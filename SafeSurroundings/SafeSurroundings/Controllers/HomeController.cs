@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SafeSurroundings.Data.Models;
+using SafeSurroundings.Models;
 
 namespace SafeSurroundings.Controllers
 {
@@ -10,7 +12,13 @@ namespace SafeSurroundings.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            TestViewModel testviewModel = new TestViewModel();
+            TestModel test = new TestModel();
+            test.ID = -1;
+            test.Name = "Test from Model Project";
+            testviewModel.Name = "Test Initial";
+            testviewModel.testModel = test;
+            return View(testviewModel);
         }
 
         public ActionResult About()
