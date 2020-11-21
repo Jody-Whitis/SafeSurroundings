@@ -1,61 +1,17 @@
-﻿@model SafeSurroundings.Models.TestViewModel
-
+﻿
 @{
-    ViewBag.Title = "Home Page";
+    Layout = null;
 }
-<style type="text/css">
-    .divColor{
-       background-color:black; 
-    }
-</style>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
 
-    $(document).ready(Test);
+<!DOCTYPE html>
 
-    function Test(){
-        var test = $("#btnTest");
-        test.click(function () { $("#divTitle").toggleClass("divColor") });
-
-        test.hover(function () {
-            test.css(
-                { "background-color": "orange","color":"blue","border-radius":"50%" }
-            )              
-        }, function () { test.css({"background-color":"white","color":"black","border-radius":"2px"})}
-
-        );
-    };
-   
-</script>
-
-<div id="divTitle" class="jumbotron">
-    <h1>Test Page 1</h1>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-
-
-        @if ((Model != null) && (Model.testModel != null))
-        {
-            <p class=" panel-body">
-                @Model.Name
-
-            </p>
-
-            <p class=" panel-body">
-                @Model.testModel.ID
-
-            </p>
-            <p class=" panel-body">
-                @Model.testModel.Name
-
-            </p>
-
-        }
-
-        <button id="btnTest" class="btn-default">Test</button>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
     </div>
-
-</div>
+</body>
+</html>

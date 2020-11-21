@@ -12,6 +12,11 @@ namespace SafeSurroundings.Controllers
     {
         public ActionResult Index()
         {
+            return RedirectToAction("Test", "Home");
+        }
+
+        public ActionResult Test()
+        {
             TestViewModel testviewModel = new TestViewModel();
             TestModel test = new TestModel();
             test.ID = -1;
