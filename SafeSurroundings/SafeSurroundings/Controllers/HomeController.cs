@@ -6,21 +6,77 @@ using System.Web.Mvc;
 using SafeSurroundings.Data.Models;
 using SafeSurroundings.Models;
 using SafeSurroundings.Data.Services;
+using SafeSurroundings.Services;
 
 namespace SafeSurroundings.Controllers
 {
     public class HomeController : Controller
     {
         InMemoryPersonTable personTable;
-
-        public HomeController(InMemoryPersonTable personTable)
+        InMemoryAccountTable accountTable;
+      
+        public HomeController(InMemoryPersonTable personTable, InMemoryAccountTable accountTable)
         {
             this.personTable = personTable;
+            this.accountTable = accountTable;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
-            return RedirectToAction("Test", "Home");
+            if((Session.Keys.Count>0) && (!string.IsNullOrEmpty(Session["sessionGUID"].ToString())))
+            {
+                return RedirectToAction("HomePage");
+            }
+            else
+            {
+            return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Index(HomeViewModel userLogin)
+        {
+            if (ModelState.IsValid)
+            {
+                Account loginAccount = new Account();
+                loginAccount = accountTable.GetLoginAccount(userLogin.User, userLogin.Password);
+
+                if((loginAccount != null))
+                {
+                    Session.Add("user", loginAccount.UserName);
+                    Session.Add("name", loginAccount.DisplayName);
+                    Session.Add("id", loginAccount.ID);
+                    Session.Add("sessionGUID", Guid.NewGuid());
+                return RedirectToAction("Index","Home");
+
+                }
+                else
+                {
+                    ModelState.AddModelError("Login Unsuccessful", "Incorrect Login");
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("Test", "Home");
+            }
+        }
+
+        [HttpGet]
+        [UserAuthentication]
+        public ActionResult HomePage(HomeViewModel homeViewModel)
+        {
+            try
+            {
+                int id = Convert.ToInt32(Session["id"]);
+                homeViewModel.DisplayName = Convert.ToString(Session["name"]);
+                return View(homeViewModel);
+            }
+            catch
+            {
+                return RedirectToAction("Test", "Home");
+            }
         }
 
         public ActionResult Test()

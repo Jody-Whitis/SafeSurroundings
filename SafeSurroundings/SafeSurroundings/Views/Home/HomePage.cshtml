@@ -1,0 +1,20 @@
+﻿@model SafeSurroundings.Models.HomeViewModel
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="container active">
+    <div class="container">
+        <table class="table table-hover" style="background-color:rgb(52, 235, 177);color:rgb(52, 235, 177)">
+            <thead>
+                <tr>
+                    @if (Model != null)
+                    {
+                        <th>Welcome @Model.DisplayName</th>
+                    }
+
+                </tr>            
+            </thead>
+        </table>
+    </div>
+</div>
