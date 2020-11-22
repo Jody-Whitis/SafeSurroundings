@@ -1,0 +1,68 @@
+﻿@model SafeSurroundings.Models.TestViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<style type="text/css">
+    .divColor {
+        background-color: black;
+    }
+
+    .panelColor{
+        color:red;
+        font-size: 40px;
+    }
+
+</style>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(Test);
+
+    function Test(){
+        var test = $("#btnTest");
+        var test2 = $("#btnTest2");
+        test.click(function () { $("#divTitle").toggleClass("divColor") } );
+        test2.click(function () { $("#ModelName").toggleClass("panelColor")});
+        test.hover(function () {
+            test.css(
+                { "background-color": "orange","color":"blue","border-radius":"50%" }
+            )
+        }, function () { test.css({"background-color":"white","color":"black","border-radius":"2px"})}
+            
+        );
+
+        test2.hover(function () {
+            test2.css(
+                { "background-color": "blue", "color": "white", "border-radius": "50%" }
+            )
+        }, function () { test2.css({ "background-color": "white", "color": "black", "border-radius": "2px" }) }
+
+        );
+    };
+
+</script>
+
+<div id="divTitle" class="jumbotron">
+    <h1>Test Page 1</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+
+
+        @if ((Model != null))
+        {
+            <p id="ModelName" class=" panel-body">
+                @Model.Name
+
+            </p>
+        }
+
+        <button id="btnTest" class="btn-default">Test</button>
+        <button id="btnTest2" class="btn-default">Test2</button>
+
+    </div>
+
+</div>
