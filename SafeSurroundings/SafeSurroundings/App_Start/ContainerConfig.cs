@@ -17,6 +17,8 @@ namespace SafeSurroundings.App_Start
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<InMemoryPersonTable>().SingleInstance();
             builder.RegisterType<InMemoryAccountTable>().SingleInstance();
+            builder.RegisterType<InMemoryPlaceTable>().SingleInstance();
+            builder.RegisterType<InMemoryMeetUpTable>().SingleInstance();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

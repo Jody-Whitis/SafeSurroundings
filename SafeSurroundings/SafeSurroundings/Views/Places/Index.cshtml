@@ -1,0 +1,37 @@
+﻿@model SafeSurroundings.Models.PlacesViewModel
+
+ 
+ 
+<div class="container">
+    <table class="table table-hover  col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Open Hour</th>
+                <th>Close Hour</th> 
+            </tr>
+        </thead>
+
+        <tbody>
+            @if ((Model.ListofAllPlaces != null) && (Model.ListofAllPlaces.Count > 0))
+            {
+               foreach (var places in Model.ListofAllPlaces)
+                {
+                    <tr>
+                        <td>@places.Name</td>
+                        <td>@places.OpenHour</td>
+                        <td>@places.CloseHour</td>
+                    </tr>
+                }
+
+            }
+
+        </tbody>
+    </table>
+
+    @*@if ((Session.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGUID"]))))
+    {
+        @Html.ActionLink("Add", "AddScore")
+    }*@
+
+</div>
