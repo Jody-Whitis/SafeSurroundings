@@ -12,8 +12,8 @@ namespace SafeSurroundings.Data.Models
         public string Name { get; set; }
         public double X_Coordinates { get; set; }
         public double Y_Coordinates { get; set; }
-        public DateTime OpenHour { get; set; }
-        public DateTime CloseHour { get; set; }
+        public TimeSpan OpenHour { get; set; }
+        public TimeSpan CloseHour { get; set; }
 
     }
 }

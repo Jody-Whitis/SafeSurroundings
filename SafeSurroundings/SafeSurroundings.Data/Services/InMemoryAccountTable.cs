@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SafeSurroundings.Data.Services
 {
-    public class InMemoryAccountTable
+    public class InMemoryAccountTable :ILocalTables
     {
         List<Account> accounts;
         
@@ -35,12 +35,18 @@ namespace SafeSurroundings.Data.Services
         
         public void AddAccount(Account newAccount)
         {
+            newAccount.ID = accounts.Max(a => a.ID) + 1;
             accounts.Add(newAccount);
-            newAccount.ID = accounts.Max(a => a.ID) +1;
+        }
+        
+        public void Update(int id)
+        {
+            
         }
 
-        public void RemoveAccount(Account account)
+        public void Delete(int id)
         {
+            Account account = accounts.Where(a => a.ID == id).FirstOrDefault();
             accounts.Remove(account);
         }
     }

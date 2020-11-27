@@ -47,8 +47,11 @@
     <Compile Include="Models\Place.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ILocalTables.cs" />
     <Compile Include="Services\InMemoryAccountTable.cs" />
+    <Compile Include="Services\InMemoryMeetUpTable.cs" />
     <Compile Include="Services\InMemoryPersonTable.cs" />
+    <Compile Include="Services\InMemoryPlaceTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

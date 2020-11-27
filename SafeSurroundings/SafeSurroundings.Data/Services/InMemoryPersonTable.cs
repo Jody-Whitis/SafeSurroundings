@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SafeSurroundings.Data.Services
 {
 
-    public class InMemoryPersonTable
+    public class InMemoryPersonTable: ILocalTables
     {
         List<Person> persons;
 
@@ -17,9 +17,26 @@ namespace SafeSurroundings.Data.Services
             persons = new List<Person> { new Person { ID=1,DisplayName="Jody", isPrivate=false}, new Person {ID=2,DisplayName="Scruffy",isPrivate = false } };
         }
 
+        public void Add(Person newPerson)
+        {
+            newPerson.ID = persons.Max(p => p.ID) + 1;
+            persons.Add(newPerson);
+        }
+
+        public void Delete(int id)
+        {
+            Person person = persons.Where(p => p.ID == id).FirstOrDefault();
+            persons.Remove(person);
+        }
+
         public IEnumerable<Person> GetAll()
         {
             return persons.OrderBy(p => p.ID);
+        }
+
+        public void Update(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
