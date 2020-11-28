@@ -98,6 +98,12 @@ namespace SafeSurroundings.Controllers
             return View(testViewModel);
         }
 
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
