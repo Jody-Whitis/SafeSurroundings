@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Safe Surroundings</title>
+    <title>@ViewBag.Title Safe Surroundings</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body >
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white;opacity:1;border-bottom:double;border-bottom-color:rgb(52, 235, 177);font-size:medium">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -20,9 +20,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);" })</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
+                    @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
+                    {
+                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
+                    }
                 </ul>
             </div>
         </div>
@@ -31,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Safe Surroundings 2020</p>
         </footer>
     </div>
 
