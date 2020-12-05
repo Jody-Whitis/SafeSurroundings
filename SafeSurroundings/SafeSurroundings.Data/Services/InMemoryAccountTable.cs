@@ -13,9 +13,9 @@ namespace SafeSurroundings.Data.Services
         
         public InMemoryAccountTable()
         {
-            accounts = new List<Account> { new Account { ID = 1, UserName = "jodywhitis0407@gmail.com", DisplayName="Jody", 
+            accounts = new List<Account> { new Account { ID = 1, UserName = "jodywhitis0407@gmail.com", DisplayName="Jody",
                 Password = "test", IsActive = true, LastLogin = DateTime.Now, IsSubscribed = false,
-                IsTwoFactor=false } };
+                IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}} };
         }
 
         public IEnumerable<Account> GetAll()
@@ -48,6 +48,22 @@ namespace SafeSurroundings.Data.Services
         {
             Account account = accounts.Where(a => a.ID == id).FirstOrDefault();
             accounts.Remove(account);
+        }
+
+        public void AddMeetup(int id, int meetUpID)
+        {
+            Account account = accounts.Where(a => a.ID == id).FirstOrDefault();
+            List<int> currentMeetups = account.ListofMeetUpID.ToList();
+            currentMeetups.Add(meetUpID);
+            account.ListofMeetUpID = currentMeetups;
+        }
+
+        public void RemoveMeetup(int id, int meetupID)
+        {
+            Account account = accounts.Where(a => a.ID == id).FirstOrDefault();
+            List<int> currentMeetups = account.ListofMeetUpID.ToList();
+            currentMeetups.Remove(meetupID);
+            account.ListofMeetUpID = currentMeetups;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SafeSurroundings.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace SafeSurroundings.Models
         [Required]
         public string Password { get; set; }
         public string DisplayName { get; set; }
-
+        public IEnumerable<MeetUp> ListofMeetups{get;set;}
     }
 }

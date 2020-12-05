@@ -14,11 +14,12 @@ namespace SafeSurroundings.Controllers
     {
         InMemoryPersonTable personTable;
         InMemoryAccountTable accountTable;
-      
-        public HomeController(InMemoryPersonTable personTable, InMemoryAccountTable accountTable)
+        InMemoryMeetUpTable meetupTable;
+        public HomeController(InMemoryPersonTable personTable, InMemoryAccountTable accountTable, InMemoryMeetUpTable meetupTable)
         {
             this.personTable = personTable;
             this.accountTable = accountTable;
+            this.meetupTable = meetupTable;
         }
 
         [HttpGet]
@@ -71,6 +72,8 @@ namespace SafeSurroundings.Controllers
             {
                 int id = Convert.ToInt32(Session["id"]);
                 homeViewModel.DisplayName = Convert.ToString(Session["name"]);
+                IEnumerable<int> meetupIDs = accountTable.SelectAccount(Convert.ToInt32(Session["id"])).ListofMeetUpID;
+                homeViewModel.ListofMeetups = meetupTable.GetByIDs(meetupIDs);
                 return View(homeViewModel);
             }
             catch
