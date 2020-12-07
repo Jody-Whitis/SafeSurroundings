@@ -42,7 +42,7 @@ namespace SafeSurroundings.Data.Services
         {
             List<MeetUp> listOfMeetups = new List<MeetUp>();
 
-            meetUps.TakeWhile(x => ids.Contains(x.ID));
+            listOfMeetups= meetUps.TakeWhile(x => ids.Contains(x.ID)).ToList();
             return listOfMeetups;
         }
 

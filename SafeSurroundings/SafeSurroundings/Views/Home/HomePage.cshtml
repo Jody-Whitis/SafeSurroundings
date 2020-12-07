@@ -12,14 +12,35 @@
                     {
                         <th>Welcome @Model.DisplayName</th>
                     }
-
-                </tr>  
+                </tr>
                 <tr>
-
-                    @Html.ActionLink("Places","Index","Places")
-
                 </tr>
             </thead>
         </table>
     </div>
-</div>
+
+    <div class="container">
+        <table class="table-hover" style="background-color:rgb(52, 235, 177);color:black" >
+            <tr class="col-md-7">
+                @if ((Model.ListofMeetups != null) && (Model.ListofMeetups.Any()))
+                {
+                    foreach (var meetups in Model.ListofMeetups)
+                    {
+            <tr>
+                <td style="border:solid;">
+                    @meetups.PlaceID
+                </td>
+                <td style="border:solid;">
+                    @Model.FormatDate(meetups.MeetTime  )
+                </td>
+                <td style="border:solid;">
+                    @Model.FormatTime(meetups.MeetTime) 
+                </td>
+            </tr>
+
+                }
+            }
+            </table>
+            @Html.ActionLink("Places", "Index", "Places")
+        </div>
+    </div>
