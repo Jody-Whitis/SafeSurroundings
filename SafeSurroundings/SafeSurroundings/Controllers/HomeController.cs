@@ -15,11 +15,13 @@ namespace SafeSurroundings.Controllers
         InMemoryPersonTable personTable;
         InMemoryAccountTable accountTable;
         InMemoryMeetUpTable meetupTable;
-        public HomeController(InMemoryPersonTable personTable, InMemoryAccountTable accountTable, InMemoryMeetUpTable meetupTable)
+        InMemoryPlaceTable placeTable;
+        public HomeController(InMemoryPersonTable personTable, InMemoryAccountTable accountTable, InMemoryMeetUpTable meetupTable,InMemoryPlaceTable placeTable)
         {
             this.personTable = personTable;
             this.accountTable = accountTable;
             this.meetupTable = meetupTable;
+            this.placeTable = placeTable;
         }
 
         [HttpGet]
@@ -70,10 +72,11 @@ namespace SafeSurroundings.Controllers
         {
             try
             {
+                IEnumerable<Place> listOfPlaces = placeTable.GetAll();
                 int id = Convert.ToInt32(Session["id"]);
                 homeViewModel.DisplayName = Convert.ToString(Session["name"]);
                 IEnumerable<int> meetupIDs = accountTable.SelectAccount(Convert.ToInt32(Session["id"])).ListofMeetUpID;
-                homeViewModel.ListofMeetups = meetupTable.GetByIDs(meetupIDs);
+                homeViewModel.ListofMeetups = meetupTable.GetByIDs(meetupIDs);              
                 return View(homeViewModel);
             }
             catch
