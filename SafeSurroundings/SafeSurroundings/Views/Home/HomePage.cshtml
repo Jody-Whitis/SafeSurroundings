@@ -1,4 +1,18 @@
 ﻿@model SafeSurroundings.Models.HomeViewModel
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(RedirecttoPlaces);
+
+    function RedirecttoPlaces() {
+        var links = $("#tdLink");
+        links.click(function () {
+            window.location.href = "@Url.Action("Index","Places")";
+        });
+    };
+
+
+</script>
 
 <h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
@@ -51,7 +65,7 @@
                 }
 
                 <tr>
-                    <td colspan="3" align="center" style="color:darkgreen">
+                    <td id="tdLink" data-toggle="tooltip" title ="Go to Places" colspan="3" align="center" style="color:darkgreen">
                         @Html.ActionLink("Places", "Index", "Places")
 
                     </td>
@@ -59,5 +73,5 @@
             </tbody>
         </table>
     </div>
- 
+
     </div>
