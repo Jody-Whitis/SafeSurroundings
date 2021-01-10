@@ -12,11 +12,7 @@
     };
 
 
-</script>
-
-<h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
-
+</script> 
 <div class="container active">
     <div class="container">
         <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
@@ -51,7 +47,7 @@
                     {
                         <tr>
                             <td>
-                                @meetups.PlaceID
+                                @meetups.PlaceName
                             </td>
                             <td>
                                 @Model.FormatDate(meetups.MeetTime)
@@ -66,8 +62,8 @@
 
                 <tr>
                     <td id="tdLink" data-toggle="tooltip" title ="Go to Places" colspan="3" align="center" style="color:darkgreen">
-                        @Html.ActionLink("Places", "Index", "Places")
-
+                     @*   @Html.ActionLink("Places", "Index", "Places")*@
+                        Places
                     </td>
                 </tr>
             </tbody>
