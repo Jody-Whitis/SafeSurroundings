@@ -1,25 +1,73 @@
 ﻿@model SafeSurroundings.Models.HomeViewModel
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
 
-<h2>@ViewBag.Title</h2>
-<h3>@ViewBag.Message</h3>
+    $(document).ready(RedirecttoPlaces);
 
+    function RedirecttoPlaces() {
+        var links = $("#tdLink");
+        links.click(function () {
+            window.location.href = "@Url.Action("Index","Places")";
+        });
+    };
+
+
+</script> 
 <div class="container active">
     <div class="container">
-        <table class="table table-hover" style="background-color:rgb(52, 235, 177);color:rgb(52, 235, 177)">
+        <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
             <thead>
                 <tr>
                     @if (Model != null)
                     {
-                        <th>Welcome @Model.DisplayName</th>
+                        <th align="center">Welcome @Model.DisplayName</th>
                     }
-
-                </tr>  
+                </tr>
                 <tr>
-
-                    @Html.ActionLink("Places","Index","Places")
-
                 </tr>
             </thead>
         </table>
     </div>
-</div>
+
+    <div class="container">
+        <table class="table table-hover  col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
+            <thead>
+                <tr>
+                    <th>Place</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                @if ((Model.ListofMeetups != null) && (Model.ListofMeetups.Any()))
+                {
+                    foreach (var meetups in Model.ListofMeetups)
+                    {
+                        <tr>
+                            <td>
+                                @meetups.PlaceName
+                            </td>
+                            <td>
+                                @Model.FormatDate(meetups.MeetTime)
+                            </td>
+                            <td>
+                                @Model.FormatTime(meetups.MeetTime)
+                            </td>
+                        </tr>
+
+                    }
+                }
+
+                <tr>
+                    <td id="tdLink" data-toggle="tooltip" title ="Go to Places" colspan="3" align="center" style="color:darkgreen">
+                     @*   @Html.ActionLink("Places", "Index", "Places")*@
+                        Places
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>

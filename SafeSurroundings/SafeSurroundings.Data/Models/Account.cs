@@ -18,5 +18,6 @@ namespace SafeSurroundings.Data.Models
         public string LastLoginDevice { get; set; }
         public Boolean IsSubscribed { get; set; }
         public Boolean IsTwoFactor { get; set; }
+        public IEnumerable<int> ListofMeetUpID { get; set; }
     }
 }
