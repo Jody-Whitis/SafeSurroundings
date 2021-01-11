@@ -6,11 +6,17 @@
 
     function RedirecttoHomePage() {
         var links = $("#tdLink");
+        var linktoAdd = $("#tdAdd");
         links.click(function () {
             window.location.href = "@Url.Action("HomePage","Home")";
         });
+
+        linktoAdd.click(function () {
+            window.location.href = "@Url.Action("AddPlace","Places")";
+        });
     };
 
+    
 
 </script>
 <div class="container active">
@@ -41,7 +47,7 @@
                 {
                     foreach (var places in Model.ListofAllPlaces)
                     {
-                        <tr>
+                        <tr id="PlaceEntry">
                             <td>@places.Name</td>
                             <td>@places.OpenHour</td>
                             <td>@places.CloseHour</td>
@@ -49,7 +55,11 @@
                     }
 
                 }
-
+            <tr>
+                <td colspan="3" id="tdAdd" data-toggle="tooltip" title="Add a New Place" align="center" style="color:darkgreen">
+                    Add a New Place
+                    </td>
+            </tr>
                 <tr>
                     <td colspan="3" id="tdLink" data-toggle="tooltip" title ="Go to Home"  align="center" style="color:darkgreen">
                        @* @Html.ActionLink("Home", "HomePage", "Home")*@

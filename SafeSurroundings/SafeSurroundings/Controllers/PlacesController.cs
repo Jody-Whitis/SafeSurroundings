@@ -29,6 +29,29 @@ namespace SafeSurroundings.Controllers
             return View(placesViewModel);
         }
 
+        [HttpGet]
+        [UserAuthentication]
+        public ActionResult AddPlace()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [UserAuthentication]
+        public ActionResult AddPlace(Place newPlace)
+        {
+            try
+            {
+                placeTable.Add(newPlace);
+                return RedirectToAction("Index", "Places");
+            }
+            catch
+            {
+                return View("Error");
+            }
+        }
+
          
 
     }
