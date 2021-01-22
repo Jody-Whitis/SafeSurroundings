@@ -49,8 +49,8 @@
                     {
                         <tr id="PlaceEntry">
                             <td>@places.Name</td>
-                            <td>@places.OpenHour</td>
-                            <td>@places.CloseHour</td>
+                            <td>@places.OpenHour.ToShortTimeString()</td>
+                            <td>@places.CloseHour.ToShortTimeString()</td>
                         </tr>
                     }
 
