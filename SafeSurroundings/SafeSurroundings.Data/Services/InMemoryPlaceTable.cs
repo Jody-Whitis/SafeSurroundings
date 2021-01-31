@@ -13,7 +13,7 @@ namespace SafeSurroundings.Data.Services
 
         public InMemoryPlaceTable()
         {
-            places = new List<Place> { new Place { ID = 1, Name = "Starbucks", OpenHour = TimeSpan.Parse("8:00:00"), CloseHour = TimeSpan.Parse("17:00:00"), X_Coordinates = 100, Y_Coordinates = 100 } };
+            places = new List<Place> { new Place { ID = 1, Name = "Starbucks", OpenHour = DateTime.Parse("8:00:00"), CloseHour = DateTime.Parse("17:00:00"), X_Coordinates = 100, Y_Coordinates = 100 } };
         }
 
         public void Add(Place newPlace)
