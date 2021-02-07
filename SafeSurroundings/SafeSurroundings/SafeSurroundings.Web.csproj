@@ -225,6 +225,7 @@
     <Content Include="Views\Places\Index.cshtml" />
     <Content Include="Views\Places\AddPlace.cshtml" />
     <Content Include="Views\MeetUp\Index.cshtml" />
+    <Content Include="Views\MeetUp\AddMeetUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -54,7 +54,9 @@ namespace SafeSurroundings.Controllers
         [UserAuthentication]
         public ActionResult AddMeetUp()
         {
-            return View();
+            MeetUpViewModel meetUpViewModel = new MeetUpViewModel();
+            meetUpViewModel.PlacestoMeet = placeTable.GetAll();
+            return View(meetUpViewModel);
         }
         
         [HttpPost]
