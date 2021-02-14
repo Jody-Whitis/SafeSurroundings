@@ -62,11 +62,15 @@ namespace SafeSurroundings.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [UserAuthentication]
-        public ActionResult AddMeetUp(MeetUp newMeetUp)
+        public ActionResult AddMeetUp(MeetUpViewModel newMeetUpViewModel)
         {
             try
             {
-                meetUpTable.Add(newMeetUp);
+                MeetUp newMeetup = new MeetUp();
+                newMeetup.MeetTime = newMeetUpViewModel.MeetTime;
+                newMeetup.PlaceID = newMeetUpViewModel.PlaceID;
+                newMeetup.PlaceName = placeTable.GetAll().Where(p => p.ID == newMeetup.PlaceID).Select(p => p.Name).FirstOrDefault();
+                meetUpTable.Add(newMeetup);
                 return RedirectToAction("Index","MeetUp");
             }
             catch{

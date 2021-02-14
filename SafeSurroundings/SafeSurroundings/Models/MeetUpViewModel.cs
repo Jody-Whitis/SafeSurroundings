@@ -11,6 +11,7 @@ namespace SafeSurroundings.Models
         public string PlaceName { get; set; }
         public DateTime MeetTime { get; set; }
         public IEnumerable<Place> PlacestoMeet { get; set; }
+        public int PlaceID{ get; set; }
         public MeetUp NewMeetUp { get; set; }
      }
 }

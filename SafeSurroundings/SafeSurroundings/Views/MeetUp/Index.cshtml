@@ -35,16 +35,12 @@
                         </tr>
                     }
 
-                }
-                <tr>
-                    <td colspan="3" id="tdAdd" data-toggle="tooltip" title="Add a New Place" align="center" style="color:darkgreen">
-                        Add a New Meetup
-                    </td>
-                </tr>
-                
+                } 
+
             </tbody>
         </table>
         <input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+        <input type="button" class="btn btn-info" value="Add a New Meetup" onclick="location.href='@Url.Action("AddMeetUp", "MeetUp")'" />
 
     </div>
 </div>
