@@ -1,0 +1,56 @@
+﻿@model SafeSurroundings.Models.MeetUpViewModel
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen" type="text" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Place</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+
+        @Html.Label("MeetUp Place", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.PlaceID, new SelectList(Model.PlacestoMeet, "ID", "Name"))
+            @Html.ValidationMessageFor(model => model.PlaceID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.Label("Meet Date: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MeetTime , new { htmlAttributes = new { @class = "timepicker" } })
+                @Html.ValidationMessageFor(model => model.MeetTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="button" class="btn btn-info" value="Back to Meetups" onclick="location.href='@Url.Action("Index", "MeetUp")'" />
+            </div>
+        </div>
+    </div>
+    
+}
+
+
+@section scripts{
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        $(document).ready(TimePicker);
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate(),date.getHours()+1);
+
+        function TimePicker() {          
+            $(".timepicker").datetimepicker({
+                format: "MM-DD-YYYY hh:mm A",
+                showTodayButton: true,
+                defaultDate: "now",
+                date: today
+            });
+        };
+    </script>
+}

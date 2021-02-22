@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SafeSurroundings.Models.MeetUpViewModel>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+ 
+<div class="container active">
+    <div class="container">
+        <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
+            <thead>
+                <tr>
+                    <th align="center">Your Schedule MeetUps</th>
+                </tr>
+                <tr>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="container">
+        <table class="table table-hover  col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>MeetTime</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @if ((Model != null))
+                {
+                    foreach (var meetup in Model)
+                    {
+                        <tr id="Meetup">
+                            <td>@meetup.PlaceName</td>
+                            <td>@meetup.MeetTime.ToString()</td>
+                        </tr>
+                    }
+
+                } 
+
+            </tbody>
+        </table>
+        <input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+        <input type="button" class="btn btn-info" value="Add a New Meetup" onclick="location.href='@Url.Action("AddMeetUp", "MeetUp")'" />
+
+    </div>
+</div>

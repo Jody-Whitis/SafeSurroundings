@@ -25,7 +25,8 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
                     @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
                     {
-                    <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
+                        <li>@Html.ActionLink("MeetUps", "Index", "MeetUp", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
                     }
                 </ul>
             </div>
