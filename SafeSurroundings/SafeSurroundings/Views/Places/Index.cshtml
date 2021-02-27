@@ -24,7 +24,7 @@
         <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
             <thead>
                 <tr>
-                    <th align="center">Your Schedule MeetUps</th>
+                    <th align="center">Places to Meet</th>
                 </tr>
                 <tr>
                 </tr>
@@ -55,24 +55,15 @@
                     }
 
                 }
-            <tr>
-                <td colspan="3" id="tdAdd" data-toggle="tooltip" title="Add a New Place" align="center" style="color:darkgreen">
-                    Add a New Place
-                    </td>
-            </tr>
-                <tr>
-                    <td colspan="3" id="tdLink" data-toggle="tooltip" title ="Go to Home"  align="center" style="color:darkgreen">
-                       @* @Html.ActionLink("Home", "HomePage", "Home")*@
-                        Home
-                    </td>
-                </tr>
             </tbody>
         </table>
+        <input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+        <input type="button" class="btn btn-info" value="Add a New Place" onclick="location.href='@Url.Action("AddPlace", "Places")'" />
 
         @*@if ((Session.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGUID"]))))
-            {
-                @Html.ActionLink("Add", "AddScore")
-            }*@
+        {
+            @Html.ActionLink("Add", "AddScore")
+        }*@
 
     </div>
 </div>
