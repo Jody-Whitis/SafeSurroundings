@@ -16,7 +16,7 @@
         });
     };
 
-    
+
 
 </script>
 <div class="container active">
@@ -57,13 +57,15 @@
                 }
             </tbody>
         </table>
-        <input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
-        <input type="button" class="btn btn-info" value="Add a New Place" onclick="location.href='@Url.Action("AddPlace", "Places")'" />
+        <div class="btn-group btn-group-lg" role="button">
+            <input type="button" class="btn btn-default" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+            <input type="button" class="btn btn-success" value="Add a New Place" onclick="location.href='@Url.Action("AddPlace", "Places")'" />
+        </div>
 
         @*@if ((Session.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGUID"]))))
-        {
-            @Html.ActionLink("Add", "AddScore")
-        }*@
+            {
+                @Html.ActionLink("Add", "AddScore")
+            }*@
 
     </div>
 </div>

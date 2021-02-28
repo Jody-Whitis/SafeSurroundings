@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<SafeSurroundings.Models.MeetUpViewModel>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
- 
+
 <div class="container active">
     <div class="container">
         <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
@@ -35,12 +35,13 @@
                         </tr>
                     }
 
-                } 
+                }
 
             </tbody>
         </table>
-        <input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
-        <input type="button" class="btn btn-info" value="Add a New Meetup" onclick="location.href='@Url.Action("AddMeetUp", "MeetUp")'" />
-
+        <div class="btn-group btn-group-lg" role="button">
+            <input type="button" class="btn btn-default" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+            <input type="button" class="btn btn-success" value="Add a New Meetup" onclick="location.href='@Url.Action("AddMeetUp", "MeetUp")'" />
+        </div>
     </div>
 </div>

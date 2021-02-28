@@ -62,8 +62,10 @@
 
             </tbody>
         </table>
-        <input type="button" class="btn btn-info" value="Meetups" onclick="location.href='@Url.Action("Index", "MeetUp")'" />
-        <input type="button" class="btn btn-info" value="Places" onclick="location.href='@Url.Action("Index", "Places")'" />
-        <input type="button" class="btn btn-info" value="Logout" onclick="location.href='@Url.Action("Logout", "Home")'" />
+        <div class="btn-group btn-group-lg" role="button">
+            <input type="button" class="btn btn-success" value="Meetups" onclick="location.href='@Url.Action("Index", "MeetUp")'" />
+            <input type="button" class="btn btn-success" value="Places" onclick="location.href='@Url.Action("Index", "Places")'" />
+            <input type="button" class="btn btn-warning" value="Logout" onclick="location.href='@Url.Action("Logout", "Home")'" />
+        </div>
     </div>
 </div>
