@@ -13,10 +13,12 @@ namespace SafeSurroundings.Controllers
     public class PlacesController : Controller
     {
         InMemoryPlaceTable placeTable;
+        InMemoryMeetUpTable meetupTable;
 
-        public PlacesController(InMemoryPlaceTable placeTable)
+        public PlacesController(InMemoryPlaceTable placeTable, InMemoryMeetUpTable meetUpTable)
         {
             this.placeTable = placeTable;
+            this.meetupTable = meetUpTable;
         }
 
         [HttpGet]
@@ -49,6 +51,19 @@ namespace SafeSurroundings.Controllers
             catch
             {
                 return View("Error");
+            }
+        }
+
+        public List<MeetUp> GetMeetUpByPlaceID(int PlaceID)
+        {
+            List<MeetUp> meetupsByPlace = new List<MeetUp>();
+            try
+            {
+                return meetupsByPlace = meetupTable.GetAll().Where(m => m.PlaceID == PlaceID).ToList();
+            }
+            catch
+            {
+                return meetupsByPlace;
             }
         }
 

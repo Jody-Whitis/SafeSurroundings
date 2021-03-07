@@ -1,24 +1,5 @@
 ﻿@model SafeSurroundings.Models.PlacesViewModel
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
 
-    $(document).ready(RedirecttoHomePage);
-
-    function RedirecttoHomePage() {
-        var links = $("#tdLink");
-        var linktoAdd = $("#tdAdd");
-        links.click(function () {
-            window.location.href = "@Url.Action("HomePage","Home")";
-        });
-
-        linktoAdd.click(function () {
-            window.location.href = "@Url.Action("AddPlace","Places")";
-        });
-    };
-
-
-
-</script>
 <div class="container active">
     <div class="container">
         <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
@@ -47,7 +28,8 @@
                 {
                     foreach (var places in Model.ListofAllPlaces)
                     {
-                        <tr id="PlaceEntry">
+                        <tr class="PlaceList">
+                            <td id="placeID" hidden="hidden">@places.ID</td>
                             <td>@places.Name</td>
                             <td>@places.OpenHour.ToShortTimeString()</td>
                             <td>@places.CloseHour.ToShortTimeString()</td>
@@ -57,15 +39,60 @@
                 }
             </tbody>
         </table>
+
+        <div class="test">
+
+        </div>
         <div class="btn-group btn-group-lg" role="button">
             <input type="button" class="btn btn-default" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
             <input type="button" class="btn btn-success" value="Add a New Place" onclick="location.href='@Url.Action("AddPlace", "Places")'" />
         </div>
-
-        @*@if ((Session.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGUID"]))))
-            {
-                @Html.ActionLink("Add", "AddScore")
-            }*@
-
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(LoadDetails);
+
+    function LoadDetails() {
+        var places = $(".PlaceList");
+        places.click(function () {
+            console.log($(this).children().first().html());
+            //$(".modal-body").html($(this).children().first().html());
+            //$("#exampleModal").modal("show");
+        });
+    };
+
+    @*function Test() {
+        var links = $(".PlaceList");
+        links.click(function () {
+            $.ajax({
+                async:true,
+                url: "@Url.Action("AddPlace","Places")",
+                type: "get"
+            }).done(function (response) {
+                $(".modal-body").html(response);
+                $("#exampleModal").modal("show");
+            });
+
+ });
+    }*@
+
+</script>
