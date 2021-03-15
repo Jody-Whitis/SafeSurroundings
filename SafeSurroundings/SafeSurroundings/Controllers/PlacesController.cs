@@ -7,6 +7,7 @@ using SafeSurroundings.Data.Models;
 using SafeSurroundings.Models;
 using SafeSurroundings.Data.Services;
 using SafeSurroundings.Services;
+using Newtonsoft.Json;
 
 namespace SafeSurroundings.Controllers
 {
@@ -54,17 +55,20 @@ namespace SafeSurroundings.Controllers
             }
         }
 
-        public List<MeetUp> GetMeetUpByPlaceID(int PlaceID)
-        {
+        [HttpGet]
+         public ActionResult GetMeetUpByPlaceID(int PlaceID = 0)
+        {           
             List<MeetUp> meetupsByPlace = new List<MeetUp>();
             try
             {
-                return meetupsByPlace = meetupTable.GetAll().Where(m => m.PlaceID == PlaceID).ToList();
+                  meetupsByPlace = meetupTable.GetAll().Where(m => m.PlaceID == PlaceID).ToList();
             }
             catch
             {
-                return meetupsByPlace;
-            }
+                  meetupsByPlace = new List<MeetUp>();
+            }          
+            return Json(JsonConvert.SerializeObject(meetupsByPlace), JsonRequestBehavior.AllowGet);
+
         }
 
          

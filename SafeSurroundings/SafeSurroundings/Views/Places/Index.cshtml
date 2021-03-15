@@ -28,9 +28,8 @@
                 {
                     foreach (var places in Model.ListofAllPlaces)
                     {
-                        <tr class="PlaceList">
-                            <td id="placeID" hidden="hidden">@places.ID</td>
-                            <td>@places.Name</td>
+                        <tr class="PlaceList" data-place-id="@places.ID">
+                             <td>@places.Name</td>
                             <td>@places.OpenHour.ToShortTimeString()</td>
                             <td>@places.CloseHour.ToShortTimeString()</td>
                         </tr>
@@ -54,45 +53,72 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
-            </div>
+                <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
+                    <thead>
+                        <tr>
+                            <th align="center">Meetups Happening Here</th>
+                        </tr>
+                        <tr>
+                        </tr>
+                    </thead>
+                </table>
+             </div>
             <div class="modal-body">
 
+                <table class="table table-hover  id=" tblPlacesModal" col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Meeting Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tblPlacesModal">
+
+                    </tbody>                  
+                </table>
             </div>
             <div class="modal-footer">
-
             </div>
         </div>
     </div>
 </div>
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/moment.min.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(LoadDetails);
+    $(document).ready(LoadDetailsInModal());
 
-    function LoadDetails() {
-        var places = $(".PlaceList");
-        places.click(function () {
-            console.log($(this).children().first().html());
-            //$(".modal-body").html($(this).children().first().html());
-            //$("#exampleModal").modal("show");
-        });
-    };
-
-    @*function Test() {
+    function LoadDetailsInModal() {
         var links = $(".PlaceList");
+
         links.click(function () {
+            var selectedID = $(this).data("place-id");
+            console.log("Selected ID: " + selectedID);
             $.ajax({
-                async:true,
-                url: "@Url.Action("AddPlace","Places")",
-                type: "get"
-            }).done(function (response) {
-                $(".modal-body").html(response);
-                $("#exampleModal").modal("show");
-            });
-
- });
-    }*@
-
+                async: true,
+                url: "@Url.Action("GetMeetUpByPlaceID", "Places")",
+                data: { PlaceID: selectedID},
+                type: "GET",
+                dataType: "JSON",
+                success: function (data) {
+                    var tableBody = $("#tblPlacesModal");
+                    var trResponse = "";
+                     var jResponse = $.parseJSON(data);
+                    $.each(jResponse, function (indx, dataResponse) {
+                        trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
+                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td></tr>";
+                        console.log(dataResponse.PlaceName);
+                    });
+                   $(tableBody).html(trResponse);  
+                    console.log("Full Data: " + $.parseJSON(data));
+                    console.log(trResponse);
+                    $("#exampleModal").modal("show");
+                },
+                error: function (errorMessage) {alert("Fetching meetups unsuccessful!")}
+            })
+        });
+ };
+    
 </script>
