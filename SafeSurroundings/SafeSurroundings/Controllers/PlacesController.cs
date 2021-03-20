@@ -8,10 +8,11 @@ using SafeSurroundings.Models;
 using SafeSurroundings.Data.Services;
 using SafeSurroundings.Services;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace SafeSurroundings.Controllers
 {
-    public class PlacesController : Controller
+    public class PlacesController : BaseController
     {
         InMemoryPlaceTable placeTable;
         InMemoryMeetUpTable meetupTable;
@@ -23,55 +24,59 @@ namespace SafeSurroundings.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             List<Place> places = new List<Place>();
-            places = placeTable.GetAll().ToList();
-            PlacesViewModel placesViewModel = new PlacesViewModel();
-            placesViewModel.ListofAllPlaces = places;
-            return View(placesViewModel);
-        }
+            try
+            {
+                places = placeTable.GetAll().ToList();
+                PlacesViewModel placesViewModel = new PlacesViewModel();
+                placesViewModel.ListofAllPlaces = places;
+                return View(placesViewModel);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = SetStatus(ex);
+                return View("Error");
+            }
 
-        [HttpGet]
-        [UserAuthentication]
-        public ActionResult AddPlace()
-        {
-            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [UserAuthentication]
-        public ActionResult AddPlace(Place newPlace)
+        public ActionResult Add(Place newPlace)
         {
             try
             {
                 placeTable.Add(newPlace);
                 return RedirectToAction("Index", "Places");
             }
-            catch
+            catch (Exception ex)
             {
+                Response.StatusCode = SetStatus(ex);
                 return View("Error");
             }
         }
 
         [HttpGet]
-         public ActionResult GetMeetUpByPlaceID(int PlaceID = 0)
-        {           
+        public ActionResult GetMeetUpByPlaceID(int PlaceID = 0)
+        {
             List<MeetUp> meetupsByPlace = new List<MeetUp>();
             try
             {
-                  meetupsByPlace = meetupTable.GetAll().Where(m => m.PlaceID == PlaceID).ToList();
+                meetupsByPlace = meetupTable.GetAll().Where(m => m.PlaceID == PlaceID).ToList();
             }
-            catch
+            catch(Exception ex)
             {
-                  meetupsByPlace = new List<MeetUp>();
-            }          
+                Response.StatusCode = SetStatus(ex);
+                meetupsByPlace = new List<MeetUp>();
+            }
             return Json(JsonConvert.SerializeObject(meetupsByPlace), JsonRequestBehavior.AllowGet);
 
         }
 
-         
+
 
     }
 }
