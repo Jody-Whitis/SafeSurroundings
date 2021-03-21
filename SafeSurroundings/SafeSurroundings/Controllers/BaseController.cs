@@ -13,6 +13,11 @@ namespace SafeSurroundings.Controllers
     /// </summary>
     public abstract class BaseController : Controller
     {
+        public BaseController()
+        {
+
+        }
+
         // GET: Base
         [HttpGet]
         public virtual ActionResult Index()

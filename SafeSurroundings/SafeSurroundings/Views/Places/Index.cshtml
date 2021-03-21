@@ -109,11 +109,11 @@
                     $.each(jResponse, function (indx, dataResponse) {
                         trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
                             + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td></tr>";
-                        console.log(dataResponse.PlaceName);
+                        //console.log(dataResponse.PlaceName);
                     });
                    $(tableBody).html(trResponse);  
-                    console.log("Full Data: " + $.parseJSON(data));
-                    console.log(trResponse);
+                    //console.log("Full Data: " + $.parseJSON(data));
+                    //console.log(trResponse);
                     $("#exampleModal").modal("show");
                 },
                 error: function (errorMessage) {alert("Fetching meetups unsuccessful!")}

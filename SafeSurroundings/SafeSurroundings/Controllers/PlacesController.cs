@@ -17,7 +17,7 @@ namespace SafeSurroundings.Controllers
         InMemoryPlaceTable placeTable;
         InMemoryMeetUpTable meetupTable;
 
-        public PlacesController(InMemoryPlaceTable placeTable, InMemoryMeetUpTable meetUpTable)
+        public PlacesController(InMemoryPlaceTable placeTable, InMemoryMeetUpTable meetUpTable):base()
         {
             this.placeTable = placeTable;
             this.meetupTable = meetUpTable;
