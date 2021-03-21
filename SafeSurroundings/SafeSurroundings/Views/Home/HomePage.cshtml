@@ -12,7 +12,7 @@
     };
 
 
-</script> 
+</script>
 <div class="container active">
     <div class="container">
         <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
@@ -60,14 +60,12 @@
                     }
                 }
 
-                <tr>
-                    <td id="tdLink" data-toggle="tooltip" title ="Go to Places" colspan="3" align="center" style="color:darkgreen">
-                     @*   @Html.ActionLink("Places", "Index", "Places")*@
-                        Places
-                    </td>
-                </tr>
             </tbody>
         </table>
+        <div class="btn-group btn-group-lg" role="button">
+            <input type="button" class="btn btn-success" value="Meetups" onclick="location.href='@Url.Action("Index", "MeetUp")'" />
+            <input type="button" class="btn btn-success" value="Places" onclick="location.href='@Url.Action("Index", "Places")'" />
+            <input type="button" class="btn btn-warning" value="Logout" onclick="location.href='@Url.Action("Logout", "Home")'" />
+        </div>
     </div>
-
-    </div>
+</div>

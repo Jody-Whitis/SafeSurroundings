@@ -7,52 +7,76 @@ using SafeSurroundings.Data.Models;
 using SafeSurroundings.Models;
 using SafeSurroundings.Data.Services;
 using SafeSurroundings.Services;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace SafeSurroundings.Controllers
 {
-    public class PlacesController : Controller
+    public class PlacesController : BaseController
     {
         InMemoryPlaceTable placeTable;
+        InMemoryMeetUpTable meetupTable;
 
-        public PlacesController(InMemoryPlaceTable placeTable)
+        public PlacesController(InMemoryPlaceTable placeTable, InMemoryMeetUpTable meetUpTable):base()
         {
             this.placeTable = placeTable;
+            this.meetupTable = meetUpTable;
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             List<Place> places = new List<Place>();
-            places = placeTable.GetAll().ToList();
-            PlacesViewModel placesViewModel = new PlacesViewModel();
-            placesViewModel.ListofAllPlaces = places;
-            return View(placesViewModel);
-        }
+            try
+            {
+                places = placeTable.GetAll().ToList();
+                PlacesViewModel placesViewModel = new PlacesViewModel();
+                placesViewModel.ListofAllPlaces = places;
+                return View(placesViewModel);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = SetStatus(ex);
+                return View("Error");
+            }
 
-        [HttpGet]
-        [UserAuthentication]
-        public ActionResult AddPlace()
-        {
-            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [UserAuthentication]
-        public ActionResult AddPlace(Place newPlace)
+        public ActionResult Add(Place newPlace)
         {
             try
             {
                 placeTable.Add(newPlace);
                 return RedirectToAction("Index", "Places");
             }
-            catch
+            catch (Exception ex)
             {
+                Response.StatusCode = SetStatus(ex);
                 return View("Error");
             }
         }
 
-         
+        [HttpGet]
+        public ActionResult GetMeetUpByPlaceID(int PlaceID = 0)
+        {
+            List<MeetUp> meetupsByPlace = new List<MeetUp>();
+            try
+            {
+                meetupsByPlace = meetupTable.GetAll().Where(m => m.PlaceID == PlaceID).ToList();
+            }
+            catch(Exception ex)
+            {
+                Response.StatusCode = SetStatus(ex);
+                meetupsByPlace = new List<MeetUp>();
+            }
+            return Json(JsonConvert.SerializeObject(meetupsByPlace), JsonRequestBehavior.AllowGet);
+
+        }
+
+
 
     }
 }
