@@ -227,6 +227,7 @@
     <Content Include="Views\Places\Add.cshtml" />
     <Content Include="Views\MeetUp\Index.cshtml" />
     <Content Include="Views\MeetUp\Add.cshtml" />
+    <Content Include="Views\MeetUp\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

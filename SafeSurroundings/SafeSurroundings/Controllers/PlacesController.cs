@@ -36,7 +36,7 @@ namespace SafeSurroundings.Controllers
             }
             catch (Exception ex)
             {
-                Response.StatusCode = SetStatus(ex);
+                Response.StatusCode = SetStatus(ex.Message);
                 return View("Error");
             }
 
@@ -54,7 +54,7 @@ namespace SafeSurroundings.Controllers
             }
             catch (Exception ex)
             {
-                Response.StatusCode = SetStatus(ex);
+                Response.StatusCode = SetStatus(ex.Message);
                 return View("Error");
             }
         }
@@ -69,7 +69,7 @@ namespace SafeSurroundings.Controllers
             }
             catch(Exception ex)
             {
-                Response.StatusCode = SetStatus(ex);
+                Response.StatusCode = SetStatus(ex.Message);
                 meetupsByPlace = new List<MeetUp>();
             }
             return Json(JsonConvert.SerializeObject(meetupsByPlace), JsonRequestBehavior.AllowGet);

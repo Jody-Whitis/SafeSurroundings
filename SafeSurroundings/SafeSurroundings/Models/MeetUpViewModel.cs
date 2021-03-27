@@ -8,6 +8,7 @@ namespace SafeSurroundings.Models
 {
     public class MeetUpViewModel
     {
+        public int ID { get; set; }
         public string PlaceName { get; set; }
         public DateTime MeetTime { get; set; }
         public IEnumerable<Place> PlacestoMeet { get; set; }

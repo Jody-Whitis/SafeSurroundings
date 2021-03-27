@@ -50,9 +50,9 @@ namespace SafeSurroundings.Controllers
         /// </summary>
         /// <param name="ex"></param>
         /// <returns></returns>
-        protected virtual int SetStatus(Exception ex)
+        protected virtual int SetStatus(string ex)
         {
-            if ((ex != null) && (!string.IsNullOrEmpty(ex.Message.ToString()))){
+            if ((ex != null) && (!string.IsNullOrEmpty(ex.ToString()))){
                 return Convert.ToInt16(HttpStatusCode.BadRequest);
             }
             else
