@@ -10,7 +10,7 @@ using SafeSurroundings.Services;
 
 namespace SafeSurroundings.Controllers
 {
-    public class MeetUpController : Controller
+    public class MeetUpController : BaseController
     {
         InMemoryMeetUpTable meetUpTable;
         InMemoryPlaceTable placeTable;
@@ -22,7 +22,7 @@ namespace SafeSurroundings.Controllers
 
         [HttpGet]
         [UserAuthentication]
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             List<Place> places = new List<Place>();
             places = placeTable.GetAll().ToList();
@@ -52,7 +52,7 @@ namespace SafeSurroundings.Controllers
 
         [HttpGet]
         [UserAuthentication]
-        public ActionResult AddMeetUp()
+        public override ActionResult Add()
         {
             MeetUpViewModel meetUpViewModel = new MeetUpViewModel();
             meetUpViewModel.PlacestoMeet = placeTable.GetAll();
@@ -62,7 +62,7 @@ namespace SafeSurroundings.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [UserAuthentication]
-        public ActionResult AddMeetUp(MeetUpViewModel newMeetUpViewModel)
+        public ActionResult Add(MeetUpViewModel newMeetUpViewModel)
         {
             try
             {

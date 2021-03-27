@@ -226,11 +226,10 @@
     <Content Include="Views\Places\Index.cshtml" />
     <Content Include="Views\Places\Add.cshtml" />
     <Content Include="Views\MeetUp\Index.cshtml" />
-    <Content Include="Views\MeetUp\AddMeetUp.cshtml" />
+    <Content Include="Views\MeetUp\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
