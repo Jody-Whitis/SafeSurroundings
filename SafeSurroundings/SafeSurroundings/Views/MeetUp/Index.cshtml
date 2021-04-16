@@ -29,7 +29,7 @@
                 {
                     foreach (var meetup in Model)
                     {
-                        <tr id="Meetup" data-place-id="@meetup.ID">
+                        <tr class="Meetup" data-place-id="@meetup.ID">
                             <td>@meetup.PlaceName</td>
                             <td>@meetup.MeetTime.ToString()</td>
                         </tr>
@@ -66,6 +66,7 @@
                         <tr>
                             <th>Place</th>
                             <th>Meeting Time</th>
+                            <th>Options</th>
                         </tr>
                     </thead>
 
@@ -85,7 +86,7 @@
     $(document).ready(LoadDetailsInModal());
 
     function LoadDetailsInModal() {
-        var links = $("#Meetup");
+        var links = $(".Meetup");
 
         links.click(function () {
             var selectedID = $(this).data("place-id");
@@ -102,7 +103,9 @@
                      var jResponse = $.parseJSON(data);
                     $.each(jResponse, function (indx, dataResponse) {
                         trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
-                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td></tr>";
+                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" +
+                            "<td>"+
+                            " <input type='button' class='btn btn-success' value='Edit' onclick='' />"+ "</td>" + "</tr>";
                         console.log(dataResponse.PlaceName);
                     });
                    $(tableBody).html(trResponse);
