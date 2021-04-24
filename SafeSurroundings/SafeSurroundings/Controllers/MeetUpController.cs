@@ -86,7 +86,7 @@ namespace SafeSurroundings.Controllers
 
         [HttpGet]
         [UserAuthentication]
-        public ActionResult Edit(int? meetUpToEditID)
+        public ActionResult Edit1(int? meetUpToEditID)
         {
             MeetUp meetupSelected = new MeetUp();
             if ((ModelState.IsValid) && (meetUpToEditID != null))
@@ -104,7 +104,7 @@ namespace SafeSurroundings.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [UserAuthentication]
-        public ActionResult Edit(MeetUp meetupToEdit)
+        public ActionResult Edit1(MeetUp meetupToEdit)
         {
             try
             {
