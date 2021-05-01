@@ -8,7 +8,6 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
-    <h4>MeetUp</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.NewMeetUp.ID)
@@ -33,7 +32,7 @@
 </div>
     <div class="form-group">
         <div class="btn-group btn-group-lg" role="button">
-            <input type="button" class="btn btn-default" value="Back to Meetups" onclick="location.href='@Url.Action("MeetUp")'" />
+            <input type="button" class="btn btn-default" value="Back to Meetups" onclick="location.href='@Url.Action("Index","Meetup")'" />
             <input type="submit" value="Update" class="btn btn-success" />
         </div>
     </div>
