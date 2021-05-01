@@ -39,19 +39,19 @@ namespace SafeSurroundings.Controllers
                     join p in places on m.PlaceID equals p.ID
                     select new MeetUpViewModel
                     {
-                        ID=m.ID,
+                        ID = m.ID,
                         PlaceName = p.Name,
                         MeetTime = m.MeetTime
                     };
                 return View(meetUpViewModels);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 base.SetStatus(ex.Message);
                 return View("Index", "Home");
             }
-             
-          
+
+
         }
 
         [HttpGet]
@@ -62,7 +62,7 @@ namespace SafeSurroundings.Controllers
             meetUpViewModel.PlacestoMeet = placeTable.GetAll();
             return View(meetUpViewModel);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [UserAuthentication]
@@ -75,10 +75,11 @@ namespace SafeSurroundings.Controllers
                 newMeetup.PlaceID = newMeetUpViewModel.PlaceID;
                 newMeetup.PlaceName = placeTable.GetAll().Where(p => p.ID == newMeetup.PlaceID).Select(p => p.Name).FirstOrDefault();
                 meetUpTable.Add(newMeetup);
-                Response.StatusCode = SetStatus(null);
-                return RedirectToAction("Index","MeetUp");
+                Response.StatusCode = SetStatus("Created");
+                return RedirectToAction("Index", "MeetUp");
             }
-            catch (Exception ex){
+            catch (Exception ex)
+            {
                 Response.StatusCode = SetStatus(ex.Message);
                 return View("Error");
             }
@@ -86,13 +87,15 @@ namespace SafeSurroundings.Controllers
 
         [HttpGet]
         [UserAuthentication]
-        public ActionResult Edit1(int? meetUpToEditID)
+        public override ActionResult Edit(int? meetUpToEditID)
         {
-            MeetUp meetupSelected = new MeetUp();
             if ((ModelState.IsValid) && (meetUpToEditID != null))
             {
-                meetupSelected = meetUpTable.GetAll().Where(m => m.ID == meetUpToEditID).FirstOrDefault();
-                return View(meetupSelected);
+                MeetUpViewModel meetUpViewModel = new MeetUpViewModel();
+                meetUpViewModel.PlacestoMeet = placeTable.GetAll();
+                meetUpViewModel.NewMeetUp = meetUpTable.GetAll().Where(m => m.ID == meetUpToEditID).FirstOrDefault();
+                return View(meetUpViewModel);
+
             }
             else
             {
@@ -104,19 +107,20 @@ namespace SafeSurroundings.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [UserAuthentication]
-        public ActionResult Edit1(MeetUp meetupToEdit)
+        public ActionResult Edit(MeetUpViewModel meetupToEdit)
         {
             try
             {
-                //edit(meetuptoedit)
-                Response.StatusCode = SetStatus(null);
-                return View("Index", "Meetup");
+                meetupToEdit.PlaceName = placeTable.GetAll().Where(p => p.ID == meetupToEdit.NewMeetUp.PlaceID).FirstOrDefault().Name;
+                meetupToEdit.NewMeetUp = meetUpTable.Update(meetupToEdit.NewMeetUp);
+                Response.StatusCode = SetStatus("Created");
+                return RedirectToAction("Index", "Meetup");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Response.StatusCode = SetStatus(ex.Message);
-                return View("Edit", "Meetup");
-              
+                return View("Index", "Meetup");
+
             }
         }
 
@@ -144,7 +148,8 @@ namespace SafeSurroundings.Controllers
         /// <returns></returns>
         protected override int SetStatus(string ex)
         {
-           if ((ex != null) && (! string.IsNullOrEmpty(ex.ToString()))){
+            if ((ex != null) && (!string.IsNullOrEmpty(ex.ToString())))
+            {
                 return Convert.ToInt16(HttpStatusCode.Created);
             }
             else

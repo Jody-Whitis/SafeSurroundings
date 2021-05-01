@@ -34,10 +34,10 @@
                     <td>@meetup.PlaceName</td>
                     <td>@meetup.MeetTime.ToString()</td>
                     <td>
-                        <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Meetup",1)'" />
+                        <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Meetup", new {meetUpToEditID=meetup.ID })'" />
                     </td>
                     <td>
-                        <input type="button" class="btn btn-danger" value="Delete" onclick="location.href='@Url.Action("Index", "Home")'" />
+                        <input type="button" class="btn btn-danger" value="Delete"  onclick="location.href='@Url.Action("Index", "Home")'" />
                     </td>
 
                 </tr>

@@ -40,10 +40,10 @@ namespace SafeSurroundings.Controllers
 
         [HttpGet]
         [UserAuthentication]
-        public virtual ActionResult Edit()
+        public virtual ActionResult Edit(int? EditID)
         {
             return View();
-        }
+        }       
 
         /// <summary>
         /// Return a standard status code, or override for custom codes.

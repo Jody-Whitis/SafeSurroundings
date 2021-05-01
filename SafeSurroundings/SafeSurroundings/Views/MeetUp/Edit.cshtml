@@ -1,56 +1,58 @@
-﻿@model SafeSurroundings.Data.Models.MeetUp
+﻿@model SafeSurroundings.Models.MeetUpViewModel
 
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
+<h2>Edit MeetUp</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h4>MeetUp</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ID)
+<div class="form-horizontal">
+    <h4>MeetUp</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.NewMeetUp.ID)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.MeetTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.MeetTime, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MeetTime, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PlaceID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PlaceID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PlaceID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PlaceName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PlaceName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PlaceName, "", new { @class = "text-danger" })
-                </div>
-            </div>           
+    <div class="form-group">
+        @Html.Label("Meet Date: ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NewMeetUp.MeetTime, new { htmlAttributes = new { @class = "timepicker" } })
+            @Html.ValidationMessageFor(model => model.NewMeetUp.MeetTime, "", new { @class = "text-danger" })
         </div>
+    </div>
+
+    <div class="form-group">
+
+        @Html.Label("MeetUp Place", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.NewMeetUp.PlaceID, new SelectList(Model.PlacestoMeet, "ID", "Name"))
+            @Html.ValidationMessageFor(model => model.NewMeetUp.PlaceID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+</div>
+    <div class="form-group">
         <div class="btn-group btn-group-lg" role="button">
-            <input type="button" class="btn btn-default" value="Home" onclick="location.href=' @Html.ActionLink("Back to MeetUps", "Index")'" />
-            <input type="submit" value="Create" class="btn btn-success" />
+            <input type="button" class="btn btn-default" value="Back to Meetups" onclick="location.href='@Url.Action("MeetUp")'" />
+            <input type="submit" value="Update" class="btn btn-success" />
         </div>
-    }
-     
-</body>
-</html>
+    </div>
+}
+@section scripts{
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        $(document).ready(TimePicker);
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 1);
+
+        function TimePicker() {
+            $(".timepicker").datetimepicker({
+                format: "MM-DD-YYYY hh:mm A",
+                showTodayButton: true,
+                defaultDate: "now",
+                date: today
+            });
+        };
+    </script>
+}
