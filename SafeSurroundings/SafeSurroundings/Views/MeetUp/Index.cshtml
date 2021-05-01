@@ -21,7 +21,6 @@
                     <th>Name</th>
                     <th>MeetTime</th>
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
 
@@ -35,11 +34,8 @@
                     <td>@meetup.MeetTime.ToString()</td>
                     <td>
                         <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Meetup", new {meetUpToEditID=meetup.ID })'" />
+                        <input type="button" class="btn btn-danger" value="Delete" onclick="location.href='@Url.Action("Index", "Home")'" />
                     </td>
-                    <td>
-                        <input type="button" class="btn btn-danger" value="Delete"  onclick="location.href='@Url.Action("Index", "Home")'" />
-                    </td>
-
                 </tr>
                     }
 
@@ -74,7 +70,7 @@
                         <tr>
                             <th>Place</th>
                             <th>Meeting Time</th>
-                            <th>Options</th>
+                            <th>Details</th>
                         </tr>
                     </thead>
 

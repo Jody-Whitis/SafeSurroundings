@@ -111,9 +111,10 @@ namespace SafeSurroundings.Controllers
         {
             try
             {
-                meetupToEdit.PlaceName = placeTable.GetAll().Where(p => p.ID == meetupToEdit.NewMeetUp.PlaceID).FirstOrDefault().Name;
+                meetupToEdit.NewMeetUp.PlaceName = placeTable.GetAll().Where(p => p.ID == meetupToEdit.NewMeetUp.PlaceID).FirstOrDefault().Name;
                 meetupToEdit.NewMeetUp = meetUpTable.Update(meetupToEdit.NewMeetUp);
-                Response.StatusCode = SetStatus("Created");
+
+                Response.StatusCode = meetupToEdit == null ? SetStatus("Created") : SetStatus(null);
                 return RedirectToAction("Index", "Meetup");
             }
             catch (Exception ex)
