@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SafeSurroundings.Data.Services
 {
 
-    public class InMemoryPersonTable: ILocalTables
+    public class InMemoryPersonTable
     {
         List<Person> persons;
 

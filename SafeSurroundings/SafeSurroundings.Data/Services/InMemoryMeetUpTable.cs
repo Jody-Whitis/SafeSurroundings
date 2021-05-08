@@ -7,7 +7,7 @@ using SafeSurroundings.Data.Models;
 
 namespace SafeSurroundings.Data.Services
 {
-    public class InMemoryMeetUpTable: ILocalTables
+    public class InMemoryMeetUpTable
     {
         List<MeetUp> meetUps;
 

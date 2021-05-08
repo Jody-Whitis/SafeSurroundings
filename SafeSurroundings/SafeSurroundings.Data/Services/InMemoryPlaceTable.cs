@@ -7,7 +7,7 @@ using SafeSurroundings.Data.Models;
 
 namespace SafeSurroundings.Data.Services
 {
-    public class InMemoryPlaceTable :  ILocalTables
+    public class InMemoryPlaceTable 
     {
         List<Place> places;
 
