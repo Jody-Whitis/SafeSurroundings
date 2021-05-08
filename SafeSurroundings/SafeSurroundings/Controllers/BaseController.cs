@@ -40,19 +40,19 @@ namespace SafeSurroundings.Controllers
 
         [HttpGet]
         [UserAuthentication]
-        public virtual ActionResult Edit()
+        public virtual ActionResult Edit(int? EditID)
         {
             return View();
-        }
+        }       
 
         /// <summary>
         /// Return a standard status code, or override for custom codes.
         /// </summary>
         /// <param name="ex"></param>
         /// <returns></returns>
-        protected virtual int SetStatus(Exception ex)
+        protected virtual int SetStatus(string ex)
         {
-            if ((ex != null) && (!string.IsNullOrEmpty(ex.Message.ToString()))){
+            if ((ex != null) && (!string.IsNullOrEmpty(ex.ToString()))){
                 return Convert.ToInt16(HttpStatusCode.BadRequest);
             }
             else

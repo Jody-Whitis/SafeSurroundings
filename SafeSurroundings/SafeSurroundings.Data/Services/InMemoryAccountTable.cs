@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SafeSurroundings.Data.Services
 {
-    public class InMemoryAccountTable :ILocalTables
+    public class InMemoryAccountTable
     {
         List<Account> accounts;
         

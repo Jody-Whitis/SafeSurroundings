@@ -7,7 +7,7 @@ using SafeSurroundings.Data.Models;
 
 namespace SafeSurroundings.Data.Services
 {
-    public class InMemoryMeetUpTable: ILocalTables
+    public class InMemoryMeetUpTable
     {
         List<MeetUp> meetUps;
 
@@ -28,9 +28,21 @@ namespace SafeSurroundings.Data.Services
             meetUps.Remove(meetup);
         }
       
-        public void Update(int id)
+        public MeetUp Update(MeetUp meetupToUpdate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                MeetUp meetUpFromUpdate = meetUps.Where(m => m.ID == meetupToUpdate.ID).FirstOrDefault();
+                meetUpFromUpdate.MeetTime = meetupToUpdate.MeetTime;
+                meetUpFromUpdate.PlaceName = meetupToUpdate.PlaceName;
+                meetUpFromUpdate.PlaceID = meetupToUpdate.PlaceID;
+                return meetUpFromUpdate;
+            }
+            catch
+            {
+                return null;
+            }
+         
         }
 
         public IEnumerable<MeetUp> GetAll()
@@ -46,5 +58,9 @@ namespace SafeSurroundings.Data.Services
             return listOfMeetups;
         }
 
+        public void Update(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
