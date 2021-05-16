@@ -125,6 +125,25 @@ namespace SafeSurroundings.Controllers
             }
         }
 
+        public ActionResult Delete(int ID)
+        {
+            MeetUp deletedMeetup = new MeetUp();
+            deletedMeetup = meetUpTable.GetAll().Where(m => m.ID == ID).FirstOrDefault();
+           if (deletedMeetup != null)
+            {
+            meetUpTable.Delete(ID);
+            Response.StatusCode = SetStatus("Deleted");
+            return View("Index", "MeetUp");
+            }
+            else
+            {
+                Response.StatusCode = SetStatus(null);
+                return View("Error");
+            }
+
+            
+        }
+
         [HttpGet]
         public ActionResult GetMeetUpByID(int MeetUpID = 0)
         {

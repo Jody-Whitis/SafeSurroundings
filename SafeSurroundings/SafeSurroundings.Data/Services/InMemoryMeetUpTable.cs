@@ -58,9 +58,5 @@ namespace SafeSurroundings.Data.Services
             return listOfMeetups;
         }
 
-        public void Update(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -34,7 +34,7 @@
                     <td>@meetup.MeetTime.ToString()</td>
                     <td>
                         <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Meetup", new {meetUpToEditID=meetup.ID })'" />
-                        <input type="button" class="btn btn-danger" value="Delete" onclick="location.href='@Url.Action("Index", "Home")'" />
+                        <input type="button" id="btnDanger" class="btn btn-danger" value="Delete"  />
                     </td>
                 </tr>
                     }
@@ -83,14 +83,49 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
+                    <thead>
+                        <tr>
+                            <th align="center">Are you sure you want to delete this?</th>
+                        </tr>
+                        <tr>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-hover  id=" tblPlacesModal" col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Meeting Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tblPlacesModalForDelete" >
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnDeleteByID" class="btn btn-danger" value="Delete" data-meetup-id="-1" />
+            </div>
+        </div>
+    </div>
+</div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/moment.min.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(LoadDetailsInModal());
+    $(document).ready(LoadDetailsInModal(), LoadDeleteInModal());
 
     function LoadDetailsInModal() {
-        var links = $(".Meetup");
+        var links = $(".Meetup").not(":button");
 
         links.click(function () {
             var selectedID = $(this).data("place-id");
@@ -120,6 +155,41 @@
                 error: function (errorMessage) {alert("Fetching meetups unsuccessful!")}
             })
         });
- };
+    };
 
+    function LoadDeleteInModal() {
+        var links = $("#btnDanger");
+        var btnModalDelete = $("#btnDeleteByID");
+        links.click(function () {
+            event.stopPropagation();
+            var selectedID = $(this).closest("tr").data("place-id");
+            console.log("Selected ID: " + selectedID);
+            $.ajax({
+                async: true,
+                url: "@Url.Action("GetMeetUpByID", "MeetUp")",
+                data: { MeetUpID: selectedID},
+                type: "GET",
+                dataType: "JSON",
+                success: function (data) {
+                    var tableBody = $("#tblPlacesModalForDelete");
+                    var trResponse = "";
+                     var jResponse = $.parseJSON(data);
+                    $.each(jResponse, function (indx, dataResponse) {
+                        trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
+                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" +
+                            "<td>"+
+                             "</td>" + "</tr>";
+                        console.log(dataResponse.PlaceName);
+                        //$(btnModalDelete).attr("data-meetup-id", dataResponse.MeetUpID);
+                        console.log(btnModalDelete.attr("data-meetup-id"));
+                    });
+                    $(tableBody).html(trResponse);
+                    console.log("Full Data from delete: " + $.parseJSON(data));
+                    console.log(trResponse);
+                    $("#deleteModel").modal("show");
+                },
+                error: function (errorMessage) {alert("Fetching meetups unsuccessful!")}
+            })
+        });
+ };
 </script>
