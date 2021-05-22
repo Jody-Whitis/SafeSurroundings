@@ -124,7 +124,7 @@ namespace SafeSurroundings.Controllers
 
             }
         }
-
+        [HttpDelete]
         public ActionResult Delete(int ID)
         {
             MeetUp deletedMeetup = new MeetUp();

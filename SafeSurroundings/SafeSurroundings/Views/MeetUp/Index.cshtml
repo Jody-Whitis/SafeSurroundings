@@ -122,7 +122,7 @@
 <script src="~/Scripts/moment.min.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(LoadDetailsInModal(), LoadDeleteInModal());
+    $(document).ready(LoadDetailsInModal(), LoadDeleteInModal(), DeleteByID());
 
     function LoadDetailsInModal() {
         var links = $(".Meetup").not(":button");
@@ -179,9 +179,9 @@
                             + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" +
                             "<td>"+
                              "</td>" + "</tr>";
-                        console.log(dataResponse.PlaceName);
-                        //$(btnModalDelete).attr("data-meetup-id", dataResponse.MeetUpID);
-                        console.log(btnModalDelete.attr("data-meetup-id"));
+                        console.log("returned ID" + dataResponse.ID);
+                        $(btnModalDelete).attr("data-meetup-id", dataResponse.ID);
+                        console.log("ID passed into Delete " + btnModalDelete.attr("data-meetup-id"));
                     });
                     $(tableBody).html(trResponse);
                     console.log("Full Data from delete: " + $.parseJSON(data));
@@ -191,5 +191,20 @@
                 error: function (errorMessage) {alert("Fetching meetups unsuccessful!")}
             })
         });
- };
+    };
+
+    function DeleteByID() {
+        var selectedForDelete = $("#btnDeleteByID");
+        var selectedID = selectedForDelete.attr("data-meetup-id");
+        selectedForDelete.click(function (){
+            $.ajax({
+                async: true,
+                url:"@Url.Action("Delete","MeetUp")",
+                data: { ID: selectedID },
+                type: "DELETE",
+                success: window.location.href ="@Url.Action("Index","MeetUp")",
+                error: function (errorMessage) {alert("Deleting unsuccesful!")}
+            })
+        });
+    };
 </script>
