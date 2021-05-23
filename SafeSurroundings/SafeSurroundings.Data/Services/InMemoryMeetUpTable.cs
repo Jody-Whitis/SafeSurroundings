@@ -18,7 +18,14 @@ namespace SafeSurroundings.Data.Services
 
         public void Add(MeetUp newMeetup)
         {
+            try
+            {
             newMeetup.ID = meetUps.Max(m => m.ID )+ 1;
+            }
+            catch
+            {
+                newMeetup.ID = Convert.ToInt32(DateTime.Now.ToString("mmss"));
+            }              
             meetUps.Add(newMeetup);
         }
 

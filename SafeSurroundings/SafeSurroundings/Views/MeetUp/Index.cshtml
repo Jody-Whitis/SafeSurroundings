@@ -24,7 +24,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody id="tbMeetUps">
                 @if ((Model != null))
                 {
                     foreach (var meetup in Model)
@@ -34,7 +34,7 @@
                     <td>@meetup.MeetTime.ToString()</td>
                     <td>
                         <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Meetup", new {meetUpToEditID=meetup.ID })'" />
-                        <input type="button" id="btnDanger" class="btn btn-danger" value="Delete"  />
+                        <input type="button" id="btnDanger" class="btn btn-danger" value="Delete"/>
                     </td>
                 </tr>
                     }
@@ -194,16 +194,22 @@
     };
 
     function DeleteByID() {
-        var selectedForDelete = $("#btnDeleteByID");
-        var selectedID = selectedForDelete.attr("data-meetup-id");
-        selectedForDelete.click(function (){
+        var btnModalDelete = $("#btnDeleteByID");  
+        var modelDeleteID = btnModalDelete.attr("data-meetup-id")
+
+        btnModalDelete.click(function () {
+             console.log("SelectedID: " + btnModalDelete.attr("data-meetup-id"));
             $.ajax({
                 async: true,
-                url:"@Url.Action("Delete","MeetUp")",
-                data: { ID: selectedID },
+                url: "@Url.Action("Delete","MeetUp")",
+                dataType: "JSON",
+                data: { ID: btnModalDelete.attr("data-meetup-id") },
                 type: "DELETE",
-                success: window.location.href ="@Url.Action("Index","MeetUp")",
-                error: function (errorMessage) {alert("Deleting unsuccesful!")}
+                success: function (data) {
+                    $("#deleteModel").modal("hide");
+                    location.reload();
+                },
+                error: function (errorMessage) { console.log(errorMessage);alert("Deleting unsuccesful!")}
             })
         });
     };
