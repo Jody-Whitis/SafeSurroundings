@@ -34,7 +34,7 @@
                     <td>@meetup.MeetTime.ToString()</td>
                     <td>
                         <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Meetup", new {meetUpToEditID=meetup.ID })'" />
-                        <input type="button" id="btnDanger" class="btn btn-danger" value="Delete"/>
+                        <input type="button" id="btnDanger" class="evtDelete btn btn-danger" value="Delete"/>
                     </td>
                 </tr>
                     }
@@ -125,7 +125,7 @@
     $(document).ready(LoadDetailsInModal(), LoadDeleteInModal(), DeleteByID());
 
     function LoadDetailsInModal() {
-        var links = $(".Meetup").not(":button");
+        var links = $(".Meetup") .not(":button");
 
         links.click(function () {
             var selectedID = $(this).data("place-id");
@@ -135,30 +135,30 @@
                 url: "@Url.Action("GetMeetUpByID", "MeetUp")",
                 data: { MeetUpID: selectedID},
                 type: "GET",
-                dataType: "JSON",
-                success: function (data) {
+                dataType: "JSON"
+            })
+                .done(function (data) {
                     var tableBody = $("#tblPlacesModal");
                     var trResponse = "";
-                     var jResponse = $.parseJSON(data);
+                    var jResponse = $.parseJSON(data);
                     $.each(jResponse, function (indx, dataResponse) {
                         trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
                             + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" +
-                            "<td>"+
-                             "</td>" + "</tr>";
+                            "<td>" +
+                            "</td>" + "</tr>";
                         console.log(dataResponse.PlaceName);
                     });
-                   $(tableBody).html(trResponse);
+                    $(tableBody).html(trResponse);
                     console.log("Full Data: " + $.parseJSON(data));
                     console.log(trResponse);
                     $("#exampleModal").modal("show");
-                },
-                error: function (errorMessage) {alert("Fetching meetups unsuccessful!")}
-            })
+                })
+                .fail(function (errorMessage) { alert("Fetching meetups unsuccessful!") })
         });
     };
 
     function LoadDeleteInModal() {
-        var links = $("#btnDanger");
+        var links = $(".evtDelete");
         var btnModalDelete = $("#btnDeleteByID");
         links.click(function () {
             event.stopPropagation();
@@ -167,18 +167,19 @@
             $.ajax({
                 async: true,
                 url: "@Url.Action("GetMeetUpByID", "MeetUp")",
-                data: { MeetUpID: selectedID},
+                data: { MeetUpID: selectedID },
                 type: "GET",
-                dataType: "JSON",
-                success: function (data) {
+                dataType: "JSON" 
+            })
+                .done(function (data) {
                     var tableBody = $("#tblPlacesModalForDelete");
                     var trResponse = "";
-                     var jResponse = $.parseJSON(data);
+                    var jResponse = $.parseJSON(data);
                     $.each(jResponse, function (indx, dataResponse) {
                         trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
                             + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" +
-                            "<td>"+
-                             "</td>" + "</tr>";
+                            "<td>" +
+                            "</td>" + "</tr>";
                         console.log("returned ID" + dataResponse.ID);
                         $(btnModalDelete).attr("data-meetup-id", dataResponse.ID);
                         console.log("ID passed into Delete " + btnModalDelete.attr("data-meetup-id"));
@@ -187,9 +188,8 @@
                     console.log("Full Data from delete: " + $.parseJSON(data));
                     console.log(trResponse);
                     $("#deleteModel").modal("show");
-                },
-                error: function (errorMessage) {alert("Fetching meetups unsuccessful!")}
-            })
+                })
+                .fail(function (errorMessage) { alert("Fetching meetups unsuccessful!") })               
         });
     };
 
@@ -204,13 +204,13 @@
                 url: "@Url.Action("Delete","MeetUp")",
                 dataType: "JSON",
                 data: { ID: btnModalDelete.attr("data-meetup-id") },
-                type: "DELETE",
-                success: function (data) {
+                type: "DELETE"
+            })
+                .done(function (data) {
                     $("#deleteModel").modal("hide");
                     location.reload();
-                },
-                error: function (errorMessage) { console.log(errorMessage);alert("Deleting unsuccesful!")}
-            })
+                })
+                .fail(function (errorMessage) { console.log(errorMessage); alert("Deleting unsuccesful!") })
         });
     };
 </script>
