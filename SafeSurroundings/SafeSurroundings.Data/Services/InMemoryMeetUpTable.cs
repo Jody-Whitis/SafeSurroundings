@@ -18,7 +18,7 @@ namespace SafeSurroundings.Data.Services
 
         public void Add(MeetUp newMeetup)
         {
-            newMeetup.ID = meetUps.Max(m => m.ID )+ 1;
+            newMeetup.ID = meetUps != null && meetUps.Any() ? meetUps.Max(m => m.ID) + 1 : 0;        
             meetUps.Add(newMeetup);
         }
 
@@ -58,9 +58,5 @@ namespace SafeSurroundings.Data.Services
             return listOfMeetups;
         }
 
-        public void Update(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
