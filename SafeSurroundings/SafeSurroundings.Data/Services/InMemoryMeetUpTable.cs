@@ -13,7 +13,7 @@ namespace SafeSurroundings.Data.Services
 
         public InMemoryMeetUpTable()
         {
-            meetUps = new List<MeetUp> { new MeetUp {ID=1,PlaceID=1, MeetTime=DateTime.Today, PlaceName="Starbucks"} };
+            meetUps = new List<MeetUp> { new MeetUp {ID=1,PlaceID=1, MeetTime=DateTime.Today, PlaceName="Starbucks", PersonID=1} };
         }
 
         public void Add(MeetUp newMeetup)
@@ -50,12 +50,14 @@ namespace SafeSurroundings.Data.Services
             return meetUps.OrderBy(m => m.ID);
         }
 
-        public IEnumerable<MeetUp> GetByIDs(IEnumerable<int> ids)
+        public IEnumerable<MeetUp> GetByPersonID(int PersonID)
         {
-            List<MeetUp> listOfMeetups = new List<MeetUp>();
+            return meetUps.Where(x => x.PersonID == PersonID);
+        }
 
-            listOfMeetups= meetUps.TakeWhile(x => ids.Contains(x.ID)).ToList();
-            return listOfMeetups;
+        public IEnumerable<MeetUp> GetByPersonIDToday(int PersonID)
+        {
+            return meetUps.Where(x => x.PersonID == PersonID && x.MeetTime.ToString("MM/dd/yyyy").Equals(DateTime.Now.ToString("MM/dd/yyyy")));
         }
 
     }

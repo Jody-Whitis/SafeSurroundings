@@ -17,15 +17,29 @@
     <div class="container">
         <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
             <thead>
+
                 <tr>
                     @if (Model != null)
                     {
+                    <tr>
+
                         <th align="center">Welcome @Model.DisplayName</th>
-                    }
-                </tr>
-                <tr>
-                </tr>
-            </thead>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        @if (Model.ListofMeetups.Any())
+                        {
+                            <th align="center">Your Schedule for Today: (@DateTime.Now.DayOfWeek) @DateTime.Now.ToString("MM/dd/yyyy")</th>
+                        }
+                        else
+                        {
+                            <th align="center">You are free today!</th>
+                        }
+                    </tr>
+                }
+                    <tr>
+                    </tr>
+                </thead>
         </table>
     </div>
 

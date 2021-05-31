@@ -29,7 +29,7 @@ namespace SafeSurroundings.Controllers
             List<Place> places = new List<Place>();
             places = placeTable.GetAll().ToList();
             List<MeetUp> meetUps = new List<MeetUp>();
-            meetUps = meetUpTable.GetAll().ToList();
+            meetUps = meetUpTable.GetByPersonID(Convert.ToInt32(Session["id"])).ToList();
             MeetUpViewModel meetupViewModel = new MeetUpViewModel();
 
             try
@@ -73,6 +73,7 @@ namespace SafeSurroundings.Controllers
                 MeetUp newMeetup = new MeetUp();
                 newMeetup.MeetTime = newMeetUpViewModel.MeetTime;
                 newMeetup.PlaceID = newMeetUpViewModel.PlaceID;
+                newMeetup.PersonID = Convert.ToInt32(Session["id"]);
                 newMeetup.PlaceName = placeTable.GetAll().Where(p => p.ID == newMeetup.PlaceID).Select(p => p.Name).FirstOrDefault();
                 meetUpTable.Add(newMeetup);
                 Response.StatusCode = SetStatus("Created");
