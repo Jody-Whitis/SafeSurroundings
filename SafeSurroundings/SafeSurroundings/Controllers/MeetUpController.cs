@@ -124,6 +124,26 @@ namespace SafeSurroundings.Controllers
 
             }
         }
+        [HttpDelete]
+        public JsonResult Delete(int ID)
+        {
+            MeetUp deletedMeetup = new MeetUp();
+            deletedMeetup = meetUpTable.GetAll().Where(m => m.ID == ID).FirstOrDefault();
+            if (deletedMeetup != null)
+            {
+                meetUpTable.Delete(ID);
+                Response.StatusCode = SetStatus("Deleted");
+                IEnumerable<MeetUp> meetupsUpdated = meetUpTable.GetAll();
+                return Json(JsonConvert.SerializeObject(meetupsUpdated), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                Response.StatusCode = SetStatus(null);
+                return Json("{deleted: false}");
+            }
+
+
+        }
 
         [HttpGet]
         public ActionResult GetMeetUpByID(int MeetUpID = 0)
