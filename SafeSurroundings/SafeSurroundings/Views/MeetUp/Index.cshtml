@@ -29,7 +29,7 @@
                 {
                     foreach (var meetup in Model)
                     {
-                <tr class="Meetup" data-place-id="@meetup.ID">
+                <tr class="Meetup" data-meetup-id="@meetup.ID">
                     <td>@meetup.PlaceName</td>
                     <td>@meetup.MeetTime.ToString()</td>
                     <td>
@@ -128,7 +128,7 @@
         var links = $(".Meetup") .not(":button");
 
         links.click(function () {
-            var selectedID = $(this).data("place-id");
+            var selectedID = $(this).data("meetup-id");
             console.log("Selected ID: " + selectedID);
             $.ajax({
                 async: true,
@@ -162,7 +162,7 @@
         var btnModalDelete = $("#btnDeleteByID");
         links.click(function () {
             event.stopPropagation();
-            var selectedID = $(this).closest("tr").data("place-id");
+            var selectedID = $(this).closest("tr").data("meetup-id");
             console.log("Selected ID: " + selectedID);
             $.ajax({
                 async: true,
