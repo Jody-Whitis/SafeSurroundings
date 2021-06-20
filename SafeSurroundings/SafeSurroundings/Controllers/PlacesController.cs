@@ -76,6 +76,40 @@ namespace SafeSurroundings.Controllers
 
         }
 
+        [HttpGet]
+        [UserAuthentication]
+        public override ActionResult Edit(int? EditID)
+        {
+            if ((ModelState.IsValid) && (EditID != null))
+            {
+                PlacesViewModel placesViewModel = new PlacesViewModel();
+                placesViewModel.PlaceModel = placeTable.GetAll().Where(p => p.ID == EditID).FirstOrDefault();
+                return View(placesViewModel);
+            }
+            else
+            {
+                SetStatus("Place Not Found to Edit");
+                return View("Error");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [UserAuthentication]
+        public ActionResult Edit(PlacesViewModel placeToEdit)
+        {
+            try
+            {
+                placeToEdit.PlaceModel = placeTable.Update(placeToEdit.PlaceModel);
+                Response.StatusCode = placeToEdit == null || placeToEdit.PlaceModel == null ? SetStatus("Created") : SetStatus(null);
+                return RedirectToAction("Index", "Places");
+            }
+            catch(Exception ex)
+            {
+                Response.StatusCode = SetStatus(ex.Message);
+                return View("Index", "Place");
+            }
+        }
 
 
     }

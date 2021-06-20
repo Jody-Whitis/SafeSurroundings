@@ -28,9 +28,22 @@ namespace SafeSurroundings.Data.Services
             places.Remove(place);
         }
 
-        public void Update(int id)
+        public Place Update(Place placetoUpdate)
         {
-
+            try
+            {
+                Place placeFromUpdate = places.Where(p => p.ID == placetoUpdate.ID).FirstOrDefault();
+                placeFromUpdate.OpenHour = placetoUpdate.OpenHour;
+                placeFromUpdate.CloseHour = placetoUpdate.CloseHour;
+                placeFromUpdate.X_Coordinates = placetoUpdate.X_Coordinates;
+                placeFromUpdate.Y_Coordinates = placetoUpdate.Y_Coordinates;
+                placeFromUpdate.Name = placetoUpdate.Name;
+                return placeFromUpdate;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public IEnumerable<Place> GetAll()

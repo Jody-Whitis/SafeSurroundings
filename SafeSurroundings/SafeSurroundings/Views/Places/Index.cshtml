@@ -28,11 +28,17 @@
                 {
                     foreach (var places in Model.ListofAllPlaces)
                     {
-                        <tr class="PlaceList" data-place-id="@places.ID">
-                            <td>@places.Name</td>
-                            <td>@places.OpenHour.ToShortTimeString()</td>
-                            <td>@places.CloseHour.ToShortTimeString()</td>
-                        </tr>
+                <tr class="PlaceList" data-place-id="@places.ID">
+                    <td>@places.Name</td>
+                    <td>@places.OpenHour.ToShortTimeString()</td>
+                    <td>@places.CloseHour.ToShortTimeString()</td>
+                    <td>
+                        @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"])))) { 
+                            <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Places", new {EditID=places.ID})'" />
+                        }
+
+                    </td>
+                </tr>
                     }
 
                 }

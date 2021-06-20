@@ -75,8 +75,7 @@ namespace SafeSurroundings.Controllers
                 IEnumerable<Place> listOfPlaces = placeTable.GetAll();
                 int id = Convert.ToInt32(Session["id"]);
                 homeViewModel.DisplayName = Convert.ToString(Session["name"]);
-                IEnumerable<int> meetupIDs = accountTable.SelectAccount(Convert.ToInt32(Session["id"])).ListofMeetUpID;
-                homeViewModel.ListofMeetups = meetupTable.GetByIDs(meetupIDs);              
+                homeViewModel.ListofMeetups = meetupTable.GetByPersonIDToday(id);              
                 return View(homeViewModel);
             }
             catch
