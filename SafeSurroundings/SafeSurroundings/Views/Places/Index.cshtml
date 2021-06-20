@@ -33,7 +33,10 @@
                     <td>@places.OpenHour.ToShortTimeString()</td>
                     <td>@places.CloseHour.ToShortTimeString()</td>
                     <td>
-                        <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Places", new {EditID=places.ID})'" />
+                        @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"])))) { 
+                            <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Places", new {EditID=places.ID})'" />
+                        }
+
                     </td>
                 </tr>
                     }
