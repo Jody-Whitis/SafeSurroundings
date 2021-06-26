@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SafeSurroundings.Data.Models
 {
-    public class Account
+    public class Profile
     {
         public int ID { get; set; }
         public string DisplayName { get; set; }

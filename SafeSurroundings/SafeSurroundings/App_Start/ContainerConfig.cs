@@ -16,7 +16,7 @@ namespace SafeSurroundings.App_Start
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<InMemoryPersonTable>().SingleInstance();
-            builder.RegisterType<InMemoryAccountTable>().SingleInstance();
+            builder.RegisterType<InMemoryProfileTable>().SingleInstance();
             builder.RegisterType<InMemoryPlaceTable>().SingleInstance();
             builder.RegisterType<InMemoryMeetUpTable>().SingleInstance();
             var container = builder.Build();

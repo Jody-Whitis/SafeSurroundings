@@ -7,33 +7,33 @@ using System.Threading.Tasks;
 
 namespace SafeSurroundings.Data.Services
 {
-    public class InMemoryAccountTable
+    public class InMemoryProfileTable
     {
-        List<Account> accounts;
+        List<Profile> accounts;
         
-        public InMemoryAccountTable()
+        public InMemoryProfileTable()
         {
-            accounts = new List<Account> { new Account { ID = 1, UserName = "jodywhitis0407@gmail.com", DisplayName="Jody",
+            accounts = new List<Profile> { new Profile { ID = 1, UserName = "jodywhitis0407@gmail.com", DisplayName="Jody",
                 Password = "test", IsActive = true, LastLogin = DateTime.Now, IsSubscribed = false,
                 IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}} };
         }
 
-        public IEnumerable<Account> GetAll()
+        public IEnumerable<Profile> GetAll()
         {
             return accounts.OrderBy(a => a.ID);
         } 
 
-        public Account GetLoginAccount(string user,string password)
+        public Profile GetLoginAccount(string user,string password)
         {
             return accounts.Where(a => a.UserName == user && a.Password == password).FirstOrDefault();
         }
 
-        public Account SelectAccount(int id)
+        public Profile SelectAccount(int id)
         {
             return accounts.Where(a => a.ID == id).FirstOrDefault();
         }
         
-        public void AddAccount(Account newAccount)
+        public void AddAccount(Profile newAccount)
         {
             newAccount.ID = accounts.Max(a => a.ID) + 1;
             accounts.Add(newAccount);
@@ -46,13 +46,13 @@ namespace SafeSurroundings.Data.Services
 
         public void Delete(int id)
         {
-            Account account = accounts.Where(a => a.ID == id).FirstOrDefault();
+            Profile account = accounts.Where(a => a.ID == id).FirstOrDefault();
             accounts.Remove(account);
         }
 
         public void AddMeetup(int id, int meetUpID)
         {
-            Account account = accounts.Where(a => a.ID == id).FirstOrDefault();
+            Profile account = accounts.Where(a => a.ID == id).FirstOrDefault();
             List<int> currentMeetups = account.ListofMeetUpID.ToList();
             currentMeetups.Add(meetUpID);
             account.ListofMeetUpID = currentMeetups;
@@ -60,7 +60,7 @@ namespace SafeSurroundings.Data.Services
 
         public void RemoveMeetup(int id, int meetupID)
         {
-            Account account = accounts.Where(a => a.ID == id).FirstOrDefault();
+            Profile account = accounts.Where(a => a.ID == id).FirstOrDefault();
             List<int> currentMeetups = account.ListofMeetUpID.ToList();
             currentMeetups.Remove(meetupID);
             account.ListofMeetUpID = currentMeetups;

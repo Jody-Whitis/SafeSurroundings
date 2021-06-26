@@ -13,10 +13,10 @@ namespace SafeSurroundings.Controllers
     public class HomeController : Controller
     {
         InMemoryPersonTable personTable;
-        InMemoryAccountTable accountTable;
+        InMemoryProfileTable accountTable;
         InMemoryMeetUpTable meetupTable;
         InMemoryPlaceTable placeTable;
-        public HomeController(InMemoryPersonTable personTable, InMemoryAccountTable accountTable, InMemoryMeetUpTable meetupTable,InMemoryPlaceTable placeTable)
+        public HomeController(InMemoryPersonTable personTable, InMemoryProfileTable accountTable, InMemoryMeetUpTable meetupTable,InMemoryPlaceTable placeTable)
         {
             this.personTable = personTable;
             this.accountTable = accountTable;
@@ -42,7 +42,7 @@ namespace SafeSurroundings.Controllers
         {
             if (ModelState.IsValid)
             {
-                Account loginAccount = new Account();
+                Profile loginAccount = new Profile();
                 loginAccount = accountTable.GetLoginAccount(userLogin.User, userLogin.Password);
 
                 if((loginAccount != null))
@@ -51,6 +51,7 @@ namespace SafeSurroundings.Controllers
                     Session.Add("name", loginAccount.DisplayName);
                     Session.Add("id", loginAccount.ID);
                     Session.Add("sessionGUID", Guid.NewGuid());
+                    Session.Add("profile", loginAccount);
                 return RedirectToAction("Index","Home");
 
                 }
