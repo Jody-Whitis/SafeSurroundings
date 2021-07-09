@@ -1,17 +1,150 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model SafeSurroundings.Models.ProfileViewModel
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div> 
+<div class="container active">
+    <div class="container">
+        <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
+            <thead>
+                <tr>
+                    @if (Model != null)
+                    {
+                        <th align="center">Hello @Model.DisplayName</th>
+                    }
+                </tr>
+            </thead>
+        </table>
     </div>
-</body>
-</html>
+
+    <div class="container">
+        <table class="table table-hover  col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>IsTwoFactor</th>
+                    <th>IsSubscribed</th>
+                    <th>Last Login Date</th>
+                    <th>Last Login Device</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbMeetUps">
+                @if ((Model != null))
+                { 
+                <tr class="Meetup" data-meetup-id="@Model.ProfileID">
+                    <td>@Model.UserName</td>
+                    <td>@Model.ConvertBooleantoDisplay(Model.IsTwoFactor)</td>
+                    <td>@Model.ConvertBooleantoDisplay(Model.IsSubscribed)</td>
+                    <td>@Model.LastLogin</td>
+                    <td>@Model.LastLoginDevice</td>
+                    <td>
+                        <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit","Profile",new {EditID=Model.ProfileID})'" />
+                        @*<input type="button" id="btnDanger" class="evtDelete btn btn-danger" value="Delete" />*@
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+        <div class="btn-group btn-group-lg" role="button">
+            <input type="button" class="btn btn-default" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+            <input type="button" class="btn btn-success" value="Add a New Meetup" onclick="location.href='@Url.Action("Add", "MeetUp")'" />
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/moment.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(LoadDetailsInModal(), LoadDeleteInModal(), DeleteByID());
+
+    function LoadDetailsInModal() {
+        var links = $(".Meetup") .not(":button");
+
+        links.click(function () {
+            var selectedID = $(this).data("meetup-id");
+            console.log("Selected ID: " + selectedID);
+            $.ajax({
+                async: true,
+                url: "@Url.Action("GetMeetUpByID", "MeetUp")",
+                data: { MeetUpID: selectedID},
+                type: "GET",
+                dataType: "JSON"
+            })
+                .done(function (data) {
+                    var tableBody = $("#tblPlacesModal");
+                    var trResponse = "";
+                    var jResponse = $.parseJSON(data);
+                    $.each(jResponse, function (indx, dataResponse) {
+                        trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
+                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" +
+                            "<td>" +
+                            "</td>" + "</tr>";
+                        console.log(dataResponse.PlaceName);
+                    });
+                    $(tableBody).html(trResponse);
+                    console.log("Full Data: " + $.parseJSON(data));
+                    console.log(trResponse);
+                    $("#exampleModal").modal("show");
+                })
+                .fail(function (errorMessage) { alert("Fetching meetups unsuccessful!") })
+        });
+    };
+
+    function LoadDeleteInModal() {
+        var links = $(".evtDelete");
+        var btnModalDelete = $("#btnDeleteByID");
+        links.click(function () {
+            event.stopPropagation();
+            var selectedID = $(this).closest("tr").data("meetup-id");
+            console.log("Selected ID: " + selectedID);
+            $.ajax({
+                async: true,
+                url: "@Url.Action("GetMeetUpByID", "MeetUp")",
+                data: { MeetUpID: selectedID },
+                type: "GET",
+                dataType: "JSON"
+            })
+                .done(function (data) {
+                    var tableBody = $("#tblPlacesModalForDelete");
+                    var trResponse = "";
+                    var jResponse = $.parseJSON(data);
+                    $.each(jResponse, function (indx, dataResponse) {
+                        trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
+                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" +
+                            "<td>" +
+                            "</td>" + "</tr>";
+                        console.log("returned ID" + dataResponse.ID);
+                        $(btnModalDelete).attr("data-meetup-id", dataResponse.ID);
+                        console.log("ID passed into Delete " + btnModalDelete.attr("data-meetup-id"));
+                    });
+                    $(tableBody).html(trResponse);
+                    console.log("Full Data from delete: " + $.parseJSON(data));
+                    console.log(trResponse);
+                    $("#deleteModel").modal("show");
+                })
+                .fail(function (errorMessage) { alert("Fetching meetups unsuccessful!") })
+        });
+    };
+
+    function DeleteByID() {
+        var btnModalDelete = $("#btnDeleteByID");
+        var modelDeleteID = btnModalDelete.attr("data-meetup-id")
+
+        btnModalDelete.click(function () {
+             console.log("SelectedID: " + btnModalDelete.attr("data-meetup-id"));
+            $.ajax({
+                async: true,
+                url: "@Url.Action("Delete","MeetUp")",
+                dataType: "JSON",
+                data: { ID: btnModalDelete.attr("data-meetup-id") },
+                type: "DELETE"
+            })
+                .done(function (data) {
+                    $("#deleteModel").modal("hide");
+                    location.reload();
+                })
+                .fail(function (errorMessage) { console.log(errorMessage); alert("Deleting unsuccesful!") })
+        });
+    };
+</script>

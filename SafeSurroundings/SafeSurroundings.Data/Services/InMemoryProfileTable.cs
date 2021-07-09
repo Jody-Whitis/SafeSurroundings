@@ -14,7 +14,7 @@ namespace SafeSurroundings.Data.Services
         public InMemoryProfileTable()
         {
             accounts = new List<Profile> { new Profile { ID = 1, UserName = "jodywhitis0407@gmail.com", DisplayName="Jody",
-                Password = "test", IsActive = true, LastLogin = DateTime.Now, IsSubscribed = false,
+                Password = "test", IsActive = true, LastLogin = DateTime.Now,LastLoginDevice="Test Computer", IsSubscribed = false,
                 IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}} };
         }
 
