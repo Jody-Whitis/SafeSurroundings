@@ -13,16 +13,16 @@ namespace SafeSurroundings.Controllers
     public class HomeController : Controller
     {
         InMemoryPersonTable personTable;
-        InMemoryProfileTable accountTable;
+        InMemoryProfileTable profileTable;
         InMemoryMeetUpTable meetupTable;
         InMemoryPlaceTable placeTable;
         public HomeController(InMemoryPersonTable personTable, InMemoryProfileTable accountTable, InMemoryMeetUpTable meetupTable,InMemoryPlaceTable placeTable)
         {
             this.personTable = personTable;
-            this.accountTable = accountTable;
+            this.profileTable = accountTable;
             this.meetupTable = meetupTable;
             this.placeTable = placeTable;
-        }
+         }
 
         [HttpGet]
         public ActionResult Index()
@@ -43,7 +43,7 @@ namespace SafeSurroundings.Controllers
             if (ModelState.IsValid)
             {
                 Profile loginAccount = new Profile();
-                loginAccount = accountTable.GetLoginAccount(userLogin.User, userLogin.Password);
+                loginAccount = profileTable.GetLoginAccount(userLogin.User, userLogin.Password);
 
                 if((loginAccount != null))
                 {
@@ -52,8 +52,10 @@ namespace SafeSurroundings.Controllers
                     Session.Add("id", loginAccount.ID);
                     Session.Add("sessionGUID", Guid.NewGuid());
                     Session.Add("profile", loginAccount);
+                    loginAccount.LastLogin = DateTime.Now;
+                    loginAccount.LastLoginDevice = Environment.MachineName.ToString(); 
+                    loginAccount = profileTable.Update(loginAccount);
                 return RedirectToAction("Index","Home");
-
                 }
                 else
                 {
