@@ -61,6 +61,7 @@ namespace SafeSurroundings.Controllers
                 profileViewModel.DisplayName = profiletoEdit.DisplayName;
                 profileViewModel.IsSubscribed = profiletoEdit.IsSubscribed;
                 profileViewModel.IsTwoFactor = profiletoEdit.IsTwoFactor;
+                profileViewModel.ProfileID = profiletoEdit.ID;
                 Response.StatusCode = SetStatus(string.Empty);
                 return View(profileViewModel);
             }
@@ -77,9 +78,12 @@ namespace SafeSurroundings.Controllers
         {
             try
             {
-
-
-
+                Profile profiletoUpdate = new Profile();
+                profiletoUpdate.ID = profileViewModelToUpdate.ProfileID;
+                profiletoUpdate.DisplayName = profileViewModelToUpdate.DisplayName;
+                profiletoUpdate.IsTwoFactor = profileViewModelToUpdate.IsTwoFactor;
+                profiletoUpdate.IsSubscribed = profileViewModelToUpdate.IsSubscribed;
+                profiletoUpdate = inMemoryProfileTable.Update(profiletoUpdate);
                 Response.StatusCode = SetStatus(string.Empty);
                 return RedirectToAction("Index", "Profile");
             }
