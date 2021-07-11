@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using SafeSurroundings.Data.Services;
 using SafeSurroundings.Data.Models;
 using SafeSurroundings.Models;
+using Newtonsoft.Json;
 
 namespace SafeSurroundings.Controllers
 {
@@ -92,6 +93,25 @@ namespace SafeSurroundings.Controllers
                 Response.StatusCode = SetStatus(ex.Message);
                 return View();
             }
+        }
+
+        [HttpGet]
+        public JsonResult GetProfileDetails(int ID)
+        {
+
+            IEnumerable<Profile> listOfProfile = inMemoryProfileTable.GetAll().Where(m => m.ID == ID);
+            if (listOfProfile != null)
+            {
+                Response.StatusCode = SetStatus(string.Empty); 
+                return Json(JsonConvert.SerializeObject(listOfProfile), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                Response.StatusCode = SetStatus("Details failed");
+                return Json("{details: none}");
+            }
+
+
         }
     }
 }
