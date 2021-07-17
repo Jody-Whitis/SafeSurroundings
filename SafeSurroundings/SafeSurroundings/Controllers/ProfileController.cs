@@ -16,10 +16,15 @@ namespace SafeSurroundings.Controllers
 
         InMemoryProfileTable inMemoryAccountTable;
         InMemoryProfileTable inMemoryProfileTable;
-        public ProfileController(InMemoryProfileTable inMemoryAccountTable, InMemoryProfileTable inMemoryProfileTable)
+        InMemoryPlaceTable inMemoryPlace;
+        InMemoryMeetUpTable InMemoryMeetUpTable;
+
+        public ProfileController(InMemoryProfileTable inMemoryAccountTable, InMemoryProfileTable inMemoryProfileTable, InMemoryMeetUpTable inMemoryMeetUpTable, InMemoryPlaceTable inMemoryPlaceTable)
         {
             this.inMemoryAccountTable = inMemoryAccountTable;
             this.inMemoryProfileTable = inMemoryProfileTable;
+            this.InMemoryMeetUpTable = inMemoryMeetUpTable;
+            this.inMemoryPlace = inMemoryPlaceTable;
         }
 
         [HttpGet]
@@ -101,7 +106,7 @@ namespace SafeSurroundings.Controllers
 
             IEnumerable<Profile> listOfProfile = inMemoryProfileTable.GetAll().Where(m => m.ID == ID);
             if (listOfProfile != null)
-            {
+            {                        
                 Response.StatusCode = SetStatus(string.Empty); 
                 return Json(JsonConvert.SerializeObject(listOfProfile), JsonRequestBehavior.AllowGet);
             }
@@ -109,9 +114,9 @@ namespace SafeSurroundings.Controllers
             {
                 Response.StatusCode = SetStatus("Details failed");
                 return Json("{details: none}");
-            }
+            }           
 
 
-        }
+        }        
     }
 }
