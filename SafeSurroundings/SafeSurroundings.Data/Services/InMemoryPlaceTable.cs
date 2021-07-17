@@ -56,6 +56,17 @@ namespace SafeSurroundings.Data.Services
             return places.Where(p => p.ID == id).FirstOrDefault();
         }
 
+        public IEnumerable<Place> GetPlacesByIDs(IEnumerable<int> placeIDs)
+        {
+            try
+            {
+                return places.Where(p => placeIDs.Contains(p.ID));
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 
 }
