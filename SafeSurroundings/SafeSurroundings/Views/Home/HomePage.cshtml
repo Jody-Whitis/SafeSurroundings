@@ -16,79 +16,73 @@
 
 </script>
 
-<div class="container" style="height:200px;width:940px">
-    <div id="homeCarousel" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="homeCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="homeCarousel" data-slide-to="1"></li>
-        </ol>
+<div class="container" >
+    <div class="container active" style="width:auto">
+        <div class="container">
+            <div id="homeCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="homeCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="homeCarousel" data-slide-to="1"></li>
+                </ol>
 
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="~/Images/testImgSS.jpg" style="height:200px; width:max-content"/>
-                <div class="carousel-caption">
-                    <h2>Test 1</h2>
-                    <p>Just Checking</p>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="~/Images/testImgSS.jpg" style="height:200px; width:max-content" />
+                        <div class="carousel-caption">
+                            <h2>Test 1</h2>
+                            <p>Just Checking</p>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src="~/Images/testImage2SS.jpg" style="height:200px; width:max-content" />
+                        <div class="carousel-caption">
+                            <h2>Test 2</h2>
+                            <p>Just Checking again</p>
+                        </div>
+                    </div>
+
+                    <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#homeCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+
                 </div>
+
             </div>
 
-            <div class="item">
-                <img src="~/Images/testImage2SS.jpg" style="height:200px; width:max-content"/>
-                <div class="carousel-caption">
-                    <h2>Test 2</h2>
-                    <p>Just Checking again</p>
-                </div>
+            <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
+                <thead>
+
+                    <tr>
+                        @if (Model != null)
+                        {
+                        <tr>
+
+                            <th align="center">Welcome @Model.DisplayName</th>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                            @if (Model.ListofMeetups.Any())
+                            {
+                                <th align="center">Your Schedule for Today: (@DateTime.Now.DayOfWeek) @DateTime.Now.ToString("MM/dd/yyyy")</th>
+                            }
+                            else
+                            {
+                                <th align="center">You are free today!</th>
+                            }
+                        </tr>
+                    }
+                        <tr>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-
-            <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#homeCarousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-            </a>
-
-
-        </div>
-
-    </div>
-</div>
-<div>
-    <div class="container">
-
-    </div>
-</div>
-
-<div class="container active" >
-    <div class="container">
-        <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
-            <thead>
-
-                <tr>
-                    @if (Model != null)
-                    {
-                    <tr>
-
-                        <th align="center">Welcome @Model.DisplayName</th>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        @if (Model.ListofMeetups.Any())
-                        {
-                            <th align="center">Your Schedule for Today: (@DateTime.Now.DayOfWeek) @DateTime.Now.ToString("MM/dd/yyyy")</th>
-                        }
-                        else
-                        {
-                            <th align="center">You are free today!</th>
-                        }
-                    </tr>
-                }
-                    <tr>
-                    </tr>
-                </thead>
-            </table>
-        </div>
 
         <div class="container">
             <table class="table table-hover  col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
@@ -129,5 +123,6 @@
                 <input type="button" class="btn btn-success" value="My Profile" onclick="location.href='@Url.Action("Index", "Profile")'" />
                 <input type="button" class="btn btn-warning" value="Logout" onclick="location.href='@Url.Action("Logout", "Home")'" />
             </div>
+        </div>
         </div>
     </div>
