@@ -2,6 +2,7 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap.min.js"></script>
+<link href="~/Content/GeneralStyle.css" rel="stylesheet" />
 <script type="text/javascript">
 
     $(document).ready(RedirecttoPlaces);
@@ -16,7 +17,7 @@
 
 </script>
 
-<div class="container" >
+<div class="container">
     <div class="container active" style="width:auto">
         <div class="container">
             <div id="homeCarousel" class="carousel slide" data-ride="carousel">
@@ -56,7 +57,7 @@
 
             </div>
 
-            <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
+            <table class="table table-hover col-lg-1 roundedBorder tableStyle_green" style="color:black;">
                 <thead>
 
                     <tr>
@@ -70,11 +71,11 @@
                         <tr>
                             @if (Model.ListofMeetups.Any())
                             {
-                                <th align="center">Your Schedule for Today: (@DateTime.Now.DayOfWeek) @DateTime.Now.ToString("MM/dd/yyyy")</th>
+                                <th style="border:hidden" align="center">Your Schedule for Today: (@DateTime.Now.DayOfWeek) @DateTime.Now.ToString("MM/dd/yyyy")</th>
                             }
                             else
                             {
-                                <th align="center">You are free today!</th>
+                                <th style="border:hidden" align="center">You are free today!</th>
                             }
                         </tr>
                     }
@@ -82,47 +83,48 @@
                         </tr>
                     </thead>
                 </table>
-            </div>
-
-        <div class="container">
-            <table class="table table-hover  col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
-                <thead>
-                    <tr>
-                        <th>Place</th>
-                        <th>Day</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
+            
+            <table class="table table-hover col-lg-pull-3 roundedBorder tableStyle_green" style="color:black;">
+                    <thead>
+                        <tr>
+                            <th>Place</th>
+                            <th>Day</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
 
 
-                <tbody>
-                    @if ((Model.ListofMeetups != null) && (Model.ListofMeetups.Any()))
-                    {
-                        foreach (var meetups in Model.ListofMeetups)
+                    <tbody>
+                        @if ((Model.ListofMeetups != null) && (Model.ListofMeetups.Any()))
                         {
-                            <tr>
-                                <td>
-                                    @meetups.PlaceName
-                                </td>
-                                <td>
-                                    @Model.FormatDate(meetups.MeetTime)
-                                </td>
-                                <td>
-                                    @Model.FormatTime(meetups.MeetTime)
-                                </td>
-                            </tr>
+                            foreach (var meetups in Model.ListofMeetups)
+                            {
+                                <tr>
+                                    <td>
+                                        @meetups.PlaceName
+                                    </td>
+                                    <td>
+                                        @Model.FormatDate(meetups.MeetTime)
+                                    </td>
+                                    <td>
+                                        @Model.FormatTime(meetups.MeetTime)
+                                    </td>
+                                </tr>
 
+                            }
                         }
-                    }
 
-                </tbody>
-            </table>
-            <div class="btn-group btn-group-lg" role="button">
-                <input type="button" class="btn btn-success" value="Meetups" onclick="location.href='@Url.Action("Index", "MeetUp")'" />
-                <input type="button" class="btn btn-success" value="Places" onclick="location.href='@Url.Action("Index", "Places")'" />
-                <input type="button" class="btn btn-success" value="My Profile" onclick="location.href='@Url.Action("Index", "Profile")'" />
-                <input type="button" class="btn btn-warning" value="Logout" onclick="location.href='@Url.Action("Logout", "Home")'" />
+                    </tbody>
+                </table>
             </div>
-        </div>
+
+            <div class="container">
+                <div class="btn-group btn-group-lg" role="button">
+                    <input type="button" class="btn btn-success" value="Meetups" onclick="location.href='@Url.Action("Index", "MeetUp")'" />
+                    <input type="button" class="btn btn-success" value="Places" onclick="location.href='@Url.Action("Index", "Places")'" />
+                    <input type="button" class="btn btn-success" value="My Profile" onclick="location.href='@Url.Action("Index", "Profile")'" />
+                    <input type="button" class="btn btn-warning" value="Logout" onclick="location.href='@Url.Action("Logout", "Home")'" />
+                </div>
+            </div>
         </div>
     </div>

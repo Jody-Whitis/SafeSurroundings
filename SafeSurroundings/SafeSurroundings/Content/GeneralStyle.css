@@ -1,0 +1,12 @@
+﻿.roundedBorder{
+    border-radius:20px;
+    padding:20px;
+}
+
+.tableStyle_green{
+    background-color:rgb(52, 235, 177);
+}
+
+.fontColor{
+    color:rgb(52,235,177);
+}
