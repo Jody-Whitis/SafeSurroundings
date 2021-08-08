@@ -1,20 +1,18 @@
 ﻿@model SafeSurroundings.Models.PlacesViewModel
-
+<link href="~/Content/GeneralStyle.css" rel="stylesheet" />
 <div class="container active">
     <div class="container">
-        <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
-            <thead>
-                <tr>
+        <table class="table table-hover col-lg-1 tableStyle_green roundedBorder">
+                 <tr>
                     <th align="center">Places to Meet</th>
                 </tr>
                 <tr>
                 </tr>
-            </thead>
-        </table>
+         </table>
     </div>
 
     <div class="container">
-        <table class="table table-hover  col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
+        <table class="table table-hover col-lg-pull-3 tableStyle_green roundedBorder">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -28,17 +26,18 @@
                 {
                     foreach (var places in Model.ListofAllPlaces)
                     {
-                <tr class="PlaceList" data-place-id="@places.ID">
-                    <td>@places.Name</td>
-                    <td>@places.OpenHour.ToShortTimeString()</td>
-                    <td>@places.CloseHour.ToShortTimeString()</td>
-                    <td>
-                        @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"])))) { 
-                            <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Places", new {EditID=places.ID})'" />
-                        }
+                        <tr class="PlaceList" data-place-id="@places.ID">
+                            <td>@places.Name</td>
+                            <td>@places.OpenHour.ToShortTimeString()</td>
+                            <td>@places.CloseHour.ToShortTimeString()</td>
+                            <td>
+                                @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
+                                {
+                                    <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Places", new {EditID=places.ID})'" />
+                                }
 
-                    </td>
-                </tr>
+                            </td>
+                        </tr>
                     }
 
                 }
@@ -59,7 +58,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <table class="table table-hover col-lg-1" style="background-color:rgb(52, 235, 177);color:black">
+                <table class="table table-hover col-lg-1 tableStyle_green roundedBorder">
                     <thead>
                         <tr>
                             <th align="center">Meetups Happening Here</th>
@@ -68,10 +67,10 @@
                         </tr>
                     </thead>
                 </table>
-             </div>
+            </div>
             <div class="modal-body">
 
-                <table class="table table-hover  id=" tblPlacesModal" col-lg-pull-3" style="background-color:rgb(52, 235, 177);color:black">
+                <table class="table table-hover col-lg-pull-3 tableStyle_green roundedBorder" id=" tblPlacesModal" >
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -80,8 +79,7 @@
                     </thead>
 
                     <tbody id="tblPlacesModal">
-
-                    </tbody>                  
+                    </tbody>
                 </table>
             </div>
             <div class="modal-footer">
@@ -117,7 +115,7 @@
                             + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td></tr>";
                         //console.log(dataResponse.PlaceName);
                     });
-                   $(tableBody).html(trResponse);  
+                   $(tableBody).html(trResponse);
                     //console.log("Full Data: " + $.parseJSON(data));
                     //console.log(trResponse);
                     $("#exampleModal").modal("show");
@@ -126,5 +124,5 @@
             })
         });
  };
-    
+
 </script>
