@@ -3,14 +3,18 @@
 <link href="~/Content/GeneralStyle.css" rel="stylesheet" />
 
 <div class="container active">
+
     <div class="container">
-        <table class="table table-hover col-lg-1 roundedBorder tableStyle_green" >
-                 <tr>
-                    <th align="center">Your Schedule MeetUps</th>
-                </tr>
-                <tr>
-                </tr>
-         </table>
+        @{
+            Html.RenderPartial("_PictureSlides");
+        }
+        <table class="table table-hover col-lg-1 roundedBorder tableStyle_green">
+            <tr>
+                <th align="center">Your Schedule MeetUps</th>
+            </tr>
+            <tr>
+            </tr>
+        </table>
     </div>
 
     <div class="container">

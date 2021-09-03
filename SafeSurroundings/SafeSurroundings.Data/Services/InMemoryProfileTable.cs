@@ -13,7 +13,7 @@ namespace SafeSurroundings.Data.Services
         
         public InMemoryProfileTable()
         {
-            profileList = new List<Profile> { new Profile { ID = 1, UserName = "jodywhitis0407@gmail.com", DisplayName="Jody",
+            profileList = new List<Profile> { new Profile { ID = 1, UserName = "test", DisplayName="Jody",
                 Password = "test", IsActive = true, LastLogin = DateTime.Now,LastLoginDevice="Test Computer", IsSubscribed = false,
                 IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}} };
         }
