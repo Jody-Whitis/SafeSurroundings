@@ -1,0 +1,8 @@
+﻿<link href="~/Content/GeneralStyle.css" rel="stylesheet" />
+<div>
+    @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
+    {
+        <img src="~/Images/testImgSS.jpg" class="navBar-brand-profile-picture" />
+    }
+    @Html.ActionLink("Safe Surroundings", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+</div>
