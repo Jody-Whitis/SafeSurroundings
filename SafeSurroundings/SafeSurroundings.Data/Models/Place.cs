@@ -16,6 +16,6 @@ namespace SafeSurroundings.Data.Models
         public double Y_Coordinates { get; set; }
         public DateTime OpenHour { get; set; }
         public DateTime CloseHour { get; set; }
-
+        public Byte[] PlacePicture { get; set; }
     }
 }

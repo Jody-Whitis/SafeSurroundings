@@ -19,5 +19,6 @@ namespace SafeSurroundings.Data.Models
         public Boolean IsSubscribed { get; set; }
         public Boolean IsTwoFactor { get; set; }
         public IEnumerable<int> ListofMeetUpID { get; set; }
-    }
+        public Byte[] ProfileImage { get; set; }
+     }
 }

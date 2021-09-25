@@ -190,6 +190,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\cat.png" />
+    <Content Include="Images\dog.png" />
     <Content Include="Images\testImage2SS.jpg" />
     <Content Include="Images\testImgSS.jpg" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
