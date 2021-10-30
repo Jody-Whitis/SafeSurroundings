@@ -16,7 +16,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Safe Surroundings", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @{
+                    Html.RenderPartial("_ProfileAvatar"); 
+                }               
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

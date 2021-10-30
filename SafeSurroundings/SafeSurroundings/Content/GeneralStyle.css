@@ -10,3 +10,10 @@
 .fontColor{
     color:rgb(52,235,177);
 }
+
+.navBar-brand-profile-picture {
+    height: 60px;
+    width: 60px;
+    padding: 5px;
+    border-radius:50%;
+}
