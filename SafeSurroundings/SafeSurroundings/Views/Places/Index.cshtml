@@ -42,8 +42,11 @@
             </div>
             <div class="btn-group btn-group-lg" role="button">
                 <input type="button" class="btn btn-default" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
-                <input type="button" class="btn btn-success" value="Add a New Place" onclick="location.href='@Url.Action("Add", "Places")'" />
-            </div>
+                @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
+                {
+                    <input type="button" class="btn btn-success" value="Add a New Place" onclick="location.href='@Url.Action("Add", "Places")'" />
+                }
+                </div>
         </div>
     </div>
 
