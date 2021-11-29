@@ -1,6 +1,8 @@
 ﻿using SafeSurroundings.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,7 @@ namespace SafeSurroundings.Data.Services
         {
             profileList = new List<Profile> { new Profile { ID = 1, UserName = "test", DisplayName="Jody",
                 Password = "test", IsActive = true, LastLogin = DateTime.Now,LastLoginDevice="Test Computer", IsSubscribed = false,
-                IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}} };
+                IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}, ProfileImage = GetImageBytes()}};
         }
 
         public IEnumerable<Profile> GetAll()
@@ -75,6 +77,28 @@ namespace SafeSurroundings.Data.Services
             List<int> currentMeetups = account.ListofMeetUpID.ToList();
             currentMeetups.Remove(meetupID);
             account.ListofMeetUpID = currentMeetups;
+        }
+
+        public void UpdateProfileImage(int id, byte[] imageBytes)
+        {
+            Profile account = profileList.Where(a => a.ID == id).FirstOrDefault();
+            account.ProfileImage = imageBytes;
+        }
+
+        protected Byte[] GetImageBytes()
+        {
+            try{
+                Image profiletest = Image.FromFile("C:\\Users\\chick\\source\\repos\\MVCImageTest\\MVCImageTest\\Images\\cat.png");
+                using(MemoryStream memoryStream = new MemoryStream())
+                {
+                    profiletest.Save(memoryStream, profiletest.RawFormat);
+                    return memoryStream.ToArray();
+                }
+            }
+            catch
+            {
+                return new byte[] { };
+            }
         }
     }
 }

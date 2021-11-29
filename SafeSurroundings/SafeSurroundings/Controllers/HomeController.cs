@@ -52,6 +52,7 @@ namespace SafeSurroundings.Controllers
                     Session.Add("id", loginAccount.ID);
                     Session.Add("sessionGUID", Guid.NewGuid());
                     Session.Add("profile", loginAccount);
+                    Session.Add("avatarSrc", GetImageScrFromBytes(loginAccount.ProfileImage));
                     loginAccount.LastLogin = DateTime.Now;
                     loginAccount.LastLoginDevice = Environment.MachineName.ToString(); 
                     loginAccount = profileTable.Update(loginAccount);
@@ -85,6 +86,13 @@ namespace SafeSurroundings.Controllers
             {
                 return RedirectToAction("Test", "Home");
             }
+        }
+
+        protected string GetImageScrFromBytes(Byte[] ProfileImageBytes)
+        {
+            string imageBase64 = Convert.ToBase64String(ProfileImageBytes);
+            string profileImagePath = ProfileImageBytes != null && ProfileImageBytes.Length > 0 ? $"data:image/png;base64,{imageBase64}" : string.Empty;
+            return string.IsNullOrEmpty(profileImagePath) ? profileImagePath : "~\\Images\\cat.png";
         }
 
         public ActionResult Test()

@@ -18,14 +18,13 @@ namespace SafeSurroundings.Models
         public Boolean IsSubscribed { get; set; }
         public DateTime LastLogin { get; set; }
         public string LastLoginDevice { get; set; }
-        public Image profileImage { get; set; }
-        public Byte[] profileImageBytes { get; set; }
+        public Byte[] ProfileImageBytes { get; set; }
         public string ConvertBooleantoDisplay(Boolean Flag)
         {
             string displayFlag = string.Empty;
             displayFlag = Flag == true ? "Yes" : "No";
             return displayFlag;
-        } 
+        }         
     }
 
 }
