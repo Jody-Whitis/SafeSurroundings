@@ -91,9 +91,8 @@ namespace SafeSurroundings.Controllers
         protected string GetImageScrFromBytes(Byte[] ProfileImageBytes)
         {
             string imageBase64 = Convert.ToBase64String(ProfileImageBytes);
-            string profileImagePath = ProfileImageBytes != null && ProfileImageBytes.Length > 0 ? $"data:image/png;base64,{imageBase64}" : string.Empty;
-            return string.IsNullOrEmpty(profileImagePath) ? profileImagePath : "~\\Images\\cat.png";
-        }
+            return ProfileImageBytes != null && ProfileImageBytes.Length > 0 ? $"data:image/png;base64,{imageBase64}" : string.Empty;         
+         }
 
         public ActionResult Test()
         {

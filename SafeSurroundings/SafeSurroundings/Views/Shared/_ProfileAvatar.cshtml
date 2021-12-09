@@ -1,6 +1,6 @@
 ﻿<link href="~/Content/GeneralStyle.css" rel="stylesheet" />
 <div>
-    @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
+    @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))) && (!String.IsNullOrEmpty(Convert.ToString(Session["avatarSrc"]))))
     {
         <img src="@Url.Content(Convert.ToString(Session["avatarSrc"]))" alt="avatar" class="navBar-brand-profile-picture" />
     }
