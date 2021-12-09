@@ -88,7 +88,7 @@ namespace SafeSurroundings.Data.Services
         protected Byte[] GetImageBytes()
         {
             try{
-                Image profiletest = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "Images//dog.png");
+                Image profiletest = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "Images//cat.png");
                 using(MemoryStream memoryStream = new MemoryStream())
                 {
                     profiletest.Save(memoryStream, profiletest.RawFormat);
