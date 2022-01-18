@@ -8,6 +8,7 @@ using SafeSurroundings.Data.Services;
 using SafeSurroundings.Data.Models;
 using SafeSurroundings.Models;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace SafeSurroundings.Controllers
 {
@@ -99,7 +100,7 @@ namespace SafeSurroundings.Controllers
                 return View();
             }
         }
-
+        
         [HttpGet]
         public JsonResult GetProfileDetails(int ID)
         {
@@ -115,8 +116,36 @@ namespace SafeSurroundings.Controllers
                 Response.StatusCode = SetStatus("Details failed");
                 return Json("{details: none}");
             }           
+        }
 
+        public ActionResult UploadAvatar(HttpPostedFileBase NewAvatar)
+        {
+            try
+            {
+                byte[] avatarBytes = new byte[] { };
+                if ((NewAvatar != null) && (NewAvatar.ContentLength > 0))
+                {
+                    using (Stream inputStream = NewAvatar.InputStream)
+                    {
+                        MemoryStream memoryStream = new MemoryStream();
+                        inputStream.CopyTo(memoryStream);
+                        avatarBytes = memoryStream.ToArray();
+                    }
+                    return RedirectToAction("Index", "Profile");
+                    //uploaded
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Profile");
+                    //invalid image type
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Profile");
+                //exception
+            }
+        }
 
-        }        
     }
 }

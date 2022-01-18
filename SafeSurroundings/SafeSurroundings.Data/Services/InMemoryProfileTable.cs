@@ -46,9 +46,10 @@ namespace SafeSurroundings.Data.Services
             try
             {
                 Profile profileFromUpdate = profileList.Where(p => p.ID == profileToUpdate.ID).FirstOrDefault();
-                profileFromUpdate.DisplayName = profileToUpdate.DisplayName;
-                profileFromUpdate.IsTwoFactor = profileToUpdate.IsTwoFactor;
-                profileFromUpdate.IsSubscribed = profileToUpdate.IsSubscribed;
+                if ((profileToUpdate.DisplayName != null) && (profileFromUpdate.DisplayName != profileToUpdate.DisplayName)) { profileFromUpdate.DisplayName = profileToUpdate.DisplayName; }
+                if (profileFromUpdate.IsTwoFactor != profileToUpdate.IsTwoFactor) { profileFromUpdate.IsTwoFactor = profileToUpdate.IsTwoFactor; }
+                if (profileFromUpdate.IsSubscribed != profileToUpdate.IsSubscribed) { profileFromUpdate.IsSubscribed = profileToUpdate.IsSubscribed; }
+                if ((profileToUpdate.ProfileImage != null) && (profileToUpdate.ProfileImage.Length > 0)) { profileFromUpdate.ProfileImage = profileToUpdate.ProfileImage; };
                 return profileFromUpdate;
             }
             catch
