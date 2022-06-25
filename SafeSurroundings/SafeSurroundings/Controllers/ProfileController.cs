@@ -9,6 +9,7 @@ using SafeSurroundings.Data.Models;
 using SafeSurroundings.Models;
 using Newtonsoft.Json;
 using System.IO;
+using SafeSurroundings.Data.Tools;
 
 namespace SafeSurroundings.Controllers
 {
@@ -122,6 +123,9 @@ namespace SafeSurroundings.Controllers
         {
             try
             {
+                Profile profiletoEdit = new Profile();
+                profiletoEdit = inMemoryProfileTable.GetAll().Where(p => p.ID == Convert.ToInt16(Session["id"])).FirstOrDefault();
+                    
                 byte[] avatarBytes = new byte[] { };
                 if ((NewAvatar != null) && (NewAvatar.ContentLength > 0))
                 {
@@ -131,9 +135,10 @@ namespace SafeSurroundings.Controllers
                         inputStream.CopyTo(memoryStream);
                         avatarBytes = memoryStream.ToArray();
                     }
+                    inMemoryProfileTable.UpdateProfileImage(profiletoEdit.ID,avatarBytes);
+                    Session["avatarSrc"] = ImageTools.GetImageScrFromBytes(profiletoEdit.ProfileImage);
                     return RedirectToAction("Index", "Profile");
-                    //uploaded
-                }
+                 }
                 else
                 {
                     return RedirectToAction("Index", "Profile");
@@ -146,6 +151,5 @@ namespace SafeSurroundings.Controllers
                 //exception
             }
         }
-
     }
 }
