@@ -2,9 +2,8 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <link href="~/Content/GeneralStyle.css" rel="stylesheet" />
 
-<div class="container active">
-    <div class="container">
-        <table class="table table-hover col-lg-1 tableStyle_green roundedBorder">
+<div class="container active"> 
+        <table class="table table-hover col-lg-1 tableStyle_purple roundedBorder">
             <tr>
                 @if (Model != null)
                 {
@@ -12,10 +11,8 @@
                 }
             </tr>
         </table>
-    </div>
 
-    <div class="container">
-        <table class="table table-hover  col-lg-pull-3 tableStyle_green roundedBorder">
+        <table class="table table-hover  col-lg-pull-3 tableStyle_purple roundedBorder">
             <thead>
                 <tr>
                     <th>Update Avatar</th>
@@ -36,7 +33,7 @@
                             {
                                 @Html.AntiForgeryToken()
                                 <div>
-                                    @Html.TextBox("NewAvatar","",new {type="file"})
+                                    @Html.TextBox("NewAvatar", "", new { type = "file" })
                                     <input type="submit" accept="image/*" value="Upload" />
                                 </div>
                             }
@@ -55,42 +52,43 @@
 
             </tbody>
         </table>
-    </div>
-</div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <table class="table table-hover col-lg-1 tableStyle_green roundedBorder">
-                    <thead>
-                        <tr>
-                            <th align="center">Profile Details</th>
-                        </tr>
-                        <tr>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-            <div class="modal-body">
 
-                <table class="table table-hover  id=" tblPlacesModal" col-lg-pull-3">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <table class="table table-hover col-lg-1 tableStyle_purple roundedBorder">
+                            <thead>
+                                <tr>
+                                    <th align="center">Profile Details</th>
+                                </tr>
+                                <tr>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="modal-body">
 
-                    <tbody id="tblPlacesModal">
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
+                        <table class="table table-hover  id=" tblPlacesModal" col-lg-pull-3">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tblPlacesModal">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+ 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/moment.min.js"></script> 
+<script src="~/Scripts/moment.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready( );

@@ -8,39 +8,41 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body >
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white;opacity:1;border-bottom:double;border-bottom-color:rgb(52, 235, 177);font-size:medium">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @{
-                    Html.RenderPartial("_ProfileAvatar"); 
-                }               
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
-                    <li>@Html.ActionLink("Places", "Index", "Places", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
-                    @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
-                    {
-                        <li>@Html.ActionLink("Profile", "Index", "Profile", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
-                        <li>@Html.ActionLink("MeetUps", "Index", "MeetUp", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @style = "color:rgb(52, 235, 177);font-weight:bold;font-size:15px;" })</li>
+    <div style="background-image:url('../Images/ssBackgroundImage.jpeg');background-size:cover;">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="opacity:0.9;border-bottom:double;border-bottom-color:rebeccapurple;font-size:medium">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @{
+                        Html.RenderPartial("_ProfileAvatar");
                     }
-                </ul>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @style = "color:rebeccapurple;font-weight:bold;font-size:15px;" })</li>
+                        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @style = "color:rebeccapurple;font-weight:bold;font-size:15px;" })</li>
+                        <li>@Html.ActionLink("Places", "Index", "Places", new { area = "" }, new { @style = "color:rebeccapurple;font-weight:bold;font-size:15px;" })</li>
+                        @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
+                        {
+                            <li>@Html.ActionLink("Profile", "Index", "Profile", new { area = "" }, new { @style = "color:rebeccapurple;font-weight:bold;font-size:15px;" })</li>
+                            <li>@Html.ActionLink("MeetUps", "Index", "MeetUp", new { area = "" }, new { @style = "color:rebeccapurple;font-weight:bold;font-size:15px;" })</li>
+                            <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, new { @style = "color:rebeccapurple;font-weight:bold;font-size:15px;" })</li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Safe Surroundings 2020</p>
-        </footer>
+        <div class="container body-content" style="min-height:990px">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Safe Surroundings 2020</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

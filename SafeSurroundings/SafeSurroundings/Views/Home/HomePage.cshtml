@@ -23,7 +23,7 @@
             @{
                 Html.RenderPartial("_PictureSlides");
             }
-            <table class="table table-hover col-lg-1 roundedBorder tableStyle_green" style="color:black;">
+            <table class="table table-hover col-lg-1 roundedBorder tableStyle_purple">
                 <thead>
 
                     <tr>
@@ -50,7 +50,7 @@
                     </thead>
                 </table>
 
-                <table class="table table-hover col-lg-pull-3 roundedBorder tableStyle_green" style="color:black;">
+                <table class="table table-hover col-lg-pull-3 roundedBorder tableStyle_purple">
                     <thead>
                         <tr>
                             <th>Place</th>
@@ -86,9 +86,9 @@
 
             <div class="container">
                 <div class="btn-group btn-group-lg" role="button">
-                    <input type="button" class="btn btn-success" value="Meetups" onclick="location.href='@Url.Action("Index", "MeetUp")'" />
-                    <input type="button" class="btn btn-success" value="Places" onclick="location.href='@Url.Action("Index", "Places")'" />
-                    <input type="button" class="btn btn-success" value="My Profile" onclick="location.href='@Url.Action("Index", "Profile")'" />
+                    <input type="button" class="btn buttons" value="Meetups" onclick="location.href='@Url.Action("Index", "MeetUp")'" />
+                    <input type="button" class="btn buttons" value="Places" onclick="location.href='@Url.Action("Index", "Places")'" />
+                    <input type="button" class="btn buttons" value="My Profile" onclick="location.href='@Url.Action("Index", "Profile")'" />
                     <input type="button" class="btn btn-warning" value="Logout" onclick="location.href='@Url.Action("Logout", "Home")'" />
                 </div>
             </div>

@@ -8,7 +8,7 @@
         @{
             Html.RenderPartial("_PictureSlides");
         }
-        <table class="table table-hover col-lg-1 roundedBorder tableStyle_green">
+        <table class="table table-hover col-lg-1 roundedBorder tableStyle_purple">
             <tr>
                 <th align="center">Your Schedule MeetUps</th>
             </tr>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="container">
-        <table class="table table-hover col-lg-pull-3 tableStyle_green roundedBorder">
+        <table class="table table-hover col-lg-pull-3 tableStyle_purple roundedBorder">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -47,8 +47,8 @@
             </tbody>
         </table>
         <div class="btn-group btn-group-lg" role="button">
-            <input type="button" class="btn btn-default" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
-            <input type="button" class="btn btn-success" value="Add a New Meetup" onclick="location.href='@Url.Action("Add", "MeetUp")'" />
+            <input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+            <input type="button" class="btn buttons" value="Add a New Meetup" onclick="location.href='@Url.Action("Add", "MeetUp")'" />
         </div>
     </div>
 </div>
@@ -56,7 +56,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <table class="table table-hover col-lg-1 tableStyle_green roundedBorder">
+                <table class="table table-hover col-lg-1 tableStyle_purple roundedBorder">
                         <tr>
                             <th align="center">Your Meetup</th>
                         </tr>
@@ -66,7 +66,7 @@
             </div>
             <div class="modal-body">
 
-                <table class="table table-hover col-lg-pull-3 roundedBorder tableStyle_green" id=" tblPlacesModal" >
+                <table class="table table-hover col-lg-pull-3 roundedBorder tableStyle_purple" id=" tblPlacesModal" >
                     <thead>
                         <tr>
                             <th>Place</th>
@@ -89,7 +89,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <table class="table table-hover col-lg-1 tableStyle_green roundedBorder" >
+                <table class="table table-hover col-lg-1 tableStyle_purple roundedBorder" >
                          <tr>
                             <th align="center">Are you sure you want to delete this?</th>
                         </tr>
@@ -99,7 +99,7 @@
             </div>
             <div class="modal-body">
 
-                <table class="table table-hover col-lg-pull-3 tableStyle_green roundedBorder" id=" tblPlacesModal">
+                <table class="table table-hover col-lg-pull-3 tableStyle_purple roundedBorder" id=" tblPlacesModal">
                     <thead>
                         <tr>
                             <th>Place</th>
