@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SafeSurroundings.Data.Tools;
 
 namespace SafeSurroundings.Data.Services
 {
@@ -17,7 +18,7 @@ namespace SafeSurroundings.Data.Services
         {
             profileList = new List<Profile> { new Profile { ID = 1, UserName = "test", DisplayName="Jody",
                 Password = "test", IsActive = true, LastLogin = DateTime.Now,LastLoginDevice="Test Computer", IsSubscribed = false,
-                IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}, ProfileImage = GetImageBytes()}};
+                IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}, ProfileImage = ImageTools.GetImageBytes()}};
         }
 
         public IEnumerable<Profile> GetAll()
@@ -46,9 +47,10 @@ namespace SafeSurroundings.Data.Services
             try
             {
                 Profile profileFromUpdate = profileList.Where(p => p.ID == profileToUpdate.ID).FirstOrDefault();
-                profileFromUpdate.DisplayName = profileToUpdate.DisplayName;
-                profileFromUpdate.IsTwoFactor = profileToUpdate.IsTwoFactor;
-                profileFromUpdate.IsSubscribed = profileToUpdate.IsSubscribed;
+                if ((profileToUpdate.DisplayName != null) && (profileFromUpdate.DisplayName != profileToUpdate.DisplayName)) { profileFromUpdate.DisplayName = profileToUpdate.DisplayName; }
+                if (profileFromUpdate.IsTwoFactor != profileToUpdate.IsTwoFactor) { profileFromUpdate.IsTwoFactor = profileToUpdate.IsTwoFactor; }
+                if (profileFromUpdate.IsSubscribed != profileToUpdate.IsSubscribed) { profileFromUpdate.IsSubscribed = profileToUpdate.IsSubscribed; }
+                if ((profileToUpdate.ProfileImage != null) && (profileToUpdate.ProfileImage.Length > 0)) { profileFromUpdate.ProfileImage = profileToUpdate.ProfileImage; };
                 return profileFromUpdate;
             }
             catch
@@ -83,22 +85,6 @@ namespace SafeSurroundings.Data.Services
         {
             Profile account = profileList.Where(a => a.ID == id).FirstOrDefault();
             account.ProfileImage = imageBytes;
-        }
-
-        protected Byte[] GetImageBytes()
-        {
-            try{
-                Image profiletest = Image.FromFile(AppDomain.CurrentDomain.BaseDirectory + "Images//cat.png");
-                using(MemoryStream memoryStream = new MemoryStream())
-                {
-                    profiletest.Save(memoryStream, profiletest.RawFormat);
-                    return memoryStream.ToArray();
-                }
-            }
-            catch
-            {
-                return new byte[] { };
-            }
         }
     }
 }

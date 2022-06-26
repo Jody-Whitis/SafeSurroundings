@@ -53,6 +53,7 @@
     <Compile Include="Services\InMemoryMeetUpTable.cs" />
     <Compile Include="Services\InMemoryPersonTable.cs" />
     <Compile Include="Services\InMemoryPlaceTable.cs" />
+    <Compile Include="Tools\ImageTools.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
