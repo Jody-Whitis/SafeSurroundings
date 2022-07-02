@@ -11,17 +11,17 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
 
-        @Html.Label("MeetUp Place", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Place to Meet", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.PlaceID, new SelectList(Model.PlacestoMeet, "ID", "Name"))
+            @Html.DropDownListFor(model => model.PlaceID,new SelectList(Model.PlacestoMeet, "ID", "Name"),  new {@class = "dropDown" } )
             @Html.ValidationMessageFor(model => model.PlaceID, "", new { @class = "text-danger" })
         </div>
     </div>
 
         <div class="form-group">
-            @Html.Label("Meet Date: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Meet Date: ", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MeetTime , new { htmlAttributes = new { @class = "timepicker" } })
+                @Html.EditorFor(model => model.MeetTime , new { htmlAttributes = new { @class = "timepicker dropDown" } })
                 @Html.ValidationMessageFor(model => model.MeetTime, "", new { @class = "text-danger" })
             </div>
         </div>

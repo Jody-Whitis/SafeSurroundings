@@ -23,34 +23,36 @@
             @{
                 Html.RenderPartial("_PictureSlides");
             }
-            <table class="table table-hover col-lg-1 roundedBorder tableStyle_purple">
-                <thead>
-
-                    <tr>
+            <table class="table table-hover roundedBorder tableStyle_blue">
+                <thead > 
                         @if (Model != null)
                         {
-                        <tr>
-
-                            <th align="center">Welcome @Model.DisplayName</th>
-                        </tr>
-                        <tr></tr>
-                        <tr>
-                            @if (Model.ListofMeetups.Any())
-                            {
-                                <th style="border:hidden" align="center">Your Schedule for Today: (@DateTime.Now.DayOfWeek) @DateTime.Now.ToString("MM/dd/yyyy")</th>
-                            }
-                            else
-                            {
-                                <th style="border:hidden" align="center">You are free today!</th>
-                            }
-                        </tr>
-                    }
-                        <tr>
-                        </tr>
+                            <tr>  
+                                <th style="text-align:center">Welcome @Model.DisplayName</th>
+                        </tr>                        
+                    } 
                     </thead>
+                <tbody>
+                    <tr>
+                        @if (Model.ListofMeetups.Any())
+                        {
+                            <td align="center" class="tdCenterNoBorder">Your Schedule for Today</td>                           
+                        }
+                        else
+                        {
+                            <td align="center" class="tdCenterNoBorder">You are free today!</td>
+                        }
+                    </tr>
+                    <tr>
+                        <td align="center">@DateTime.Now.DayOfWeek</td>
+                    </tr>
+                    <tr>
+                        <td align="center"> @DateTime.Now.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                </tbody>
                 </table>
 
-                <table class="table table-hover col-lg-pull-3 roundedBorder tableStyle_purple">
+                <table class="table table-hover col-lg-pull-3 roundedBorder tableStyle_blue">
                     <thead>
                         <tr>
                             <th>Place</th>

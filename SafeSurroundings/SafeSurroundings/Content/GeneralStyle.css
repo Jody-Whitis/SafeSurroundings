@@ -7,11 +7,23 @@
     background-color:rgb(52, 235, 177);
 }
 
-.tableStyle_purple {
-    background-color: rebeccapurple;
-    color:cornflowerblue;
+.tableStyle_blue {
+    background-color: cornflowerblue;
+    color:rebeccapurple;
     font-size: 20px;
 
+}
+
+.table_purple_forLarge{
+background-color:cornflowerblue;
+color:rebeccapurple;
+font-size: 15px;
+resize:vertical;
+text-size-adjust: auto;
+}
+
+.tdCenterNoBorder{
+border:hidden;
 }
 
 .fontColor{
@@ -26,12 +38,18 @@
 }
 
 .fieldNames {
-    color: darkgreen;
+    color: rebeccapurple;
     font-size: 20px;
     font-family: Calibri;
     background-color: cornflowerblue;
-    border-radius: 15px 50px;
+    border-radius: 55px 55px;
     text-align: center;
+}
+
+.dropDown{
+ color:white;
+ font-size: 20px;
+ background-color: rebeccapurple;
 }
 
 .buttons{
