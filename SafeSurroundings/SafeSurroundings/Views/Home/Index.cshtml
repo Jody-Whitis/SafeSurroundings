@@ -1,5 +1,6 @@
 ﻿@model SafeSurroundings.Models.HomeViewModel
-<h2>Login</h2>
+<link href="~/Content/GeneralStyle.css" rel="stylesheet" />
+<h1 class="fieldNames">Login</h1>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -8,14 +9,14 @@
 
         <div class="form-group">
 
-            @Html.Label("User", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("User", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.User, new { htmlAttributes = new { @class = "form-control", autofocus = true } })
                 @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
-            @Html.Label("Password", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Password", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
             <div class="col-md-10">
                 @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
@@ -30,7 +31,6 @@
         </div>
     </div>
 }
-
 
 
 @section Scripts{

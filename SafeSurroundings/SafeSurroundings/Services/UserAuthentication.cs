@@ -16,18 +16,15 @@ namespace SafeSurroundings.Services
             {
                 if ((filterContext.HttpContext.Session.Keys.Count == 0) && (string.IsNullOrEmpty(Convert.ToString(filterContext.HttpContext.Session["sessionGUID"]))))
                 {
-                    filterContext.Result = new HttpUnauthorizedResult();
+                filterContext.Result = new HttpUnauthorizedResult();
                 }
             }
 
             public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
             {
                 if (filterContext.Result == null || filterContext.Result is HttpUnauthorizedResult)
-                {
-                    filterContext.Result = new ViewResult
-                    {
-                        ViewName = "Error"
-                    };
+                {        
+                filterContext.Result = new RedirectResult("~/Home/Index");             
                 }
             }
         }    

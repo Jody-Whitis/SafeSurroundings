@@ -4,18 +4,18 @@
 
 <div class="container active">
     <div class="container">
-        <table class="table table-hover col-lg-1 tableStyle_green roundedBorder">
+        <table class="table table-hover col-lg-1 tableStyle_blue roundedBorder">
             <tr>
                 @if (Model != null)
                 {
-                    <th align="center">Hello @Model.DisplayName</th>
+                    <th style="text-align:center">Edit @Model.DisplayName's Profile</th>
                 }
             </tr>
         </table>
     </div>
 
-    <div class="container">
-        <table class="table table-hover  col-lg-pull-3 tableStyle_green roundedBorder">
+    <div class="container-fluid" style="overflow:auto">
+        <table class="table table-responsive col-md-push-4 table_purple_forLarge roundedBorder" >
             <thead>
                 <tr>
                     <th>Update Avatar</th>
@@ -24,6 +24,7 @@
                     <th>Subscribed</th>
                     <th>Last Login Date</th>
                     <th>Last Login Device</th>
+                    <th> </th>
                 </tr>
             </thead>
 
@@ -31,15 +32,17 @@
                 @if ((Model != null))
                 {
                     <tr class="Meetup" data-meetup-id="@Model.ProfileID">
-                        <td>
-                            @using (Html.BeginForm("UploadAvatar", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <div>
-                                    @Html.TextBox("NewAvatar","",new {type="file"})
-                                    <input type="submit" accept="image/*" value="Upload" />
-                                </div>
-                            }
+                        <td class="col-md-2">
+                            <div class="container-fluid" style="overflow:auto">
+                                @using (Html.BeginForm("UploadAvatar", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div>
+                                        @Html.TextBox("NewAvatar", "", new { type = "file" })
+                                        <input type="submit" accept="image/*" value="Upload" />
+                                    </div>
+                                }
+                            </div>
                         </td>
                         <td>@Model.UserName</td>
                         <td>@Model.ConvertBooleantoDisplay(Model.IsTwoFactor)</td>
@@ -57,11 +60,12 @@
         </table>
     </div>
 </div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <table class="table table-hover col-lg-1 tableStyle_green roundedBorder">
+                <table class="table table-hover col-lg-1 tableStyle_blue roundedBorder">
                     <thead>
                         <tr>
                             <th align="center">Profile Details</th>
@@ -90,7 +94,7 @@
     </div>
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/moment.min.js"></script> 
+<script src="~/Scripts/moment.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready( );

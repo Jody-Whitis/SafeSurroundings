@@ -13,18 +13,18 @@
     @Html.HiddenFor(model => model.NewMeetUp.ID)
 
     <div class="form-group">
-        @Html.Label("Meet Date: ", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Meet Date: ", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.NewMeetUp.MeetTime, new { htmlAttributes = new { @class = "timepicker" } })
+            @Html.EditorFor(model => model.NewMeetUp.MeetTime, new { htmlAttributes = new { @class = "timepicker dropDown" } })
             @Html.ValidationMessageFor(model => model.NewMeetUp.MeetTime, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
 
-        @Html.Label("MeetUp Place", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("MeetUp Place", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.NewMeetUp.PlaceID, new SelectList(Model.PlacestoMeet, "ID", "Name"))
+            @Html.DropDownListFor(model => model.NewMeetUp.PlaceID, new SelectList(Model.PlacestoMeet, "ID", "Name"), new {@class= "dropDown"})
             @Html.ValidationMessageFor(model => model.NewMeetUp.PlaceID, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -32,7 +32,7 @@
 </div>
     <div class="form-group">
         <div class="btn-group btn-group-lg" role="button">
-            <input type="button" class="btn btn-default" value="Back to Meetups" onclick="location.href='@Url.Action("Index","Meetup")'" />
+            <input type="button" class="btn btn-info" value="Back to Meetups" onclick="location.href='@Url.Action("Index","Meetup")'" />
             <input type="submit" value="Update" class="btn btn-success" />
         </div>
     </div>

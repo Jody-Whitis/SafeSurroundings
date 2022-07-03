@@ -5,7 +5,7 @@
             @{
                 Html.RenderPartial("_PictureSlides");
             }
-            <table class="table table-hover col-lg-pull-3 tableStyle_green roundedBorder">
+            <table class="table table-hover col-lg-pull-3 tableStyle_blue roundedBorder">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -41,10 +41,10 @@
 
             </div>
             <div class="btn-group btn-group-lg" role="button">
-                <input type="button" class="btn btn-default" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
+                <input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
                 @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
                 {
-                    <input type="button" class="btn btn-success" value="Add a New Place" onclick="location.href='@Url.Action("Add", "Places")'" />
+                    <input type="button" class="btn buttons" value="Add a New Place" onclick="location.href='@Url.Action("Add", "Places")'" />
                 }
                 </div>
         </div>
@@ -54,7 +54,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <table class="table table-hover col-lg-1 tableStyle_green roundedBorder">
+                    <table class="table table-hover col-lg-1 tableStyle_blue roundedBorder">
                         <tr>
                             <th align="center">Meetups Happening Here</th>
                         </tr>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <table class="table table-hover col-lg-pull-3 tableStyle_green roundedBorder" id=" tblPlacesModal">
+                    <table class="table table-hover col-lg-pull-3 tableStyle_blue roundedBorder" id=" tblPlacesModal">
                         <thead>
                             <tr>
                                 <th>Name</th>
