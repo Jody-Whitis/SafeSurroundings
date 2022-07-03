@@ -1,10 +1,7 @@
 # SafeSurroundings
  
-Simple overview of use/purpose.
-
 ## Description
-Personal acedemic project to help arrange and meet safe places based on review and user driven feedback.
-
+* Personal academic project to help arrange and meet safe places based on review and user driven feedback.
 
 ## Getting Started
 
@@ -15,16 +12,8 @@ Personal acedemic project to help arrange and meet safe places based on review a
 * CSS
 * Bootstrap
 * Ajax
-
-
-### Installing
-*
-
-### Executing program
-
-* 
+* .Net FrameWork 4.7.*
 
 ## Authors
-
 Contributors
-Jody
+* Jody
