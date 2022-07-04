@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SafeSurroundings.Data.Models;
-
+using SafeSurroundings.Data.Models.Ratings;
 namespace SafeSurroundings.Data.Services
 {
     public class InMemoryPlaceTable 
@@ -13,7 +13,8 @@ namespace SafeSurroundings.Data.Services
 
         public InMemoryPlaceTable()
         {
-            places = new List<Place> { new Place { ID = 1, Name = "Starbucks", OpenHour = DateTime.Parse("8:00:00"), CloseHour = DateTime.Parse("17:00:00"), X_Coordinates = 100, Y_Coordinates = 100 } };
+            places = new List<Place> { new Place { ID = 1, Name = "Starbucks", OpenHour = DateTime.Parse("8:00:00"), CloseHour = DateTime.Parse("17:00:00"),
+                X_Coordinates = 100, Y_Coordinates = 100, Safety = new List<short>{(short)Ratings.Rating.Great}, Ratings = new List<short>{(short)Ratings.Rating.Great}}};
         }
 
         public void Add(Place newPlace)
@@ -61,6 +62,34 @@ namespace SafeSurroundings.Data.Services
             try
             {
                 return places.Where(p => placeIDs.Contains(p.ID));
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public Place UpdateRating(int id, short rating)
+        {
+            try
+            {
+                Place placeToUpdate = places.Where(p => p.ID == id).FirstOrDefault();
+                placeToUpdate.Ratings.Add(rating);
+                return placeToUpdate;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public Place UpdateSafety(int id, short rating)
+        {
+            try
+            {
+                Place placeToUpdate = places.Where(p => p.ID == id).FirstOrDefault();
+                placeToUpdate.Safety.Add(rating);
+                return placeToUpdate;
             }
             catch
             {

@@ -17,5 +17,7 @@ namespace SafeSurroundings.Data.Models
         public DateTime OpenHour { get; set; }
         public DateTime CloseHour { get; set; }
         public Byte[] PlacePicture { get; set; }
+        public List<short> Ratings { get; set; } 
+        public List<short> Safety { get; set; }        
     }
 }
