@@ -13,7 +13,7 @@ namespace SafeSurroundings.Models
         public List<Place> ListofAllPlaces{get;set;}
         //for signed in accounts, frequent places
         public string GetSafetyName(Place placeToRate) {
-                return placeToRate != null && placeToRate.Safety != null ? Enum.GetName(typeof(Safety), 
+                return placeToRate != null && placeToRate.Safety != null && placeToRate.Safety.Count > 0 ? Enum.GetName(typeof(Safety), 
                     Convert.ToInt16(placeToRate.Safety.Average(r => r))) : "Place Not Yet Rated!";
         }
 
