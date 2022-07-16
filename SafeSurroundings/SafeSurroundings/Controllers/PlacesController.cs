@@ -101,6 +101,7 @@ namespace SafeSurroundings.Controllers
             try
             {
                 placeToEdit.PlaceModel = placeTable.Update(placeToEdit.PlaceModel);
+                placeToEdit.PlaceModel.Safety.Add(placeToEdit.Safety);
                 Response.StatusCode = placeToEdit == null || placeToEdit.PlaceModel == null ? SetStatus("Created") : SetStatus(null);
                 return RedirectToAction("Index", "Places");
             }
