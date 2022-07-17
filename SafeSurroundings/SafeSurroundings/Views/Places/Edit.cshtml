@@ -5,7 +5,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
- 
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -65,7 +65,7 @@
             <div class="col-sm-3 dropDown" style="margin-left:5px">
                 @for (int i = 0; i < 5; i++)
                 {
-                    if ( (Model.PlaceModel != null) && (Model.PlaceModel.Safety != null) && (Model.PlaceModel.Safety.Count > 0) && (i < Model.PlaceModel.Safety.Average(r => r)))
+                    if ((Model.PlaceModel != null) && (Model.PlaceModel.Safety != null) && (Model.PlaceModel.Safety.Count > 0) && (i < Model.PlaceModel.Safety.Average(r => r)))
                     {
                         <span class="glyphicon glyphicon-star" id=@(Convert.ToInt16(i)+1)></span>
                     }
@@ -78,19 +78,20 @@
         </div>
 
     </div>
- 
+
     <div class="form-group">
         <div class="btn-group btn-group-lg" role="button">
             <input type="button" class="btn btn-info" value="Back to Meetups" onclick="location.href='@Url.Action("Index","Places")'" />
             <input type="submit" value="Update" class="btn btn-success" />
         </div>
-    </div>   
+    </div>
 }
 @section scripts{
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/Ratings.js"></script>
     <script>
-        $(document).ready(TimePicker(), SetStarClass(), SetRating());
+        $(document).ready(TimePicker());
 
         var date = new Date();
         var today = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 1);
@@ -103,46 +104,6 @@
                 }
             );
         };
-
-        function SetRating() {
-            var links = $(".glyphicon");
-            links.click(function () {
-                console.log(this.id);
-                $("#ddlSafetyType").val(this.id);
-            });
-        };
-
-        function SetStarClass() {
-            var links = $(".glyphicon");
-            links.click(function () {
-                if (this.className == "glyphicon glyphicon-star") {
-
-                    if (this.id > 1) {
-                        this.className = "glyphicon glyphicon-star-empty";
-                    }
-
-                    var ratingID = this.id; //store the ID that holds the rating name
-                    $(".glyphicon").each(function () { //loop through all glyps and fill in stars
-                        if (this.id > ratingID) {
-                            this.className = "glyphicon glyphicon-star-empty";
-                        }
-                    });
-
-                }
-
-                else {
-
-                    this.className = "glyphicon glyphicon-star"; //get the element
-                    var ratingID = this.id; //store the ID that holds the rating name
-                    $(".glyphicon").each(function () { //loop through all glyps and fill in stars
-                        if (this.id < ratingID) {
-                            this.className = "glyphicon glyphicon-star";
-                        }
-                    });
-
-                }
-            })
-        }
 
     </script>
 }

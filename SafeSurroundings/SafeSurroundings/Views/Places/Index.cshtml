@@ -28,7 +28,7 @@
                                 <td class="fieldCell">
                                     @for (int i = 0; i < 5; i++)
                                     {
-                                        if ((places.Safety != null) && (places.Safety.Count > 0) && (i < places.Safety.Average(r => r)))
+                                        if ((places.Safety != null) && (places.Safety.Count > 0) && (i < Math.Floor(places.Safety.Average(r => r))))
                                         {
                                             <span class="glyphicon glyphicon-star"></span>
                                         }
