@@ -47,6 +47,7 @@
     <Compile Include="Models\MeetUp.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\Ratings.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\InMemoryProfileTable.cs" />

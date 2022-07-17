@@ -17,5 +17,31 @@ namespace SafeSurroundings.Data.Models
         public DateTime OpenHour { get; set; }
         public DateTime CloseHour { get; set; }
         public Byte[] PlacePicture { get; set; }
+
+        protected List<short> ratingValue = new List<short>();
+        public List<short> Ratings
+        {
+            get
+            {
+                return ratingValue;
+            }
+            set
+            {
+                ratingValue = value;
+            }
+        }
+
+        protected List<short> safetyValue = new List<short>();
+        public List<short> Safety
+        {
+            get
+            {
+                return safetyValue;
+            }
+            set
+            {
+                safetyValue = value;
+            }
+        }        
     }
 }

@@ -11,6 +11,8 @@
                         <th>Name</th>
                         <th>Open Hour</th>
                         <th>Close Hour</th>
+                        <th>Safety Rating</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
 
@@ -20,26 +22,36 @@
                         foreach (var places in Model.ListofAllPlaces)
                         {
                             <tr class="PlaceList" data-place-id="@places.ID">
-                                <td>@places.Name</td>
-                                <td>@places.OpenHour.ToShortTimeString()</td>
-                                <td>@places.CloseHour.ToShortTimeString()</td>
+                                <td class="fieldCell">@places.Name</td>
+                                <td class="fieldCell">@places.OpenHour.ToShortTimeString()</td>
+                                <td class="fieldCell">@places.CloseHour.ToShortTimeString()</td>
+                                <td class="fieldCell">
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if ((places.Safety != null) && (places.Safety.Count > 0) && (i < Math.Floor(places.Safety.Average(r => r))))
+                                        {
+                                            <span class="glyphicon glyphicon-star"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="glyphicon glyphicon-star-empty"></span>
+                                        }
+                                    }
+                                    @Model.GetSafetyName(places).Replace("_", " ")
+                                </td>
                                 <td>
                                     @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
                                     {
                                         <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Places", new {EditID=places.ID})'" />
-                                    }
-
-                                </td>
-                            </tr>
+                                    } 
+                                </td> 
+                                </tr>
                         }
 
                     }
                 </tbody>
             </table>
 
-            <div class="test">
-
-            </div>
             <div class="btn-group btn-group-lg" role="button">
                 <input type="button" class="btn btn-info" value="Home" onclick="location.href='@Url.Action("Index", "Home")'" />
                 @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
@@ -89,7 +101,7 @@
     $(document).ready(LoadDetailsInModal());
 
     function LoadDetailsInModal() {
-        var links = $(".PlaceList");
+        var links = $(".fieldCell");
 
         links.click(function () {
             var selectedID = $(this).data("place-id");
