@@ -13,7 +13,7 @@ namespace SafeSurroundings.Data.Services
 
         public InMemoryMeetUpTable()
         {
-            meetUps = new List<MeetUp> { new MeetUp {ID=1,PlaceID=1, MeetTime=DateTime.Today, PlaceName="Starbucks", PersonID=1} };
+            meetUps = new List<MeetUp> { new MeetUp {ID=1,PlaceID=1, MeetTime=DateTime.Today, PlaceName="Starbucks", PersonID=1, Details="Meet Someone to Hangout"} };
         }
 
         public void Add(MeetUp newMeetup)

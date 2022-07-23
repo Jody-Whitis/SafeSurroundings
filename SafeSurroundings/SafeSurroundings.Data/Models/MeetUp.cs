@@ -13,5 +13,7 @@ namespace SafeSurroundings.Data.Models
         public int PlaceID { get; set; }
         public string PlaceName { get; set; }
         public int PersonID { get; set; }
+
+        public string Details { get; set; }
     }
 }
