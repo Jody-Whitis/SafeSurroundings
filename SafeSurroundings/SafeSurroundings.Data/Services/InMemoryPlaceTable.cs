@@ -14,7 +14,7 @@ namespace SafeSurroundings.Data.Services
         public InMemoryPlaceTable()
         {
             places = new List<Place> { new Place { ID = 1, Name = "Starbucks", OpenHour = DateTime.Parse("8:00:00"), CloseHour = DateTime.Parse("17:00:00"),
-                X_Coordinates = 100, Y_Coordinates = 100, Safety = new List<short>{(short)Ratings.Rating.Great}, Ratings = new List<short>{(short)Ratings.Rating.Great}}};
+                X_Coordinates = 100, Y_Coordinates = 100, Address="123 St Ave", Safety = new List<short>{(short)Ratings.Rating.Great}, Ratings = new List<short>{(short)Ratings.Rating.Great}}};
         }
 
         public void Add(Place newPlace)
@@ -39,6 +39,7 @@ namespace SafeSurroundings.Data.Services
                 placeFromUpdate.X_Coordinates = placetoUpdate.X_Coordinates;
                 placeFromUpdate.Y_Coordinates = placetoUpdate.Y_Coordinates;
                 placeFromUpdate.Name = placetoUpdate.Name;
+                placeFromUpdate.Address = placetoUpdate.Address;
                 return placeFromUpdate;
             }
             catch
