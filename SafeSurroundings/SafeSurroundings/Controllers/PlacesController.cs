@@ -60,12 +60,14 @@ namespace SafeSurroundings.Controllers
         }
 
         [HttpGet]
+        [UserAuthentication]
         public ActionResult GetMeetUpByPlaceID(int PlaceID = 0)
         {
             List<MeetUp> meetupsByPlace = new List<MeetUp>();
             try
             {
-                meetupsByPlace = meetupTable.GetAll().Where(m => m.PlaceID == PlaceID).ToList();
+                int personID = Session["id"] != null ? Convert.ToInt16(Session["id"]) : -1;
+                meetupsByPlace = meetupTable.GetAll().Where(m => m.PlaceID == PlaceID && m.PersonID == personID).ToList();
             }
             catch(Exception ex)
             {

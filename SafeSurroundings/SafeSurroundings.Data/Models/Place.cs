@@ -10,10 +10,13 @@ namespace SafeSurroundings.Data.Models
     public class Place
     {
         public int ID { get; set; }
+
         [Required]
         public string Name { get; set; }
         public double X_Coordinates { get; set; }
         public double Y_Coordinates { get; set; }
+
+        [StringLength(maximumLength:255)]
         public string Address { get; set; }
         public DateTime OpenHour { get; set; }
         public DateTime CloseHour { get; set; }

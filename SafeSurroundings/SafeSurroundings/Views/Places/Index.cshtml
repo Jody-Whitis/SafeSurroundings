@@ -116,18 +116,18 @@
                 success: function (data) {
                     var tableBody = $("#tblPlacesModal");
                     var trResponse = "";
-                     var jResponse = $.parseJSON(data);
-                    $.each(jResponse, function (indx, dataResponse) {
-                        trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
-                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td> <td>" + dataResponse.Details + "</td></tr>";
-                        //console.log(dataResponse.PlaceName);
-                    });
-                   $(tableBody).html(trResponse);
-                    console.log("Full Data: " + $.parseJSON(data));
-                    //console.log(trResponse);
-                    $("#exampleModal").modal("show");
+                    var jResponse = $.parseJSON(data);
+                        $.each(jResponse, function (indx, dataResponse) {
+                            trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
+                                + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td> <td>" + dataResponse.Details + "</td></tr>";
+                            //console.log(dataResponse.PlaceName);
+                        });
+                        $(tableBody).html(trResponse);
+                        console.log("Full Data: " + $.parseJSON(data));
+                        //console.log(trResponse);
+                        $("#exampleModal").modal("show");
                 },
-                error: function (errorMessage) {alert("Fetching meetups unsuccessful!")}
+                error: function (errorMessage) {Console.log("Please Login to View Meetups Here!")}
             })
         });
  };
