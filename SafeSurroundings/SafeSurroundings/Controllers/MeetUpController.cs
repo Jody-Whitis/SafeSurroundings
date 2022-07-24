@@ -75,6 +75,7 @@ namespace SafeSurroundings.Controllers
                 newMeetup.PlaceID = newMeetUpViewModel.PlaceID;
                 newMeetup.PersonID = Convert.ToInt32(Session["id"]);
                 newMeetup.PlaceName = placeTable.GetAll().Where(p => p.ID == newMeetup.PlaceID).Select(p => p.Name).FirstOrDefault();
+                newMeetup.Details = newMeetUpViewModel.Details;
                 meetUpTable.Add(newMeetup);
                 Response.StatusCode = SetStatus("Created");
                 return RedirectToAction("Index", "MeetUp");

@@ -36,6 +36,7 @@ namespace SafeSurroundings.Data.Services
                 meetUpFromUpdate.MeetTime = meetupToUpdate.MeetTime;
                 meetUpFromUpdate.PlaceName = meetupToUpdate.PlaceName;
                 meetUpFromUpdate.PlaceID = meetupToUpdate.PlaceID;
+                meetUpFromUpdate.Details = meetupToUpdate.Details;
                 return meetUpFromUpdate;
             }
             catch

@@ -24,6 +24,7 @@
                     <th>Name</th>
                     <th>MeetTime</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -35,6 +36,7 @@
                         <tr class="Meetup" data-meetup-id="@meetup.ID">
                             <td>@meetup.PlaceName</td>
                             <td>@meetup.MeetTime.ToString()</td>
+                            <td>Click on Row for Details</td>
                             <td>
                                 <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Meetup", new {meetUpToEditID=meetup.ID })'" />
                                 <input type="button" id="btnDanger" class="evtDelete btn btn-danger" value="Delete" />
@@ -141,10 +143,8 @@
                     var trResponse = "";
                     var jResponse = $.parseJSON(data);
                     $.each(jResponse, function (indx, dataResponse) {
-                        trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
-                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" +
-                            "<td>" +
-                            "</td>" + "</tr>";
+                        trResponse += " <tr><td>"+ dataResponse.PlaceName + "</td><td>"
+                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td>" + "<td>" + dataResponse.Details + "</td>" + "</tr>";
                         console.log(dataResponse.PlaceName);
                     });
                     $(tableBody).html(trResponse);

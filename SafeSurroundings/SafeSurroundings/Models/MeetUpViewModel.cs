@@ -14,5 +14,16 @@ namespace SafeSurroundings.Models
         public IEnumerable<Place> PlacestoMeet { get; set; }
         public int PlaceID{ get; set; }
         public MeetUp NewMeetUp { get; set; }
+        protected string detailsValue = string.Empty;
+        public string Details {
+            get
+            {
+                return detailsValue;
+            }
+            set
+            {
+                detailsValue = value;
+            }
+        }
      }
 }

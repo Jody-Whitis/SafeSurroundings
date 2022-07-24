@@ -39,6 +39,7 @@ namespace SafeSurroundings.Data.Services
                 placeFromUpdate.X_Coordinates = placetoUpdate.X_Coordinates;
                 placeFromUpdate.Y_Coordinates = placetoUpdate.Y_Coordinates;
                 placeFromUpdate.Name = placetoUpdate.Name;
+                placeFromUpdate.Address = placetoUpdate.Address;
                 return placeFromUpdate;
             }
             catch

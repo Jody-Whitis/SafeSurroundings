@@ -191,6 +191,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\appointmentPicture.jpg" />
+    <Content Include="Images\backgroundDimmed.png" />
     <Content Include="Images\cat.png" />
     <Content Include="Images\dog.png" />
     <Content Include="Images\hangoutPicture.jpg" />
