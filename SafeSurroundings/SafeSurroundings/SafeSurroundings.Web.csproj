@@ -194,8 +194,11 @@
     <Content Include="Images\backgroundDimmed.png" />
     <Content Include="Images\cat.png" />
     <Content Include="Images\dog.png" />
+    <Content Include="Images\hangoutIcon.jpg" />
     <Content Include="Images\hangoutPicture.jpg" />
+    <Content Include="Images\hangoutPicture2.jpg" />
     <Content Include="Images\ratingPicture.jpg" />
+    <Content Include="Images\riskImage.jpg" />
     <Content Include="Images\safety.jpg" />
     <Content Include="Images\ssBackgroundImage.jpeg" />
     <Content Include="Images\testImage2SS.jpg" />

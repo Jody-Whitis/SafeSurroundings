@@ -22,10 +22,10 @@
                         foreach (var places in Model.ListofAllPlaces)
                         {
                             <tr class="PlaceList" data-place-id="@places.ID">
-                                <td class="fieldCell">@places.Name</td>
-                                <td class="fieldCell">@places.OpenHour.ToShortTimeString()</td>
-                                <td class="fieldCell">@places.CloseHour.ToShortTimeString()</td>
-                                <td class="fieldCell">
+                                <td class="fieldCell" data-place-id="@places.ID">@places.Name</td>
+                                <td class="fieldCell" data-place-id="@places.ID">@places.OpenHour.ToShortTimeString()</td>
+                                <td class="fieldCell" data-place-id="@places.ID">@places.CloseHour.ToShortTimeString()</td>
+                                <td class="fieldCell" data-place-id="@places.ID">
                                     @for (int i = 0; i < 5; i++)
                                     {
                                         if ((places.Safety != null) && (places.Safety.Count > 0) && (i < Math.Floor(places.Safety.Average(r => r))))
@@ -39,7 +39,7 @@
                                     }
                                     @Model.GetSafetyName(places).Replace("_", " ")
                                 </td>
-                                <td>
+                                <td data-place-id="@places.ID">
                                     @if ((Session.Keys.Count > 0) && (!String.IsNullOrEmpty(Convert.ToString(Session["sessionGuid"]))))
                                     {
                                         <input type="button" class="btn btn-info" value="Edit" onclick="location.href='@Url.Action("Edit", "Places", new {EditID=places.ID})'" />
@@ -64,9 +64,9 @@
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <div class="modal-content tableStyle_blue roundedBorder">
                 <div class="modal-header">
-                    <table class="table table-hover col-lg-1 tableStyle_blue roundedBorder">
+                    <table class="table table-hover col-lg-1">
                         <tr>
                             <th align="center">Meetups Happening Here</th>
                         </tr>
@@ -76,11 +76,12 @@
                 </div>
                 <div class="modal-body">
 
-                    <table class="table table-hover col-lg-pull-3 tableStyle_blue roundedBorder" id=" tblPlacesModal">
+                    <table class="table table-hover col-lg-pull-3" id=" tblPlacesModal">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Meeting Time</th>
+                                <th>Details</th>
                             </tr>
                         </thead>
 
@@ -118,7 +119,7 @@
                      var jResponse = $.parseJSON(data);
                     $.each(jResponse, function (indx, dataResponse) {
                         trResponse += " <tr><td>" + dataResponse.PlaceName + "</td><td>"
-                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td></tr>";
+                            + moment(dataResponse.MeetTime).format("MM/DD/YYYY hh:mm a") + "</td> <td>" + dataResponse.Details + "</td></tr>";
                         //console.log(dataResponse.PlaceName);
                     });
                    $(tableBody).html(trResponse);
