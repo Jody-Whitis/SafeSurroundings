@@ -20,5 +20,8 @@
     <Setting Name="senderEmail" Type="System.String" Scope="Application">
       <Value Profile="(Default)">projtestcred@gmail.com</Value>
     </Setting>
+    <Setting Name="emailSender" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">safeSurroundings@safe.com</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

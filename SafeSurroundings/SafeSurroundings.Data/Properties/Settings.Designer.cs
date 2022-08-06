@@ -76,5 +76,14 @@ namespace SafeSurroundings.Data.Properties {
                 return ((string)(this["senderEmail"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("safeSurroundings@safe.com")]
+        public string emailSender {
+            get {
+                return ((string)(this["emailSender"]));
+            }
+        }
     }
 }

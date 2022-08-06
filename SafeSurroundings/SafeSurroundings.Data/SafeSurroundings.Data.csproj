@@ -75,7 +75,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EmailTemplates\EmailTemplate.html">
+    <Content Include="EmailTemplates\EmailTemplateBase.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
