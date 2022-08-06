@@ -18,7 +18,7 @@ namespace SafeSurroundings.Data.Services
         {
             profileList = new List<Profile> { new Profile { ID = 1, UserName = "test", DisplayName="Jody",
                 Password = "test", IsActive = true, LastLogin = DateTime.Now,LastLoginDevice="Test Computer", IsSubscribed = false,
-                IsTwoFactor=false, ListofMeetUpID = new List<int>{ 1}, ProfileImage = ImageTools.GetImageBytes()}};
+                IsTwoFactor=false, TwoFactorCode = 0, ListofMeetUpID = new List<int>{ 1}, ProfileImage = ImageTools.GetImageBytes()}};
         }
 
         public IEnumerable<Profile> GetAll()
