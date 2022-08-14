@@ -59,7 +59,7 @@ namespace SafeSurroundings.Controllers
 
                     if (loginAccount.IsTwoFactor)
                     {
-                       return RedirectToAction("TwoFactorAuthenication", "Home");
+                       return RedirectToAction("TwoFactorAuthentication", "Home");
                     }
                     else
                     {

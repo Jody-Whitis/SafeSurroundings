@@ -22,8 +22,8 @@
                     @Html.ValidationSummary(true, "Incorrect Code", new { @class = "text-danger" })
                 </div>
                 <div class="col-md-3">
-                    <input type="submit" class="btn btn-warning" onclick="location.href='@Url.Action("Back to Login", "Index")'" />
-                    <input type="submit" value="Save" class="btn btn-success" onclick="location.href='@Url.Action("ProcessTwoFactor","Home")'" />
+                    <input type="button" value="Back to Login" class="btn btn-warning" onclick="location.href='@Url.Action("Index", "Home")'" />
+                    <input type="submit" value="Authenticate" class="btn btn-success" onclick="location.href='@Url.Action("ProcessTwoFactor","Home")'" />
                 </div>
             </div> 
             </div>
