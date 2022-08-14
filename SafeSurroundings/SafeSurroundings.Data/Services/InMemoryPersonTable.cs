@@ -14,7 +14,7 @@ namespace SafeSurroundings.Data.Services
 
         public InMemoryPersonTable()
         {
-            persons = new List<Person> { new Person { ID=1,DisplayName="Jody", isPrivate=false}, new Person {ID=2,DisplayName="Scruffy",isPrivate = false } };
+            persons = new List<Person> { new Person { ID=1,DisplayName="Test", isPrivate=false}, new Person {ID=2,DisplayName="Scruffy",isPrivate = false } };
         }
 
         public void Add(Person newPerson)

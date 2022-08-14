@@ -28,7 +28,7 @@ namespace SafeSurroundings.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if((Session.Keys.Count>0) && (!string.IsNullOrEmpty(Session["sessionGUID"].ToString())))
+            if((Session.Keys.Count > 0) && (Session["sessionGUID"] != null) && (!string.IsNullOrEmpty(Session["sessionGUID"].ToString())))
             {
                 return RedirectToAction("HomePage");
             }
@@ -51,13 +51,21 @@ namespace SafeSurroundings.Controllers
                     Session.Add("user", loginAccount.UserName);
                     Session.Add("name", loginAccount.DisplayName);
                     Session.Add("id", loginAccount.ID);
-                    Session.Add("sessionGUID", Guid.NewGuid());
                     Session.Add("profile", loginAccount);
                     Session.Add("avatarSrc", ImageTools.GetImageScrFromBytes(loginAccount.ProfileImage));
                     loginAccount.LastLogin = DateTime.Now;
                     loginAccount.LastLoginDevice = Environment.MachineName.ToString(); 
                     loginAccount = profileTable.Update(loginAccount);
-                return RedirectToAction("Index","Home");
+
+                    if (loginAccount.IsTwoFactor)
+                    {
+                       return RedirectToAction("TwoFactorAuthentication", "Home");
+                    }
+                    else
+                    {
+                    Session.Add("sessionGUID", Guid.NewGuid());
+                    return RedirectToAction("Index","Home");
+                    }
                 }
                 else
                 {
@@ -68,6 +76,39 @@ namespace SafeSurroundings.Controllers
             else
             {
                 return RedirectToAction("Test", "Home");
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult TwoFactorAuthentication()
+        {
+            Session.Add("TwoFactorAuth", false);
+            TwoFactorViewModel twoFactorProfile = new TwoFactorViewModel();
+            Session.Add("TwoFactorCode",Data.Models.TwoFactorAuthentication.GetTwoFactorCode());
+
+            string emailTemplate = System.IO.File.ReadAllText(Server.MapPath(@"~/EmailTemplates/EmailTemplateBase.html"));
+            string emailBody = System.IO.File.ReadAllText(Server.MapPath(@"~/EmailTemplates/TwoFactorAuthentication.html"));
+
+            Data.Models.TwoFactorAuthentication.SendTwoFactor(Convert.ToString(Session["user"]), Convert.ToInt16(Session["TwoFactorCode"]), emailTemplate.Replace(EmailTools.InsertTextMarker, emailBody));
+            
+            return View(twoFactorProfile);  
+        }
+
+        [HttpPost]
+        public ActionResult TwoFactorAuthentication(TwoFactorViewModel twoFactorProfile)
+        {
+            if ((ModelState.IsValid) && (twoFactorProfile.TwoFactorCode == Convert.ToInt16(Session["TwoFactorCode"])))
+            {
+                Session["TwoFactorAuth"] = true;
+                Session.Remove("TwoFactorCode");
+                Session.Add("sessionGUID", Guid.NewGuid());
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("Login Unsuccessful", "Incorrect Code");
+                return View();
             }
         }
 
