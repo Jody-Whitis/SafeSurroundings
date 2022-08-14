@@ -1,0 +1,35 @@
+﻿@model SafeSurroundings.Models.TwoFactorViewModel
+
+@{
+    ViewBag.Title = "TwoFactorAuthenication";
+}
+
+ <div class="panel tableStyle_blue roundedBorder">
+
+    <div class="panel-body">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group-m">
+                <div style="text-align:center"><h2>Two Factor Authenication Code</h2></div>             
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Input Code From Email Message", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.TwoFactorCode, new { htmlAttributes = new { @class = "form-control dropDown", @style = "text-align:center", @min="0000", @max="9999" }})
+                    @Html.ValidationSummary(true, "Incorrect Code", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Save" class="btn btn-success" onclick="location.href='@Url.Action("ProcessTwoFactor","Home")'" />
+                </div>
+            </div> 
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to Login", "Index")
+</div>

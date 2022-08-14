@@ -23,5 +23,11 @@ namespace SafeSurroundings.Data.Models
             }
             return twoFactorCode;
         }
+
+        public static bool SendTwoFactor(string emailRecipient, int code, string emailBody)
+        {
+            emailBody = emailBody.Replace(Tools.EmailTools.InsertTextMarker, code.ToString());
+            return Tools.EmailTools.SendEmail("Two Factor Code", new List<string>() {emailRecipient},emailBody);
+        }
     }
 }

@@ -26,8 +26,7 @@ using System.IO;
             Boolean isSent = false;
 
             try
-            {
-                string emailTemplate = File.ReadAllText(EmailTemplate).ToString();
+            {                
                 smtp.UseDefaultCredentials = Properties.Settings.Default.emailDefaultCreditials;
                 smtp.Credentials = new System.Net.NetworkCredential(Properties.Settings.Default.emailCreditials,Properties.Settings.Default.passEmailCreditials);
                 smtp.Port = Properties.Settings.Default.emailPort;
@@ -43,9 +42,8 @@ using System.IO;
                 {
                     mailMessage.To.Add(sender);
                 }
-
-                emailTemplate = emailTemplate.Replace(InsertTextMarker, emailBody);
-                mailMessage.Body = emailTemplate;
+                 
+                mailMessage.Body = emailBody;
                 
                 smtp.Send(mailMessage);
                 isSent = true;
