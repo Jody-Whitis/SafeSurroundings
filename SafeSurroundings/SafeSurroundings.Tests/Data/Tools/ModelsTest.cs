@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SafeSurroundings.Tests.Data.Tools
 {
     [TestClass]
-    public class TwoFactorAuthenticationTests : SafeSurroundings.Data.Models.TwoFactorAuthenication
+    public class TwoFactorAuthenticationTests : SafeSurroundings.Data.Models.TwoFactorAuthentication
     {
         [TestMethod]
         public void GetTwoFactor()

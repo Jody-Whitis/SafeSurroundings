@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SafeSurroundings.Data.Models
 {
-    public class TwoFactorAuthenication
+    public class TwoFactorAuthentication
     {
 
         public static int GetTwoFactorCode()

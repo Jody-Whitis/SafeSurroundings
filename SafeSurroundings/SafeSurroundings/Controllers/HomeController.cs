@@ -81,22 +81,22 @@ namespace SafeSurroundings.Controllers
 
 
         [HttpGet]
-        public ActionResult TwoFactorAuthenication()
+        public ActionResult TwoFactorAuthentication()
         {
             Session.Add("TwoFactorAuth", false);
             TwoFactorViewModel twoFactorProfile = new TwoFactorViewModel();
-            Session.Add("TwoFactorCode",Data.Models.TwoFactorAuthenication.GetTwoFactorCode());
+            Session.Add("TwoFactorCode",Data.Models.TwoFactorAuthentication.GetTwoFactorCode());
 
             string emailTemplate = System.IO.File.ReadAllText(Server.MapPath(@"~/EmailTemplates/EmailTemplateBase.html"));
             string emailBody = System.IO.File.ReadAllText(Server.MapPath(@"~/EmailTemplates/TwoFactorAuthentication.html"));
 
-            Data.Models.TwoFactorAuthenication.SendTwoFactor(Convert.ToString(Session["user"]), Convert.ToInt16(Session["TwoFactorCode"]), emailTemplate.Replace(EmailTools.InsertTextMarker, emailBody));
+            Data.Models.TwoFactorAuthentication.SendTwoFactor(Convert.ToString(Session["user"]), Convert.ToInt16(Session["TwoFactorCode"]), emailTemplate.Replace(EmailTools.InsertTextMarker, emailBody));
             
             return View(twoFactorProfile);  
         }
 
         [HttpPost]
-        public ActionResult TwoFactorAuthenication(TwoFactorViewModel twoFactorProfile)
+        public ActionResult TwoFactorAuthentication(TwoFactorViewModel twoFactorProfile)
         {
             if ((ModelState.IsValid) && (twoFactorProfile.TwoFactorCode == Convert.ToInt16(Session["TwoFactorCode"])))
             {
