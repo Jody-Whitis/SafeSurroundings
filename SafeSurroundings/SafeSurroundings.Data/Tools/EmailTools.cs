@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.IO;
- namespace SafeSurroundings.Data.Tools
+using SafeSurroundings.Data.Models;
+
+namespace SafeSurroundings.Data.Tools
 {
     public class EmailTools
     {
@@ -55,5 +57,38 @@ using System.IO;
             }
             return isSent;
         }
+
+        #region EmailBodyBuilding
+        public static string BuildRemindersText(IEnumerable<MeetUp> meetupsToSend)
+        {
+            StringBuilder meetupRows = new StringBuilder(); 
+            
+            meetupRows.Append("<tr style='border-bottom:1px solid navy'>");
+            meetupRows.Append("<td style='border-bottom:1px solid navy;'>");
+            meetupRows.Append("</td>");
+            meetupRows.Append("<td style='text-align:center;border-bottom:1px solid navy;padding:0px'>");
+            meetupRows.Append("<b>MeetUp Remainders</b>");
+            meetupRows.Append("</td>");
+            meetupRows.Append("<td style='border-bottom:1px solid navy;'>");
+            meetupRows.Append("</td>");
+            meetupRows.Append("</tr>");
+
+            foreach (MeetUp meetupRecord in meetupsToSend)
+            {
+                meetupRows.Append("<tr style='border-bottom:1px solid navy'>");
+                meetupRows.Append("<td style='text-align:center;border-right:1px solid navy;padding:0px;border-bottom:1px solid navy;padding:0px'>");
+                meetupRows.Append(meetupRecord.PlaceName);
+                meetupRows.Append("</td>");
+                meetupRows.Append("<td style='text-align:center;border-right:1px solid navy;padding:0px;border-bottom:1px solid navy;padding:0px'>");
+                meetupRows.Append(meetupRecord.MeetTime);
+                meetupRows.Append("</td>");
+                meetupRows.Append("<td style='text-align:center;border-bottom:1px solid navy;padding:0px'>");
+                meetupRows.Append(meetupRecord.Details);
+                meetupRows.Append("</td>");
+                meetupRows.Append("</tr>");
+            }
+            return meetupRows.ToString();
+        }
+        #endregion
     }
 }
