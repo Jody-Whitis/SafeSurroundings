@@ -142,7 +142,7 @@ namespace SafeSurroundings.Controllers
         {
             try
             {
-                IEnumerable<MeetUp> listOfMeetups = meetupTable.GetByPersonIDToday(Convert.ToInt16(Session["id"]));
+                IEnumerable<MeetUp> listOfMeetups = meetupTable.GetByPersonIDTodayByRange(Convert.ToInt16(Session["id"]));
                 string emailRemainerBody = EmailTools.BuildRemindersText(listOfMeetups);
                 string emailTemplate = System.IO.File.ReadAllText(Server.MapPath(@"~/EmailTemplates/EmailTemplateBase.html"));
                 EmailTools.SendEmail("Meetup Remainders", new List<string> {homeViewModelLogin.User},emailTemplate.Replace(EmailTools.InsertTextMarker, emailRemainerBody));
