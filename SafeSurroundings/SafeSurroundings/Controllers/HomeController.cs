@@ -52,6 +52,7 @@ namespace SafeSurroundings.Controllers
                     Session.Add("name", loginAccount.DisplayName);
                     Session.Add("id", loginAccount.ID);
                     Session.Add("profile", loginAccount);
+                    Session.Add("isSubscribed", loginAccount.IsSubscribed);
                     Session.Add("avatarSrc", ImageTools.GetImageScrFromBytes(loginAccount.ProfileImage));
                     loginAccount.LastLogin = DateTime.Now;
                     loginAccount.LastLoginDevice = Environment.MachineName.ToString();
@@ -105,11 +106,10 @@ namespace SafeSurroundings.Controllers
                 Session.Remove("TwoFactorCode");
                 Session.Add("sessionGUID", Guid.NewGuid());
 
-                Profile userProfile = profileTable.SelectAccount(Convert.ToInt16(Session["id"]));
                 HomeViewModel homeViewModelLogin = new HomeViewModel();
-                homeViewModelLogin.User = userProfile.UserName;
+                homeViewModelLogin.User = Convert.ToString(Session["user"]);
   
-                if (userProfile.IsSubscribed) {SendEmailReminder(homeViewModelLogin);}
+                if ((Session["isSubscribed"] != null) && (Convert.ToBoolean(Session["isSubscribed"]))) {SendEmailReminder(homeViewModelLogin);}
 
                 return RedirectToAction("Index", "Home");
             }
