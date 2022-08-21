@@ -61,5 +61,9 @@ namespace SafeSurroundings.Data.Services
             return meetUps.Where(x => x.PersonID == PersonID && x.MeetTime.ToString("MM/dd/yyyy").Equals(DateTime.Now.ToString("MM/dd/yyyy")));
         }
 
+        public IEnumerable<MeetUp> GetByPersonIDTodayByRange(int personID, int dayRange = 7)
+        {
+            return meetUps.Where(x => x.PersonID == personID && (x.MeetTime - DateTime.Now).Days <= dayRange);
+        }
     }
 }
