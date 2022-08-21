@@ -64,7 +64,7 @@ namespace SafeSurroundings.Controllers
                     else
                     {
                         Session.Add("sessionGUID", Guid.NewGuid());
-                        if (loginAccount.IsSubscribed) { SendEmailRemainder(userLogin);}
+                        if (loginAccount.IsSubscribed) { SendEmailReminder(userLogin);}
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -109,7 +109,7 @@ namespace SafeSurroundings.Controllers
                 HomeViewModel homeViewModelLogin = new HomeViewModel();
                 homeViewModelLogin.User = userProfile.UserName;
   
-                if (userProfile.IsSubscribed) {SendEmailRemainder(homeViewModelLogin);}
+                if (userProfile.IsSubscribed) {SendEmailReminder(homeViewModelLogin);}
 
                 return RedirectToAction("Index", "Home");
             }
@@ -138,7 +138,7 @@ namespace SafeSurroundings.Controllers
             }
         }
 
-        protected void SendEmailRemainder(HomeViewModel homeViewModelLogin)
+        protected void SendEmailReminder(HomeViewModel homeViewModelLogin)
         {
             try
             {

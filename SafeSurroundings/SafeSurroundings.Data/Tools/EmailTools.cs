@@ -66,7 +66,7 @@ namespace SafeSurroundings.Data.Tools
 
             meetupRows.Append("<tr style='border-bottom:1px solid navy'>");
             meetupRows.Append("<td colspan='3' style='border-bottom:1px solid navy; text-align:center'>");
-            meetupRows.Append("<b>MeetUp Remainders</b>");
+            meetupRows.Append("<b>MeetUp Reminders</b>");
             meetupRows.Append("</td>"); 
             meetupRows.Append("</tr>");
 

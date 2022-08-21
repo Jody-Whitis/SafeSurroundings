@@ -31,7 +31,7 @@ namespace SafeSurroundings.Tests.Data.Tools
         [DataTestMethod()]
         [DataRow("projtestcred@gmail.com", "<table style='align-content:center; border-collapse:collapse; color:navy; font-size:20px; width:50%; border: 5px solid navy;margin:0px'>$</table>","$")]
         [TestMethod]
-        public void TestSendRemainder(string emailRecipient, string emailTemplate,string placeHolder)
+        public void TestSendReminder(string emailRecipient, string emailTemplate,string placeHolder)
         {
             List<MeetUp> listOfMeetups = new List<MeetUp>();
             listOfMeetups.Add(new MeetUp { PlaceName = "Starbucks", MeetTime = DateTime.Now, Details = "Unit Testing" } );
