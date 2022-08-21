@@ -4,6 +4,10 @@
 * Personal academic project to help arrange and meet safe places based on review and user driven feedback.
 * Purpose is to gain a deeper understanding on web development, user graphic interface, unit testing, and source control.
 
+## Status
+* Prebuild 2.0 - 8/29/2022
+* Post Prebuild - N/A
+
 ## Getting Started
 * Download VS 2022
 * Clone Repo
