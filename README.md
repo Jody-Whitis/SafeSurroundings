@@ -2,13 +2,47 @@
  
 ## Description
 * Personal academic project to help arrange and meet safe places based on review and user driven feedback.
+* Purpose is to gain a deeper understanding on web development, user graphic interface, unit testing, and source control.
 
 ## Getting Started
+* Download VS 2022
+* Clone Repo
+* Enter test email address to use features in the mock repo. (located in the .Data project)
+* Restore nuget packages and dependancies.
+* Make sure to clean and rebuild.
+* Changes saved in instance as long as the app is running.
+* The Prebuild versions is using local testing data.
+
+## Site Features
+* Account creation
+* Two Factor Authenication
+* Email Subscriptions.
+* Add/edit/delete Places for open/close hours and safety rating.
+* Add/edit/delete Meetups for Place, date/time, and detail notes.
+* Edit Profile for Avatar and email settings.
+* View all Meetups by Place.
+* View Details of Meetups.
+* Rate the Safety of the Place. (5 Star rating)
+
+## Future/Proposed Features for Post Prebuild Version
+* Improved UI
+* Maps to mark locations
+* Live Database
+* Live Website hosting
+* Improved Email Template UI
+* Improve Session and database call handling.
+* Improved Logging.
+* Improved Web Exception handling.
+* Avatars for Places.
+* Linking other People to Meetups. (Meet with someone at a place)
+* Improved Past Meetup Information.
 
 ## PreBuild Demo
 ![image](https://user-images.githubusercontent.com/26256313/185811661-a236ef2e-1732-4f70-835a-30e70623313f.png)
 
 ![image](https://user-images.githubusercontent.com/26256313/185811712-d7552660-bc85-4b8c-9d3f-0270d22f7075.png)
+
+![image](https://user-images.githubusercontent.com/26256313/185812020-c6cf9c40-68eb-4d69-ad26-56b544dc4d00.png)
 
 ![image](https://user-images.githubusercontent.com/26256313/185811721-0a33bad3-97d7-41c9-a8ad-40492fb1bce4.png)
 
@@ -24,12 +58,10 @@
 
 ![image](https://user-images.githubusercontent.com/26256313/185811822-674d37cf-d814-4c9b-9b75-835e11d13c0c.png)
 
-![image](https://user-images.githubusercontent.com/26256313/185811838-3f96ccca-cba1-4ad1-9d7c-2feb52a573e2.png)
-
 ![image](https://user-images.githubusercontent.com/26256313/185811916-66e12bf7-b3ba-49b9-9024-0ba787b5cac7.png)
 
 
-### Techologies and Languages
+### Languages Implemented
 * MVC
 * C#
 * JavaScript/JQuery
