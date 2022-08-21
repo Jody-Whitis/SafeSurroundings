@@ -29,7 +29,7 @@ namespace SafeSurroundings.Tests.Data.Tools
 
 
         [DataTestMethod()]
-        [DataRow("jodywhitis0407@gmail.com", "<table style='align-content:center; color:navy; font-size:20px; width:50%; border: 5px solid navy;margin:0px'>$</table>","$")]
+        [DataRow("projtestcred@gmail.com", "<table style='align-content:center; border-collapse:collapse; color:navy; font-size:20px; width:50%; border: 5px solid navy;margin:0px'>$</table>","$")]
         [TestMethod]
         public void TestSendRemainder(string emailRecipient, string emailTemplate,string placeHolder)
         {

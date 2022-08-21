@@ -46,7 +46,7 @@ namespace SafeSurroundings.Controllers
                 Profile loginAccount = new Profile();
                 loginAccount = profileTable.GetLoginAccount(userLogin.User, userLogin.Password);
 
-                if((loginAccount != null))
+                if ((loginAccount != null))
                 {
                     Session.Add("user", loginAccount.UserName);
                     Session.Add("name", loginAccount.DisplayName);
@@ -54,17 +54,18 @@ namespace SafeSurroundings.Controllers
                     Session.Add("profile", loginAccount);
                     Session.Add("avatarSrc", ImageTools.GetImageScrFromBytes(loginAccount.ProfileImage));
                     loginAccount.LastLogin = DateTime.Now;
-                    loginAccount.LastLoginDevice = Environment.MachineName.ToString(); 
+                    loginAccount.LastLoginDevice = Environment.MachineName.ToString();
                     loginAccount = profileTable.Update(loginAccount);
 
                     if (loginAccount.IsTwoFactor)
                     {
-                       return RedirectToAction("TwoFactorAuthentication", "Home");
+                        return RedirectToAction("TwoFactorAuthentication", "Home");
                     }
                     else
                     {
-                    Session.Add("sessionGUID", Guid.NewGuid());
-                    return RedirectToAction("Index","Home");
+                        Session.Add("sessionGUID", Guid.NewGuid());
+                        if (loginAccount.IsSubscribed) { SendEmailRemainder(userLogin);}
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 else
@@ -103,6 +104,13 @@ namespace SafeSurroundings.Controllers
                 Session["TwoFactorAuth"] = true;
                 Session.Remove("TwoFactorCode");
                 Session.Add("sessionGUID", Guid.NewGuid());
+
+                Profile userProfile = profileTable.SelectAccount(Convert.ToInt16(Session["id"]));
+                HomeViewModel homeViewModelLogin = new HomeViewModel();
+                homeViewModelLogin.User = userProfile.UserName;
+  
+                if (userProfile.IsSubscribed) {SendEmailRemainder(homeViewModelLogin);}
+
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -129,7 +137,22 @@ namespace SafeSurroundings.Controllers
                 return RedirectToAction("Test", "Home");
             }
         }
-         
+
+        protected void SendEmailRemainder(HomeViewModel homeViewModelLogin)
+        {
+            try
+            {
+                IEnumerable<MeetUp> listOfMeetups = meetupTable.GetByPersonIDToday(Convert.ToInt16(Session["id"]));
+                string emailRemainerBody = EmailTools.BuildRemindersText(listOfMeetups);
+                string emailTemplate = System.IO.File.ReadAllText(Server.MapPath(@"~/EmailTemplates/EmailTemplateBase.html"));
+                EmailTools.SendEmail("Meetup Remainders", new List<string> {homeViewModelLogin.User},emailTemplate.Replace(EmailTools.InsertTextMarker, emailRemainerBody));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }         
+
         public ActionResult Test()
         {
             TestViewModel testviewModel = new TestViewModel();

@@ -61,16 +61,13 @@ namespace SafeSurroundings.Data.Tools
         #region EmailBodyBuilding
         public static string BuildRemindersText(IEnumerable<MeetUp> meetupsToSend)
         {
-            StringBuilder meetupRows = new StringBuilder(); 
-            
+            StringBuilder meetupRows = new StringBuilder();
+            meetupRows.Append("<table style='align-content:center; border-collapse:collapse; color:navy; font-size:20px; width:50%; border: 5px solid navy;margin:0px'>");
+
             meetupRows.Append("<tr style='border-bottom:1px solid navy'>");
-            meetupRows.Append("<td style='border-bottom:1px solid navy;'>");
-            meetupRows.Append("</td>");
-            meetupRows.Append("<td style='text-align:center;border-bottom:1px solid navy;padding:0px'>");
+            meetupRows.Append("<td colspan='3' style='border-bottom:1px solid navy; text-align:center'>");
             meetupRows.Append("<b>MeetUp Remainders</b>");
-            meetupRows.Append("</td>");
-            meetupRows.Append("<td style='border-bottom:1px solid navy;'>");
-            meetupRows.Append("</td>");
+            meetupRows.Append("</td>"); 
             meetupRows.Append("</tr>");
 
             foreach (MeetUp meetupRecord in meetupsToSend)
@@ -87,6 +84,7 @@ namespace SafeSurroundings.Data.Tools
                 meetupRows.Append("</td>");
                 meetupRows.Append("</tr>");
             }
+            meetupRows.Append("</table>");
             return meetupRows.ToString();
         }
         #endregion
