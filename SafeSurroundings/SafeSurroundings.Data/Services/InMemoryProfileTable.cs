@@ -1,11 +1,7 @@
 ﻿using SafeSurroundings.Data.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SafeSurroundings.Data.Tools;
 
 namespace SafeSurroundings.Data.Services
@@ -18,7 +14,7 @@ namespace SafeSurroundings.Data.Services
         {
             profileList = new List<Profile> { new Profile { ID = 1, UserName = "projtestcred@gmail.com", DisplayName="Test",
                 Password = "test", IsActive = true, LastLogin = DateTime.Now,LastLoginDevice="Test Computer", IsSubscribed = false,
-                IsTwoFactor=true, TwoFactorCode = 0, ListofMeetUpID = new List<int>{ 1}, ProfileImage = ImageTools.GetImageBytes()}};
+                IsTwoFactor=false, TwoFactorCode = 0, ListofMeetUpID = new List<int>{1}, ProfileImage = ImageTools.GetImageBytes()}};
         }
 
         public IEnumerable<Profile> GetAll()
