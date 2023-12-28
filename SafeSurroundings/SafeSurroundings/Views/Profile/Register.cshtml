@@ -13,7 +13,7 @@
     <div class="form-group">
         @Html.Label("Email Address: ", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control dropDown" } })
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -27,7 +27,7 @@
     <div class="form-group">
         @Html.Label("Display Name: ", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DisplayName, new { htmlAttributes = new { @class = "form-control dropDown" } })
+            @Html.EditorFor(model => model.DisplayName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.DisplayName, "", new { @class = "text-danger" })
         </div>
     </div>
