@@ -1,0 +1,63 @@
+﻿@model SafeSurroundings.Models.ProfileViewModel
+
+
+<h2 class="fieldNames">Register Profile</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Email Address: ", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control dropDown" } })
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Password", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
+        <div class="col-md-10">
+            @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Display Name: ", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DisplayName, new { htmlAttributes = new { @class = "form-control dropDown" } })
+            @Html.ValidationMessageFor(model => model.DisplayName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Two Factor Enabled: ", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
+        <div class="col-xs-1">
+            @Html.EditorFor(model => model.IsTwoFactor, new { htmlAttributes = new { @class = "form-control dropDown" } })
+            @Html.ValidationMessageFor(model => model.IsTwoFactor, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Subscribed through Email: ", htmlAttributes: new { @class = "control-label col-md-2 fieldNames" })
+        <div class="col-xs-1">
+            @Html.EditorFor(model => model.IsSubscribed, new { htmlAttributes = new { @class = "form-control dropDown" } })
+            @Html.ValidationMessageFor(model => model.IsSubscribed, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+</div>
+    <div class="form-group">
+        <div class="btn-group btn-group-lg" role="button">
+            <input type="button" class="btn btn-info" value="Cancel" onclick="location.href='@Url.Action("Index","Home")'" />
+            <input type="submit" value="Register" class="btn btn-success" />
+        </div>
+    </div>
+}
+@section scripts{
+    <script>
+
+    </script>
+}

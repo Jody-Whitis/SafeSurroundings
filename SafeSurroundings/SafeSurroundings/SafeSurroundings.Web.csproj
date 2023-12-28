@@ -258,6 +258,7 @@
     <Content Include="Views\Shared\_PictureSlides.cshtml" />
     <Content Include="Views\Shared\_ProfileAvatar.cshtml" />
     <Content Include="Views\Home\TwoFactorAuthentication.cshtml" />
+    <Content Include="Views\Profile\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
