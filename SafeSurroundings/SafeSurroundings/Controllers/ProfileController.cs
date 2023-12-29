@@ -101,7 +101,51 @@ namespace SafeSurroundings.Controllers
                 return View();
             }
         }
-        
+
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            ProfileViewModel profileViewModel = new ProfileViewModel();
+            try
+            {             
+                return View(profileViewModel);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = SetStatus(ex.Message);
+                return View("Error");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(ProfileViewModel profileViewModelToUpdate)
+        {
+            try
+            {
+                Profile profiletoUpdate = new Profile();
+                profiletoUpdate.UserName = profileViewModelToUpdate.UserName;
+                profiletoUpdate.Password = profileViewModelToUpdate.Password;
+                profiletoUpdate.DisplayName = profileViewModelToUpdate.DisplayName;
+                profiletoUpdate.IsTwoFactor = profileViewModelToUpdate.IsTwoFactor;
+                profiletoUpdate.IsSubscribed = profileViewModelToUpdate.IsSubscribed;
+                profiletoUpdate.ProfileImage = ImageTools.GetImageBytes();
+                profiletoUpdate.IsActive = true;
+                 
+                inMemoryProfileTable.AddAccount(profiletoUpdate);
+
+                Response.StatusCode = SetStatus(string.Empty);
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = SetStatus(ex.Message);
+                return View();
+            }
+        }
+
         [HttpGet]
         public JsonResult GetProfileDetails(int ID)
         {

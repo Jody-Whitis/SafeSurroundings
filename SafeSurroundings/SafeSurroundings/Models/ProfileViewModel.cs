@@ -13,6 +13,7 @@ namespace SafeSurroundings.Models
         public Profile UserProfile { get; set; }
         public int ProfileID { get; set; }
         public string UserName { get; set; }
+        public string Password { get; set; }
         public string DisplayName { get; set; }
         public Boolean IsTwoFactor { get; set; }
         public Boolean IsSubscribed { get; set; }

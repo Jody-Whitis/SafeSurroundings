@@ -25,9 +25,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Register" class="btn btn-default" style="background-color:dodgerblue;color:aquamarine" onclick="location.href='@Url.Action("Register", "Profile")'" />
                 @Html.ValidationSummary(true, "Incorrect Login", new { @class = "text-danger" })
                 <input type="submit" value="Login" class="btn btn-default" style="background-color:dodgerblue;color:aquamarine" />
-            </div>
+            </div> 
         </div>
     </div>
 }
