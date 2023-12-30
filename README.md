@@ -1,25 +1,26 @@
 # SafeSurroundings
  
 ## Description
-* Personal academic project to help arrange and meet safe places based on review and user driven feedback.
-* Purpose is to gain a deeper understanding on web development, user graphic interface, unit testing, and source control.
+* Personal project to help arrange and meet safe places based on review and user-driven feedback.
+* Purpose is to better understand web development, user graphic interface, unit testing, and source control.
 
 ## Status
-* Prebuild 2.0 - 8/29/2022
-* Post Prebuild - N/A
+* Prebuild 1.0 - 1.9 : 8/29/2022
+* Prebuid 2.0* : 12/27/2023-ongoing
+* Post Prebuild : N/A
 
 ## Getting Started
 * Download VS 2022
 * Clone Repo
-* Enter test email address to use features in the mock repo. (located in the .Data project)
-* Restore nuget packages and dependancies.
+* Enter the test email address to use features in the mock repo. (located in the .Data project)
+* Restore Nuget packages and dependencies.
 * Make sure to clean and rebuild.
-* Changes saved in instance as long as the app is running.
-* The Prebuild versions is using local testing data.
+* Changes saved in an instance as long as the app is running.
+* The Prebuild versions use local testing data.
 
 ## Site Features
 * Account creation
-* Two Factor Authenication
+* Two Factor Authentication
 * Email Subscriptions.
 * Add/edit/delete Places for open/close hours and safety rating.
 * Add/edit/delete Meetups for Place, date/time, and detail notes.
