@@ -162,6 +162,8 @@
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.5.0.min.map" />
     <None Include="Scripts\jquery-3.5.0.slim.min.map" />
+    <None Include="Scripts\moment-with-locales.min.js.map" />
+    <None Include="Scripts\moment.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SafeSurroundings\SafeSurroundings.Web.csproj">
